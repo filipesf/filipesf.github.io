@@ -6,7 +6,7 @@ layout: default
     {% for post in site.posts %}
       <article class="home">
         <time class="fi-clock" datetime="">
-          {{ post.date | timeago }}
+          {{ post.date | date_to_long_string }}
         </time>
 
         <span class="fi-pricetag-multiple category">
