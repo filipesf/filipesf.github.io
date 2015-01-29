@@ -38,7 +38,7 @@ E por isso, pra mim, não foi tão simples assim aceitar essa oportunidade. Fora
 
 Mas estou bem confiante e empolgado com essa nova empreitada. Vou precisas estudar bastante pois vou trabalhar com uma tecnologia que nunca trabalhei antes e segundo meu chefe, eu preciso ser &#8220;o cara&#8221;.
 
-<img src="http://filipefernandes.com.br/blog/wp-content/uploads/2014/10/rails-angular-ministerio-da-saude.png" alt="Filipe Fernandes é contratado como terceirizado pelo Ministério da Saúde" width="830" height="300" class="alignnone size-full wp-image-52" />
+<h2>A nova jornada começa!</h2>
 
 Aos curiosos e interessados na parte técnica dessa nova jornada, nessa segunda-feira (13/10/2014) começo a trabalhar no <a href="http://portalsaude.saude.gov.br/" title="AngularJS — Superheroic JavaScript MVW Framework" target="_blank" rel="nofollow">Ministério da Saúde</a> e serei um dos responsáveis pela parte de front-end dos projetos internos do Ministério e, também, a meta é me tonar um profissional *top* em <a href="https://angularjs.org/" title="AngularJS" target="_blank" rel="nofollow">AngularJS</a>. Vou precisas parar meus estudos com <a href="http://www.rubyonrails.com.br/" title="Ruby on Rails" target="_blank" rel="nofollow">Ruby on Rails</a> por um tempo, mas não vou abandonar.
 
