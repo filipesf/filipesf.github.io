@@ -444,6 +444,10 @@
     padding: 0 0 2rem 0;
   }
 
+  section.blog article.home:last-child {
+    border-bottom: none;
+  }
+
   section.blog article.home h2.post-title,
   section.blog article.single h2.post-title {
     font-size: 3.2rem;
@@ -761,25 +765,32 @@
   }
 
   footer ul.social li a[class^='fi-']:before {
+    color: #bdc3c7;
+  }
+
+  footer ul.social li a[class^='fi-']:before,
+  footer ul.social li a[class^='fi-']:hover:before {
     font-size: 2rem;
 
     margin: 0;
 
     -webkit-transition: .2s all ease;
        -moz-transition: .2s all ease;
-       -o-transition: .2s all ease;
-        transition: .2s all ease;
-
-    color: #bdc3c7;
+         -o-transition: .2s all ease;
+            transition: .2s all ease;
   }
 
-  footer ul.social li a:hover[class^='fi-']:before {
-    -webkit-transition: .2s all ease;
-       -moz-transition: .2s all ease;
-       -o-transition: .2s all ease;
-        transition: .2s all ease;
-
-    color: #1abc9c;
+  footer ul.social li a[class*='twitter']:hover:before {
+    color: #55acee;
+  }
+  footer ul.social li a[class*='github']:hover:before {
+    color: #222222;
+  }
+  footer ul.social li a[class*='linkedin']:hover:before {
+    color: #128cab;
+  }
+  footer ul.social li a[class*='mail']:hover:before {
+    color: darken(#bdc3c7, 20%);
   }
 
 }
