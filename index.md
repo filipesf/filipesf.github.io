@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 ---
 <div class="row">
   <div class="medium-12 columns">
