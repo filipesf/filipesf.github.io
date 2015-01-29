@@ -17,6 +17,7 @@ class Jekyll < Thor
       post.puts "---"
       post.puts "layout: post"
       post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+      post.puts "excerpt: "
       post.puts "date: #{date} #{time}"
       post.puts "published: false"
       post.puts "comments: true"
