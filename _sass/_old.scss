@@ -1,0 +1,1122 @@
+/* --------------------------------------------------------------- */
+/* Theme Name: Filipe Fernandes Blog                               */
+/*                                                                 */
+/* Author: Filipe Fernandes                                        */
+/* Author URI: http://filipefernandes.com.br                       */
+/*                                                                 */
+/* Version: 1.0                                                    */
+/* --------------------------------------------------------------- */
+
+/* --------------------------------------------------------------- */
+/* --- EXTERNAL CSS IMPORTS -------------------------------------- */
+/* --------------------------------------------------------------- */
+
+@import 'vendor/normalize';
+@import 'vendor/foundation';
+
+/* --------------------------------------------------------------- */
+/* --- SMALL SCREEN ---------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+@media only screen {
+  /* --- BASE TAGS ------------------------------------------------- */
+
+  * {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+       -o-transition: .2s all ease;
+        transition: .2s all ease;
+
+    outline: none;
+  }
+
+
+  ::selection {
+    color: #fbfbfb;
+    background: #1abc9c;
+  }
+
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+
+    color: #999;
+    background: #fbfbfb;
+  }
+
+  body.e404 {
+    padding: 10rem 2rem 0 2rem;
+
+    background: #1abc9c;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+
+    color: #7f8c8d;
+  }
+
+  p {
+    font-weight: 300;
+  }
+
+  a[class^='fi-']:before {
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+
+  a {
+    color: #1abc9c;
+  }
+
+  a:hover {
+    color: #008568;
+  }
+
+
+  .bk-top {
+    position: fixed;
+    z-index: 1;
+    top: -50px;
+
+    width: 100%;
+    height: 3rem;
+
+    cursor: pointer;
+
+    background: url(../img/bk-top.svg) center bottom no-repeat;
+  }
+
+
+  /* --- HEADER & NAV ---------------------------------------------- */
+
+  header nav {
+    z-index: 9;
+
+    padding: 1rem 0;
+
+    background: #1abc9c;
+  }
+
+  header nav h1 {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 3rem auto;
+
+    text-indent: -9999px;
+
+    background: url(../img/logo.svg) no-repeat center;
+    background-size: 100%;
+  }
+
+  header nav ul {
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+  }
+
+  header nav ul li {
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 20px;
+
+    display: inline-block;
+
+    margin: 0 0 0 25px;
+
+    list-style: none;
+
+    text-transform: lowercase;
+  }
+
+  header nav ul li:first-child {
+    margin: 0 !important;
+  }
+
+  header nav ul li a {
+    color: #fbfbfb;
+  }
+
+
+  body.br header nav ul li {
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 20px;
+
+    display: inline-block;
+
+    margin: 0 0 0 15px;
+
+    list-style: none;
+
+    text-transform: lowercase;
+  }
+
+
+  /* --- GENERAL SECTIONS ------------------------------------------ */
+
+  section.whoim,
+  section.about,
+  section.work,
+  section.contact,
+  section.blog {
+    padding: 3rem 0;
+  }
+
+  section .title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: inherit;
+
+    margin: 0 0 6rem 0;
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  section .subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+
+    margin: -5rem 0 2rem 0;
+
+    text-align: center;
+  }
+
+
+  /* --- SECTION WHO I AM ------------------------------------------ */
+
+  section.whoim {
+    text-align: center;
+
+    background: #1abc9c;
+  }
+
+  section.whoim h2,
+  section.whoim h3 {
+    font-weight: 300;
+    font-style: italic;
+
+    margin: 0;
+
+    color: #fbfbfb;
+  }
+
+  section.whoim h2 {
+    font-size: 1.3rem;
+
+    margin: 0 0 1rem 0;
+  }
+
+  section.whoim h3 {
+    font-size: 1.0rem;
+  }
+
+  section.whoim strong {
+    font-weight: 400;
+  }
+
+
+  /* --- SECTION ABOUT --------------------------------------------- */
+
+  section.about {
+    min-height: 110rem;
+
+    color: #999;
+    background: url(../img/filipe-fernandes.png) no-repeat;
+    background-position: center 85rem;
+  }
+
+  section.about .title {
+    color: #1abc9c;
+  }
+
+  section.about .subtitle {
+    color: #999;
+  }
+
+  section.about p {
+    font-size: 1.05rem;
+    font-weight: 300;
+  }
+
+  section.about p a {
+    color: #1abc9c;
+  }
+
+  section.about p a:hover {
+    color: #008568;
+  }
+
+
+  /* --- SECTION WORK ---------------------------------------------- */
+
+  section.work {
+    color: #fbfbfb;
+    background: #1abc9c;
+  }
+
+  section.work .title,
+  section.work .subtitle,
+  section.work .subtitle a {
+    color: #fbfbfb;
+  }
+
+  section.work .subtitle a:hover {
+    color: #008568;
+  }
+
+
+  /* WORK LIST */
+  section.work .wrk-list a {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+
+    text-align: center;
+  }
+
+  section.work .wrk-list a ul.wrk-hover {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10% 0;
+
+    list-style: none;
+
+    text-align: center;
+
+    opacity: 1;
+    color: #fbfbfb;
+    background: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover.inactive {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10% 0;
+
+    cursor: default;
+    text-align: center;
+
+    opacity: 1;
+    color: #fbfbfb;
+    background: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.link {
+    display: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.name {
+    font-size: 1.5rem;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.what {
+    font-size: .8rem;
+  }
+
+
+  /* --- SECTION CONTACT ------------------------------------------- */
+
+  section.contact {
+    color: #999;
+  }
+
+  section.contact .title {
+    color: #1abc9c;
+  }
+
+  section.contact .subtitle {
+    color: #999;
+  }
+
+  section.contact .alert {
+    text-align: center;
+  }
+
+  section.contact .sent {
+    color: #2cc990;
+  }
+
+  section.contact .erro {
+    color: #ff6963;
+  }
+
+
+  /* FORM */
+  section.contact form input,
+  section.contact form textarea {
+    color: #ddd;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: none;
+    box-shadow: none;
+  }
+
+  section.contact form input:focus,
+  section.contact form textarea:focus {
+    color: #1abc9c;
+    border-bottom: 1px solid #1abc9c;
+    box-shadow: none;
+  }
+
+  section.contact form textarea {
+    height: 6rem;
+
+    resize: none;
+  }
+
+  section.contact form button {
+    background: #1abc9c;
+  }
+
+  section.contact form button:hover,
+  section.contact form button:focus {
+    background: #008568;
+  }
+
+
+  /* --- SECTION BLOG ------------------------------------------- */
+
+  section.blog [class^='fi-']:before {
+    display: inline-block;
+
+    margin: 0 5px 0 0 ;
+  }
+
+
+  section.blog section.header {
+    min-height: 20rem;
+    margin: -3rem 0 3rem 0;
+    padding: 5rem 0 1rem 0;
+
+    color: #999;
+    background: #1abc9c url(../img/header-blog.png) no-repeat;
+    background-position: center bottom;
+  }
+
+  section.blog section.header h3 {
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 3rem;
+
+    color: #fbfbfb;
+  }
+
+  section.blog section.header p {
+    font-weight: 300;
+    font-style: italic;
+
+    margin: 0;
+
+    color: #fbfbfb;
+  }
+
+
+  section.blog article.home {
+    padding: 2rem 0;
+
+    border-bottom: 1px solid #eee;
+  }
+
+  section.blog article.home:first-child {
+    padding: 0 0 2rem 0;
+  }
+
+  section.blog article.home h2.post-title,
+  section.blog article.single h2.post-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1em;
+
+    margin-bottom: .5em;
+
+    color: #1abc9c;
+  }
+
+
+  section.blog article.home p {
+    font-size: 1.2em;
+    font-weight: 400;
+    line-height: 1.6;
+
+    margin: 10px 0 0 0;
+
+    letter-spacing: .4px;
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  section.blog article.home time,
+  section.blog article.single time {
+    font-weight: 300;
+  }
+
+  section.blog article.home span.category,
+  section.blog article.single span.category {
+    font-weight: 300;
+
+    display: block;
+
+    margin: 10px 0;
+  }
+
+  section.blog article.home span.category a,
+  section.blog article.single span.category a {
+    color: #999;
+  }
+
+  section.blog article.home span.category a:hover,
+  section.blog article.single span.category a:hover {
+    color: #1abc9c;
+  }
+
+
+  section.blog article.single {
+    padding: 0 0 2rem 0;
+
+    border-bottom: none;
+  }
+
+
+  section.blog figure.thumb-post {
+    height: 21.875em;
+    margin: -3rem 0 1rem 0;
+  }
+
+
+  section.blog article.single h2.post-title {
+    color: #1abc9c;
+  }
+
+  section.blog article.single h3.post-subtitle {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+
+    margin: 10px 0 0 0;
+
+    color: #bbb;
+  }
+
+
+  section.blog article.single p {
+    font-size: 1.2em;
+    font-weight: 400;
+    line-height: 1.6;
+
+    letter-spacing: .4px;
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+
+  section.blog article.single blockquote {
+    padding: 1rem;
+
+    border-left: 5px solid #1abc9c;
+    background: #fff;
+  }
+
+  section.blog article.single blockquote p {
+    font-size: 2rem;
+    font-style: italic;
+    line-height: 2.5rem;
+
+    margin: 0;
+
+    color: #1abc9c;
+  }
+
+  section.blog article.single iframe {
+    width: 100%;
+    height: 495px;
+    margin: 1rem 0;
+  }
+
+
+  section.blog article.single .alignright {
+    float: right;
+
+    margin: 1rem 0 0 1rem;
+  }
+
+  section.blog article.single .alignleft {
+    float: left;
+
+    margin: 1rem 1rem 0 0;
+  }
+
+  section.blog article.single .aligncenter {
+    display: block;
+
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  section.blog article.single a .alignright {
+    float: right;
+
+    margin: 1rem 0 0 1rem;
+  }
+
+  section.blog article.single a .alignleft {
+    float: left;
+
+    margin: 1rem 1rem 0 0;
+  }
+
+  section.blog article.single a .aligncenter {
+    display: block;
+
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+  section.blog section.comments {
+    margin: 0 0 -3rem 0;
+    padding: 3em 0 0 0;
+
+    color: #666;
+    background: #ecf0f1;
+  }
+
+  section.blog section.comments-title {
+    padding: 1.5rem 0;
+
+    background: #1abc9c;
+  }
+
+  section.blog section.comments-title h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    text-align: center;
+
+    color: #fbfbfb;
+  }
+
+
+  section.blog section.pagenavi {
+    padding: 2rem 0;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi {
+    margin: 10px 0;
+    padding: 10px 0;
+
+    text-align: center;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi span.pages {
+    display: block;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi a,
+  section.blog section.pagenavi .wp-pagenavi span {
+    margin: 0 3px;
+    padding: 5px 10px;
+
+    color: #1abc9c;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi a,
+  section.blog section.pagenavi .wp-pagenavi span.current {
+    color: #1abc9c;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi a:hover,
+  section.blog section.pagenavi .wp-pagenavi span.current {
+    color: #fbfbfb;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+        border-radius: 3px;
+    background: #1abc9c;
+
+       -o-border-radius: 3px;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi .last {
+    float: right;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi .first {
+    float: left;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi .extend {
+    display: none;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi .last,
+  section.blog section.pagenavi .wp-pagenavi .first {
+    margin: -10px 0;
+    padding: 10px;
+
+    color: #1abc9c;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+        border-radius: 3px;
+    background: #fbfbfb;
+
+       -o-border-radius: 3px;
+  }
+
+  section.blog section.pagenavi .wp-pagenavi .last:hover,
+  section.blog section.pagenavi .wp-pagenavi .first:hover {
+    color: #fbfbfb;
+    background: #1abc9c;
+  }
+
+
+  section.blog section.social-share {
+    text-align: center;
+
+    background: #ecf0f1;
+  }
+
+  section.blog section.social-share a {
+    font-size: 2rem;
+
+    display: block;
+
+    padding: 1rem 0;
+
+    color: #fbfbfb;
+  }
+
+  section.blog section.social-share a[class^='fi-social'] {
+    color: #bdc3c7;
+    background: #ecf0f1;
+  }
+
+  section.blog section.social-share a[class^='fi-social']:hover {
+    color: #fbfbfb;
+  }
+
+  section.blog section.social-share a[class$='twitter']:hover {
+    background: #55acee;
+  }
+
+  section.blog section.social-share a[class$='facebook']:hover {
+    background: #3b5998;
+  }
+
+  section.blog section.social-share a[class$='linkedin']:hover {
+    background: #128cab;
+  }
+
+  section.blog section.social-share a[class$='google-plus']:hover {
+    background: #c63d2d;
+  }
+
+
+  /* --- FOOTER ------------------------------------------- */
+
+  footer {
+    padding: 1.5rem 0;
+
+    border-top: 1px solid #e6e6e6;
+    background: #ecf0f1;
+  }
+
+  footer ul.social {
+    margin: 0;
+
+    list-style: none;
+
+    text-align: center;
+  }
+
+  footer ul.social li {
+    display: inline-block;
+
+    margin: 0 20px 0 0;
+  }
+
+  footer ul.social li a {
+    padding: 15px 0 0 0;
+  }
+
+  footer ul.social li a[class^='fi-']:before {
+    font-size: 2rem;
+
+    margin: 0;
+
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+       -o-transition: .2s all ease;
+        transition: .2s all ease;
+
+    color: #bdc3c7;
+  }
+
+  footer ul.social li a:hover[class^='fi-']:before {
+    -webkit-transition: .2s all ease;
+       -moz-transition: .2s all ease;
+       -o-transition: .2s all ease;
+        transition: .2s all ease;
+
+    color: #1abc9c;
+  }
+
+}
+
+
+/* --------------------------------------------------------------- */
+/* --- MEDIUM SCREEN --------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+@media only screen and (min-width:40.063em) {
+  /* --- HEADER & NAV ---------------------------------------------- */
+
+  header nav h1 {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+
+    text-indent: -9999px;
+
+    background: url(../img/logo.svg) no-repeat center;
+    background-size: 100%;
+  }
+
+  header nav ul {
+    margin: 0;
+    padding: 0;
+
+    text-align: right;
+  }
+
+  header nav ul li,
+  body.br header nav ul li {
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 40px;
+
+    display: inline-block;
+
+    margin: 0 0 0 25px;
+
+    list-style: none;
+
+    text-transform: lowercase;
+  }
+
+
+  section.whoim h2 {
+    font-size: 2.5rem;
+  }
+
+  section.whoim h3 {
+    font-size: 1.7rem;
+  }
+
+
+  /* --- GENERAL SECTIONS ------------------------------------------ */
+
+  section.whoim,
+  section.about,
+  section.work,
+  section.contact {
+    padding: 6rem 0;
+  }
+
+
+  /* --- SECTION ABOUT --------------------------------------------- */
+
+  section.about {
+    min-height: 65rem;
+
+    background: url(../img/filipe-fernandes.png) center bottom no-repeat;
+  }
+
+
+  /* --- SECTION WORK --------------------------------------------- */
+
+  section.work .wrk-list a ul.wrk-hover {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10% 0;
+
+    text-align: center;
+
+    opacity: 1;
+    color: #fbfbfb;
+    background: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover.inactive {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10% 0;
+
+    cursor: default;
+    text-align: center;
+
+    opacity: 1;
+    color: #fbfbfb;
+    background: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.link {
+    display: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.name {
+    font-size: 1.2rem;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.what {
+    font-size: .8rem;
+  }
+
+
+  /* --- SECTION CONTACT --------------------------------------------- */
+
+  section.contact ul.call {
+    margin: 0;
+
+    list-style: none;
+
+    text-align: left;
+  }
+
+  section.contact ul.call li {
+    margin: 0 0 .7rem 0;
+  }
+
+  section.contact ul.call li a {
+    font-size: 1.3rem;
+  }
+
+  section.contact ul.call li a[class^='fi-']:before {
+    display: inline-block;
+
+    margin: 0 15px 0 0 ;
+  }
+
+  section.contact ul.social {
+    margin: 0;
+
+    text-align: left;
+  }
+
+
+  /* --- SECTION BLOG ------------------------------------------- */
+
+  section.blog section.comments-title h4 {
+    font-size: 2rem;
+    font-weight: 700;
+
+    text-align: center;
+
+    color: #fbfbfb;
+  }
+
+  section.blog article.home span.category,
+  section.blog article.single span.category {
+    font-weight: 300;
+
+    display: inline;
+
+    margin: 0 0 0 20px;
+  }
+
+}
+
+
+/* --------------------------------------------------------------- */
+/* --- LARGE SCREEN ---------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+@media only screen and (min-width:64.063em) {
+  /* --- GENERAL SECTIONS ------------------------------------------ */
+
+  section.whoim h2 span.l2 {
+    display: block;
+  }
+
+  section .title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: inherit;
+
+    margin: 0 0 6rem 0;
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  section .subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+
+    margin: -5rem 0 6rem 0;
+
+    text-align: center;
+  }
+
+
+  /* --- SECTION WHO I AM ------------------------------------------ */
+
+  section.whoim h2 {
+    font-size: 3rem;
+
+    margin: 0 0 1rem 0;
+  }
+
+  section.whoim h3 {
+    font-size: 2rem;
+  }
+
+
+  /* --- SECTION ABOUT --------------------------------------------- */
+
+  section.about {
+    min-height: 65rem;
+
+    color: #999;
+    background: url(../img/filipe-fernandes.png) center bottom no-repeat;
+  }
+
+
+  /* --- SECTION WORK --------------------------------------------- */
+
+  section.work .wrk-list a {
+    position: relative;
+
+    display: block;
+
+    width: 91.4444%;
+  }
+
+  section.work .wrk-list a ul.wrk-hover {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 37% 0 0 0;
+
+    text-align: center;
+
+    opacity: 0;
+    color: #fbfbfb;
+    background: rgba(0,133,104,.8);
+  }
+
+  section.work .wrk-list a ul.wrk-hover.inactive {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 37% 0 0 0;
+
+    cursor: default;
+    text-align: center;
+
+    opacity: 0;
+    color: #fbfbfb;
+    background: rgba(153,153,153,.8);
+  }
+
+  section.work .wrk-list a ul.wrk-hover li {
+    list-style: none;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.link {
+    display: block;
+
+    width: 26px;
+    height: 26px;
+    margin: 0 auto;
+
+    text-indent: -9999px;
+
+    background: url(../img/wrk-link.svg) center no-repeat;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.name {
+    font-size: 1.5rem;
+  }
+
+  section.work .wrk-list a ul.wrk-hover li.what {
+    font-weight: 300;
+  }
+
+  section.work .wrk-list a:hover ul.wrk-hover {
+    opacity: 1;
+  }
+
+
+  /* --- SECTION CONTACT --------------------------------------------- */
+
+  section.contact ul.social {
+    margin: 0;
+
+    list-style: none;
+  }
+
+  section.contact ul.social li {
+    display: inline-block;
+
+    margin: 0 20px 0 0;
+  }
+
+  section.contact ul.social li a[class^='fi-social-']:before {
+    font-size: 2rem;
+
+    margin: 0;
+  }
+
+  section.contact ul.call {
+    margin: 0;
+
+    list-style: none;
+  }
+
+  section.contact ul.call li {
+    margin: 0 0 .7rem 0;
+  }
+
+  section.contact ul.call li a {
+    font-size: 1.8rem;
+    font-style: italic;
+  }
+
+  section.contact ul.call li a[class^='fi-']:before {
+    margin: 0 15px 0 0;
+  }
+
+}
+

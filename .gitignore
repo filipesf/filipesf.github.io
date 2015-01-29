@@ -1,23 +1,6 @@
 .*/
 node_modules
 
-Gemfile
-Gemfile.lock
-jekyll.thor
-_includes
-_layouts
-_plugins
-_posts
-_sass
-css
-img
-js
-index.html
-gulpfile.js
-package.json
-feed.xml
-_config.yml
-
 .DS_Store*
 ehthumbs.db
 Icon?

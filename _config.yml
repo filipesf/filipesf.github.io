@@ -1,0 +1,44 @@
+title: Filipe Fernandes
+description: Desenvolvedor Front-end e fundador do Choco la Design
+
+headline: Compartilhar é a forma mais simples de aprender.
+sub_headline: Aqui é meu espaço para compartilhar as coisas simples que vejo por aí.
+
+email: contato@filipefernandes.com.br
+
+baseurl: ""
+url: "http://filipesf.github.io"
+
+twitter_username: filipesf
+github_username:  filipesf
+
+markdown: kramdown
+
+permalink: pretty
+highlighter: pygments
+
+port: 7777
+
+sass:
+  style: :compressed
+
+gems: ["jekyll-timeago"]
+
+jekyll_timeago:
+  depth: 1
+  today: 'hoje'
+  yesterday: 'ontem'
+  tomorrow: 'amanhã'
+  and: 'e'
+  suffix: 'atrás'
+  prefix: 'Publicado'
+  suffix_future: ''
+  prefix_future: 'em'
+  years: 'anos'
+  year: 'ano'
+  months: 'meses'
+  month: 'mês'
+  weeks: 'semanas'
+  week: 'semana'
+  days: 'dias'
+  day: 'dia'

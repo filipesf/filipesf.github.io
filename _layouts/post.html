@@ -1,0 +1,29 @@
+---
+layout: page
+---
+<div class="row">
+  <div class="medium-12 columns">
+    <article class="single">
+      <time class="fi-clock" datetime="">
+        {{ page.date | timeago }}
+      </time>
+
+      <span class="fi-pricetag-multiple category">
+        {{ page.tags }}
+      </span>
+      <br>
+      <br>
+      <h2 class="post-title">{{ page.title }}</h2>
+      <h3 class="post-subtitle">{{ page.excerpt }}</h3>
+      <hr>
+
+      {{ content }}
+    </article>
+  </div>
+</div>
+
+{% include social-share.html %}
+
+{% if page.comments %}
+  {% include comments.html %}
+{% endif %}
