@@ -71,11 +71,14 @@
     margin-left: 3px;
   }
 
-  a {
+  a,
+  a:visited {
     color: #1abc9c;
   }
 
-  a:hover {
+  a:hover,
+  a:focus,
+  a:active {
     color: #008568;
   }
 
