@@ -1,16 +1,49 @@
 ---
 # Styles
 ---
+
 @charset "UTF-8";
 
 /*-----------------------------------*\
-    #OLD STYLES
+    #UTILITIES
 \*-----------------------------------*/
 
-@import "old";
+@import "utilities.variables";
+@import "utilities.colors";
+@import "utilities.functions";
+@import "utilities.mixins";
 
 /*-----------------------------------*\
-    #SYNTAX HIGHLIGHTER
+    #BASE
 \*-----------------------------------*/
 
-@import "syntax";
+@import "base.normalize";
+@import "base.page";
+@import "base.typography";
+
+/*-----------------------------------*\
+    #OBJECTS
+\*-----------------------------------*/
+
+@import "objects.rows";
+@import "objects.columns";
+@import "objects.buttons";
+@import "objects.media";
+
+/*-----------------------------------*\
+    #COMPONENTS
+\*-----------------------------------*/
+
+@import "components.site-nav";
+@import "components.page-head";
+@import "components.page-post";
+@import "components.page-static";
+@import "components.page-foot";
+@import "components.widgets";
+@import "components.buttons";
+
+/*-----------------------------------*\
+    #REPLACES
+\*-----------------------------------*/
+
+@import "replaces.helpers";

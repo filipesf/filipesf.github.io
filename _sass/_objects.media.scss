@@ -1,0 +1,38 @@
+//=====================================
+//
+//  MEDIA
+//
+//=====================================
+
+
+
+@mixin obj-media($extend: false) {
+  @if $extend == extend {
+    @extend %media;
+  } @else {
+    display: block;
+    @include clearfix;
+
+    > :first-child {
+      float: left;
+      margin-right: $base-spacing;
+
+      img {
+        display: block;
+      }
+    }
+
+    > :last-child {
+      overflow: hidden;
+
+      &,
+      & > :last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+%media { @include obj-media; }
+
+

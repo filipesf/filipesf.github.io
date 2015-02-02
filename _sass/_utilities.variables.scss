@@ -1,0 +1,118 @@
+//=====================================
+//
+//  GLOBAL VARIABLES
+//
+//=====================================
+
+
+
+//-------------------------------------
+//  #BASE
+//-------------------------------------
+
+// SIZES
+$base-size:         16px  !default;
+$base-line-height:  24px  !default;
+$base-letter-space: 0.4px !default;
+
+// SPACING
+$base-spacing:         $base-line-height !default;
+$base-spacing--double: $base-spacing * 2 !default;
+$base-spacing--half:   $base-spacing / 2 !default;
+
+// BORDERS
+$base-border-weight: 1px !default;
+$base-border-radius: 4px !default;
+
+// IMAGES PATHS
+$images-path: "../images" !global;
+
+// TRANSITIONS
+$transition-property: all  !global;
+$transition-duration: 0.3s !global;
+$transition-type:     ease !global;
+
+
+
+//-------------------------------------
+//  #TYPOGRAPHY
+//-------------------------------------
+
+// FONT STACK
+$font-family--sans:  Helvetica, "Helvetica Neue", Arial, sans-serif;
+$font-family--serif: Georgia, Times, "Times New Roman", serif;
+$font-family--mono:  Inconsolata, Menlo, "Courier New", monospace;
+
+// FONT FAMILY
+$font-family--primary:   "Open Sans", $font-family--sans !default;
+$font-family--secondary: $font-family--sans !default;
+
+// FONT SIZES
+$font-size--tiny:     12px !default;
+$font-size--small:    14px !default;
+$font-size--regular:  16px !default;
+$font-size--large:    18px !default;
+$font-size--xlarge:   24px !default;
+$font-size--huge:     32px !default;
+$font-size--big:      36px !default;
+$font-size--giant:    48px !default;
+
+// FONT WEIGHTS
+$font-weight--thin:   100 !default;
+$font-weight--light:  300 !default;
+$font-weight--medium: 400 !default;
+$font-weight--bold:   700 !default;
+$font-weight--bolder: 900 !default;
+
+// HEADERS
+$headers-font-family: $font-family--primary;
+$headers-font-weight: $font-weight--bold;
+
+$h1-font-size: $font-size--giant;
+$h2-font-size: $font-size--big;
+$h3-font-size: $font-size--huge;
+$h4-font-size: $font-size--xlarge;
+$h5-font-size: $font-size--large;
+$h6-font-size: $font-size--regular;
+
+// PARAGRAPH
+$paragraph-font-family: $font-family--primary;
+$paragraph-font-size:   $font-size--regular;
+
+
+
+//-------------------------------------
+//  #GRID
+//-------------------------------------
+
+$grid-col-count:  16     !default;
+$grid-col-gutter: 30px   !default;
+$grid-max-width:  1200px !default;
+
+
+
+//-------------------------------------
+//  #RESPONSIVE
+//-------------------------------------
+
+// BREAKPOINTS
+$breakpoint-sm: 320px  !default;
+$breakpoint-md: 768px  !default;
+$breakpoint-lg: 1080px !default;
+$breakpoint-wd: 1280px !default;
+
+// MIN SCREEN SIZES
+$screen-sm-min: $breakpoint-sm !default;
+$screen-md-min: $breakpoint-md !default;
+$screen-lg-min: $breakpoint-lg !default;
+$screen-wd-min: $breakpoint-wd !default;
+
+// MAX SCREEN SIZES
+$screen-sm-max: $screen-md-min - 1 !default;
+$screen-md-max: $screen-lg-min - 1 !default;
+$screen-lg-max: $screen-wd-min - 1 !default;
+
+// RETINA
+$device-pixel-ratio: 2;
+
+

@@ -1,0 +1,29 @@
+//=====================================
+//
+//  COLUMNS
+//
+//=====================================
+
+
+
+@mixin column($extend: false) {
+  @if $extend == extend {
+    @extend %column;
+  }
+  @else {
+    @include gutter;
+    float: left;
+    position: relative;
+    &:last-of-type {
+      float: right;
+    }
+    @include mq(small) {
+      margin-bottom: em($grid-col-gutter / 2);
+      @include gutter;
+      width: 100%;
+    }
+  }
+}
+%column {
+  @include column;
+}

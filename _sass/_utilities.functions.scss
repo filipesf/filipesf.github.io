@@ -1,0 +1,78 @@
+//=====================================
+//
+//  FUNCTIONS
+//
+//=====================================
+
+
+
+//-------------------------------------
+//  #FONT-FACE
+//-------------------------------------
+
+@if variable-exists(fonts) {
+  @each $font in $fonts {
+    @import url($font);
+  }
+}
+
+
+
+//-------------------------------------
+//  #EM CALC
+//-------------------------------------
+
+// STRIP UNITS
+@function strip-units($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+// CONVERT TO EM
+@function em($target, $em-context: $base-size) {
+  @if not unitless($target) {
+    $target: strip-units($target);
+  }
+  @if not unitless($em-context) {
+    $em-context: strip-units($em-context);
+  }
+  @return $target / $em-context * 1em;
+}
+
+
+
+//-------------------------------------
+//  #COLOR PALETTE
+//-------------------------------------
+
+@function palette($key, $shade: base) {
+  $split-palettes:
+    map-merge(
+      map-merge($palette-base, $palette-default),
+      map-merge($palette-events, $palette-social)) !global;
+
+  $color: map-get($split-palettes, $key);
+
+  $palette: (
+    $key: (
+      base:    $color,
+      dark:    darken(  $color, $shade-dark    ),
+      xdark:   darken(  $color, $shade-xdark   ),
+      xxdark:  darken(  $color, $shade-xxdark  ),
+      light:   lighten( $color, $shade-light   ),
+      xlight:  lighten( $color, $shade-xlight  ),
+      xxlight: lighten( $color, $shade-xxlight )
+    )
+  );
+  @return map-get(map-get($palette, $key), $shade);
+}
+
+
+
+//-------------------------------------
+//  #COLUMN WIDTH CALC
+//-------------------------------------
+
+@function col-calc($i) {
+  $col: percentage(1 / $grid-col-count * $i);
+  @return $col;
+}

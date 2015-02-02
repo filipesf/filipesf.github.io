@@ -1,0 +1,91 @@
+//=====================================
+//
+//  COLORS
+//
+//=====================================
+
+
+
+//-------------------------------------
+//  #COLOR VARIABLES
+//-------------------------------------
+
+// BASE COLORS
+$color-white:       #ecf0f1;
+$color-silver:      #bdc3c7;
+$color-gray:        #3d4448;
+$color-black:       #171a1a;
+
+// DEFAULT COLORS
+$color-base:        #232C35;
+$color-primary:     #1abc9c;
+$color-secondary:   #d6dddd;
+
+// EVENTS COLORS
+$color-success:     #2ecc71;
+$color-warning:     #f1c40f;
+$color-alert:       #e74c3c;
+$color-info:        #3498db;
+
+// SOCIAL COLORS
+$color-twitter:     #00aced;
+$color-facebook:    #3b5998;
+$color-google-plus: #dd4b39;
+$color-youtube:     #bb0000;
+$color-linkedin:    #007bb6;
+$color-instagram:   #517fa4;
+
+
+
+//-------------------------------------
+//  #COLOR SCALES
+//-------------------------------------
+
+// DARK SHADES
+$shade-dark:    6%  !default;
+$shade-xdark:   12% !default;
+$shade-xxdark:  24% !default;
+
+// LIGHT SHADES
+$shade-light:   7%  !default;
+$shade-xlight:  14% !default;
+$shade-xxlight: 28% !default;
+
+
+
+//-------------------------------------
+//  #PALETTES
+//-------------------------------------
+
+// BASE PALETTE
+$palette-base: (
+  "white":  $color-white,
+  "silver": $color-silver,
+  "gray":   $color-gray,
+  "black":  $color-black
+);
+
+// DEFAULT PALETTE
+$palette-default: (
+  "base":        $color-base,
+  "primary":     $color-primary,
+  "secondary":   $color-secondary
+);
+
+// EVENTS PALETTE
+$palette-events: (
+  "success":     $color-success,
+  "warning":     $color-warning,
+  "alert":       $color-alert,
+  "info":        $color-info
+);
+
+// SOCIAL PALETTE
+$palette-social: (
+  "twitter":     $color-twitter,
+  "facebook":    $color-facebook,
+  "google-plus": $color-google-plus,
+  "youtube":     $color-youtube,
+  "linkedin":    $color-linkedin,
+  "instagram":   $color-instagram
+);

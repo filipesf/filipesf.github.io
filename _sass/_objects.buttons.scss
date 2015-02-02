@@ -1,0 +1,38 @@
+//=====================================
+//
+//  BUTTONS
+//
+//=====================================
+
+
+
+@mixin obj-button($extend: false) {
+  @if $extend == extend {
+    @extend %btn;
+  } @else {
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: em(14px);
+    text-align: center;
+    text-decoration: none !important;
+    margin-bottom: em(20px);
+    margin-top: em(15px);
+    padding: em(10px) em(20px);
+    width: auto;
+
+    // Small modifier
+    @include m(small) {
+      font-size: em(12px);
+      padding: em(5px) em(15px);
+    }
+
+    // Large modifier
+    @include m(large) {
+      font-size: em(18px);
+      padding: em(15px) em(25px);
+    }
+  }
+}
+
+%btn { @include obj-button; }

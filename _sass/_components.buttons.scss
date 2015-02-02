@@ -1,0 +1,23 @@
+//=====================================
+//
+//  BUTTONS
+//
+//=====================================
+
+
+
+button, input[type="submit"], .btn {
+  @include obj-button(extend);
+  @include hover(background-color, "secondary");
+  @include border-radius($base-border-radius);
+  @include box-shadow(0, -2px, 0);
+  color: palette("secondary", xxdark);
+}
+a[class^="btn"] {
+  display: inline-block;
+  @include mq(small) {
+    display: block;
+  }
+}
+
+
