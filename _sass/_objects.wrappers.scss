@@ -35,4 +35,8 @@
 
 .wrapper {
   @extend %wrapper;
+
+  @include mq(small) {
+    padding: 0 $base-spacing;
+  }
 }
