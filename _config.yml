@@ -1,5 +1,5 @@
 title: Filipe Fernandes
-description: Desenvolvedor Front-end e fundador do Choco la Design
+description: Front-end Developer
 
 headline: Compartilhar é a forma mais simples de aprender.
 sub_headline: Aqui é meu espaço para compartilhar as coisas simples que vejo por aí.
@@ -14,7 +14,7 @@ github_username:  filipesf
 
 markdown: kramdown
 
-permalink: pretty
+permalink: articles/:title
 highlighter: pygments
 
 port: 7777

@@ -1,0 +1,48 @@
+//=====================================
+//
+//  Navigation
+//
+//=====================================
+
+
+
+.nav {
+  padding-top: $base-spacing;
+
+  @include e(brand) {
+    @include size(65px);
+    box-sizing: content-box;
+    float: left;
+    margin-right: $base-spacing--half;
+
+    @include e(path) { fill: $color-primary; }
+  }
+
+  @include e(title) { @include hide-text(); }
+
+  @include e(list) {
+    float: right;
+    list-style: none;
+    margin: 0;
+
+    @include e(item) {
+      display: inline-block;
+      margin-left: $base-spacing;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+
+      a {
+        @include font-size($font-size--large);
+        display: inline-block;
+        font-family: $headers-font-family;
+        padding: $base-spacing 0;
+        &:hover {
+          border: none;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

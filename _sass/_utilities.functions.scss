@@ -55,12 +55,14 @@
   $palette: (
     $key: (
       base:    $color,
-      dark:    darken(  $color, $shade-dark    ),
-      xdark:   darken(  $color, $shade-xdark   ),
-      xxdark:  darken(  $color, $shade-xxdark  ),
-      light:   lighten( $color, $shade-light   ),
-      xlight:  lighten( $color, $shade-xlight  ),
-      xxlight: lighten( $color, $shade-xxlight )
+
+      dark:    darken($color, $shade-dark),
+      xdark:   darken($color, $shade-xdark),
+      xxdark:  darken($color, $shade-xxdark),
+
+      light:   lighten($color, $shade-light),
+      xlight:  lighten($color, $shade-xlight),
+      xxlight: lighten($color, $shade-xxlight)
     )
   );
   @return map-get(map-get($palette, $key), $shade);

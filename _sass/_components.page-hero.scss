@@ -1,0 +1,24 @@
+//=====================================
+//
+//  HERO
+//
+//=====================================
+
+
+
+.hero {
+  color: $color-primary;
+
+  @include e(title) {
+    @include font-size($font-size--giant);
+    font-weight: $font-weight--light;
+    line-height: 1.2;
+  }
+
+  @include e(subtitle) {
+    @include font-size($font-size--large);
+    font-weight: $font-weight--light;
+    line-height: 1.2;
+    margin: 0;
+  }
+}

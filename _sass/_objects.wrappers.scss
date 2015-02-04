@@ -1,21 +1,20 @@
 //=====================================
 //
-//  ROWS
+//  WRAPPERS
 //
 //=====================================
 
 
 
-@mixin row($extend: false) {
+@mixin wrapper($extend: false) {
   @if $extend == extend {
-    @extend %row;
-  }
-  @else {
+    @extend %wrapper;
+  } @else {
     @include clearfix;
     @include centered;
     margin-bottom: 0;
     margin-top: 0;
-    max-width: em($grid-max-width / 2);
+    max-width: em($grid-max-width);
     width: 100%;
     & & {
       margin-left: em(-$grid-col-gutter / 2);
@@ -24,11 +23,16 @@
     }
   }
 }
-%row {
-  @include row;
+
+%wrapper {
+  @include wrapper;
 }
 
-%row-wide {
-  @include row;
-  max-width: em($grid-max-width);
+%wrapper-wide {
+  @include wrapper;
+  max-width: em($grid-max-width-wide);
+}
+
+.wrapper {
+  @extend %wrapper;
 }

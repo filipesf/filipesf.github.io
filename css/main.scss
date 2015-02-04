@@ -25,10 +25,9 @@
     #OBJECTS
 \*-----------------------------------*/
 
-@import "objects.rows";
-@import "objects.columns";
-@import "objects.buttons";
 @import "objects.media";
+@import "objects.buttons";
+@import "objects.wrappers";
 
 /*-----------------------------------*\
     #COMPONENTS
@@ -36,10 +35,11 @@
 
 @import "components.site-nav";
 @import "components.page-head";
-@import "components.page-post";
-@import "components.page-static";
+@import "components.page-hero";
+@import "components.page-about";
+@import "components.page-articles";
+@import "components.page-comments";
 @import "components.page-foot";
-@import "components.widgets";
 @import "components.buttons";
 
 /*-----------------------------------*\
@@ -47,3 +47,4 @@
 \*-----------------------------------*/
 
 @import "replaces.helpers";
+@import "replaces.text-colors";

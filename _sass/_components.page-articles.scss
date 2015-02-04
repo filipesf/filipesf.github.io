@@ -1,0 +1,41 @@
+//=====================================
+//
+//  ARTICLES
+//
+//=====================================
+
+
+
+.article {
+  @include e(meta) {
+    color: palette(smoke, xdark);
+    display: block;
+    margin-bottom: $base-spacing--half;
+
+    @include e(datetime) { margin-right: $base-spacing--half; }
+  }
+
+  @include e(title) {
+    @include font-size($font-size--giant);
+    color: $color-primary;
+    font-weight: $font-weight--light;
+    line-height: 1.2;
+    margin-bottom: $base-spacing--half;
+  }
+
+  @include e(excerpt) { color: palette(carbon, xxlight); }
+
+  @include e(subtitle) {
+    @include font-size($font-size--large);
+    color: palette(carbon, xxlight);
+    font-family: $font-family--primary;
+    font-weight: $font-weight--light;
+    line-height: 1.5;
+    margin-bottom: $base-spacing--double;
+  }
+
+  @include e(video) {
+    @include size(100%, 450px);
+    margin: $base-spacing 0;
+  }
+}

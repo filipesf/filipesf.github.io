@@ -1,26 +1,29 @@
 ---
-layout: page
+layout: articles
 ---
-<div class="row">
-  <div class="medium-12 columns">
-    <article class="single">
-      <time class="fi-clock" datetime="">
-        {{ page.date | date_to_long_string }}
-      </time>
 
-      <span class="fi-pricetag-multiple category">
-        {{ page.tags }}
-      </span>
-      <br>
-      <br>
-      <h2 class="post-title">{{ page.title }}</h2>
-      <h3 class="post-subtitle">{{ page.excerpt }}</h3>
-      <hr>
+<article class="article" role="main">
+  <span class="article__meta">
+    <time class="article__meta__datetime" datetime="{{ page.date | %H:%M:%S }}">
+      <i class="fa fa-clock-o"></i>
+      {{ page.date | date_to_long_string }}
+    </time>
+    <span class="article__meta__category">
+      <i class="fa fa-tags"></i>
+      {{ page.tags }}
+    </span>
+  </span>
+  <h2 class="article__title">
+    {{ page.title }}
+  </h2>
+  <h3 class="article__subtitle">
+    {{ page.excerpt }}
+  </h3>
 
-      {{ content }}
-    </article>
-  </div>
-</div>
+  <hr>
+  {{ content }}
+</article>
+<hr>
 
 {% include social-share.html %}
 

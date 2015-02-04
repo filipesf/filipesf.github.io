@@ -44,15 +44,15 @@ $font-family--serif: Georgia, Times, "Times New Roman", serif;
 $font-family--mono:  Inconsolata, Menlo, "Courier New", monospace;
 
 // FONT FAMILY
-$font-family--primary:   "Open Sans", $font-family--sans !default;
+$font-family--primary:   Roboto, $font-family--sans !default;
 $font-family--secondary: $font-family--sans !default;
 
 // FONT SIZES
 $font-size--tiny:     12px !default;
 $font-size--small:    14px !default;
 $font-size--regular:  16px !default;
-$font-size--large:    18px !default;
-$font-size--xlarge:   24px !default;
+$font-size--medium:   18px !default;
+$font-size--large:    24px !default;
 $font-size--huge:     32px !default;
 $font-size--big:      36px !default;
 $font-size--giant:    48px !default;
@@ -65,14 +65,14 @@ $font-weight--bold:   700 !default;
 $font-weight--bolder: 900 !default;
 
 // HEADERS
-$headers-font-family: $font-family--primary;
-$headers-font-weight: $font-weight--bold;
+$headers-font-family: "Roboto Slab", $font-family--serif;
+$headers-font-weight: $font-weight--light;
 
 $h1-font-size: $font-size--giant;
 $h2-font-size: $font-size--big;
 $h3-font-size: $font-size--huge;
-$h4-font-size: $font-size--xlarge;
-$h5-font-size: $font-size--large;
+$h4-font-size: $font-size--large;
+$h5-font-size: $font-size--medium;
 $h6-font-size: $font-size--regular;
 
 // PARAGRAPH
@@ -85,9 +85,10 @@ $paragraph-font-size:   $font-size--regular;
 //  #GRID
 //-------------------------------------
 
-$grid-col-count:  16     !default;
-$grid-col-gutter: 30px   !default;
-$grid-max-width:  1200px !default;
+$grid-col-count:      16     !default;
+$grid-col-gutter:     30px   !default;
+$grid-max-width:      850px !default;
+$grid-max-width-wide: 1366px !default;
 
 
 

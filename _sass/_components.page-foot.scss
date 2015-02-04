@@ -1,0 +1,42 @@
+//=====================================
+//
+//  FOOTER
+//
+//=====================================
+
+
+
+.footer {
+  @include wrapper();
+  text-align: center;
+  padding-bottom: $base-spacing;
+
+  @include e(list) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include e(item) {
+      display: inline-block;
+      margin: 0 $base-spacing--half;
+
+      &:first-of-type { margin-left: 0; }
+      &:last-of-type { margin-right: 0; }
+
+      a {
+        color: $color-smoke;
+        font-size: $font-size--huge;
+        transition: $transition-property $transition-duration $transition-type;
+
+        &:hover {
+          border: none;
+
+          [class*="twitter"]  { color: $color-twitter; }
+          [class*="github"]   { color: $color-github; }
+          [class*="linkedin"] { color: $color-linkedin; }
+          [class*="envelope"] { color: $color-primary; }
+        }
+      }
+    }
+  }
+}

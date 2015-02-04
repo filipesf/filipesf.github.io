@@ -6,7 +6,7 @@ excerpt: Os maiores inimigos do crescimento profissional são a falta de motiva�
 layout: post
 comments: true
 dsq_thread_id: 2681371033
-tags: Profissional
+tags: Work
 ---
 Foi com esse pensamento que passei um tempo tentando outras coisas na minha vida profissional e tentei sair um pouco da minha zona de conforto. Apesar dessa minha vontade maluca de querer fazer coisas novas, elas nem sempre precisam ser algo totalmente diferente do habitual, o que tornam as experiências muito menos frustrantes.
 

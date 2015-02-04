@@ -12,10 +12,10 @@
 
 *,
 *:before,
-*:after { @include prefix(box-sizing, border-box); }
+*:after { box-sizing: border-box; }
 
 ::selection {
-  background-color: palette(warning, xxlight);
+  background-color: palette(primary, xxlight);
   color: $color-base;
 }
 
@@ -26,17 +26,21 @@
 //-------------------------------------
 
 body {
-  background-color: $color-white;
+  background-color: $color-snow;
   color: $color-base;
 }
 
 
 
 //-------------------------------------
-//  #PARAGRAPH
+//  #RULER
 //-------------------------------------
 
-p { @include font-size($paragraph-font-size); }
+hr {
+  border: none;
+  border-bottom: 1px solid palette(smoke, xlight);
+  margin: $base-spacing--double 0;
+}
 
 
 

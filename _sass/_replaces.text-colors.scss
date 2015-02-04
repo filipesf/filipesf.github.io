@@ -1,0 +1,15 @@
+//=====================================
+//
+//  TEXT COLORS
+//
+//=====================================
+
+
+
+.text-color {
+  @each $name, $color in $split-palettes {
+    &--#{$name} {
+      color: $color;
+    }
+  }
+}

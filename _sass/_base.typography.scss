@@ -11,7 +11,7 @@
 //-------------------------------------
 
 body {
-  font-family: $font-family--sans;
+  font-family: $font-family--primary;
   font-weight: $font-weight--medium;
   letter-spacing: $base-letter-space;
   -webkit-font-smoothing: antialiased;
@@ -29,8 +29,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-family--primary;
+  font-family: $headers-font-family;
   font-weight: $headers-font-weight;
+  margin-top: 0;
 }
 
 h1 { @include font-size($h1-font-size); }
@@ -46,7 +47,15 @@ h6 { @include font-size($h6-font-size); }
 //  #PARAGRAPH
 //-------------------------------------
 
-p { @include font-size($paragraph-font-size); }
+p {
+  @include font-size($font-size--large);
+  color: $color-carbon;
+  font-weight: $font-weight--light;
+  line-height: 1.5;
+
+  &:first-of-type { margin-top: 0; }
+  &:last-of-type { margin-bottom: 0; }
+}
 
 
 
@@ -57,5 +66,33 @@ p { @include font-size($paragraph-font-size); }
 a {
   text-decoration: none;
 
-  &:hover { text-decoration: underline; }
+  &:hover { border-bottom: 1px solid; }
+}
+
+
+
+//-------------------------------------
+//  #BLOCKQUOTE
+//-------------------------------------
+
+blockquote {
+  font-style: italic;
+  margin: 0;
+  padding: 24px;
+  padding-left: 50px;
+  position: relative;
+
+  &:before {
+    color: $color-primary;
+    content: "\201C";
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  p {
+    color: $color-primary;
+    font-size: $font-size--huge;
+  }
 }

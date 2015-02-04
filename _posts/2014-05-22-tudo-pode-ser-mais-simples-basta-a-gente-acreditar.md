@@ -6,11 +6,11 @@ excerpt: A diferença da opinião entre crianças e adultos sobre o futuro do mu
 layout: post
 comments: true
 dsq_thread_id: 2705879453
-tags: Simplificando
+tags: Simplify
 ---
 Acabei de assistir um vídeo que uma amiga postou no Facebook e fiquei feliz, mas ao mesmo tempo horrorizado com o que eu vi.
 
-<iframe src="//player.vimeo.com/video/78245147?color=1abc9c&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe class="article__video" src="//player.vimeo.com/video/78245147?color=1abc9c&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Eu sempre fui uma pessoa extremamente otimista. Obviamente isso foi mudando aos poucos com o tempo, mas eu nunca deixei de ser quem eu sou, sempre tentando acreditar que as coisas seriam possíveis para mim e para aqueles mais próximos, principalmente.
 
@@ -26,6 +26,4 @@ Nos comentários do vídeo, fiquei muito triste quando uma pessoa disse algo que
 
 Enquanto escrevia esse post eu pensei bastante e cheguei à conclusão de que enquanto nós continuarmos como esses adultos do vídeo, o mundo nunca será um lugar melhor e, pior que isso, nossos filhos viveram em um mundo pior que o que temos hoje. É isso que você quer para seus filhos?
 
-<h5 style="color: #1abc9c;">
-  Ainda dá tempo de mudar! ;)
-</h5>
+<strong class="highlight">Ainda dá tempo de mudar! ;)</strong>
