@@ -8,6 +8,11 @@
 
 .social-share {
   text-align: right;
+
+  @include mq(small-only) {
+    text-align: center;
+  }
+
   margin: $base-spacing 0;
 
   @include e(cta) {
