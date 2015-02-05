@@ -11,12 +11,24 @@
 
   @include e(title) {
     @include font-size($font-size--giant);
+
+    @include mq(small-only) {
+      @include font-size($font-size--large);
+      line-height: 1.2;
+    }
+
     font-weight: $font-weight--light;
     line-height: 1.2;
   }
 
   @include e(subtitle) {
     @include font-size($font-size--large);
+
+    @include mq(small-only) {
+      @include font-size($font-size--medium);
+      line-height: 1.2;
+    }
+
     font-weight: $font-weight--light;
     line-height: 1.2;
     margin: 0;
