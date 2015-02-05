@@ -9,34 +9,11 @@ github:   http://github.com/filipesf
 
 baseurl: ""
 url: "http://filipesf.github.io"
+permalink: articles/:title
+port: 7777
 
 markdown: kramdown
-
-permalink: articles/:title
 highlighter: pygments
-
-port: 7777
 
 sass:
   style: :compressed
-
-gems: [jekyll-timeago]
-
-jekyll_timeago:
-  depth: 1
-  today: 'today'
-  yesterday: 'yesterday'
-  tomorrow: 'tomorrow'
-  and: 'and'
-  suffix: 'ago'
-  prefix: ''
-  suffix_future: ''
-  prefix_future: ''
-  years: 'years'
-  year: 'year'
-  months: 'months'
-  month: 'month'
-  weeks: 'weeks'
-  week: 'week'
-  days: 'days'
-  day: 'day'
