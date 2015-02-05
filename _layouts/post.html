@@ -2,7 +2,7 @@
 layout: articles
 ---
 
-<article class="article" role="main">
+<article class="article">
   <span class="article__meta">
     <time class="article__meta__datetime" datetime="{{ page.date | %H:%M:%S }}">
       <i class="fa fa-clock-o"></i>
@@ -23,9 +23,10 @@ layout: articles
   <hr>
   {{ content }}
 </article>
-<hr>
 
 {% include social-share.html %}
+
+<hr>
 
 {% if page.comments %}
   {% include comments.html %}

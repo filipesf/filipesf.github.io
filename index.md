@@ -2,6 +2,8 @@
 layout: index
 ---
 
+<h1>{{ site.twitter_username }} </h1>
+
 <section class="about" role="main">
   <div class="wrapper">
     <p>I spend the last 11 years building websites for small and medium companies with Wordpress focused in SEO. In the middle of this journey, I founded <a href="http://chocoladesign.com" title="Choco la Design" target="_blank">Choco la Design</a> which have 80k unique visitors/month. It's a collaborative blog about design, where me and my contributors help people in academic research and as a references for they work.</p>

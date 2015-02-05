@@ -49,6 +49,12 @@ h6 { @include font-size($h6-font-size); }
 
 p {
   @include font-size($font-size--large);
+
+  @include mq(small-only) {
+    @include font-size($font-size--medium);
+    line-height: 1.5;
+  }
+
   color: $color-carbon;
   font-weight: $font-weight--light;
   line-height: 1.5;
@@ -94,5 +100,9 @@ blockquote {
   p {
     color: $color-primary;
     font-size: $font-size--huge;
+
+    @include mq(small-only) {
+      font-size: $font-size--large;
+    }
   }
 }

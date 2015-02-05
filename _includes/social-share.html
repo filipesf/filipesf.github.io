@@ -1,19 +1,11 @@
 <section class="social-share">
-  <div class="row">
-    <div class="small-3 columns">
-      <a class="fi-social-twitter" href="http://twitter.com/share?url={{ page.url | prepend: site.url }}&amp;text={{ page.title }}&amp;via=filipesf" title="Compartilhar {{ page.title }} no Twitter" target="_blank"></a>
-    </div>
+  <span class="social-share__cta">Share:</span>
 
-    <div class="small-3 columns">
-      <a class="fi-social-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ page.url | prepend: site.url }}" title="Compartilhar {{ page.title }} no LinkedIn" target="_blank"></a>
-    </div>
+  <a class="social-share__icon fa fa-twitter" href="http://twitter.com/share?url={{ page.url | prepend: site.url }}&amp;text={{ page.title }}&amp;via=filipesf" title="Share {{ page.title }} on Twitter" target="_blank"></a>
 
-    <div class="small-3 columns">
-      <a class="fi-social-facebook" href="http://www.facebook.com/sharer.php?u={{ page.url | prepend: site.url }}" title="Compartilhar {{ page.title }} no Facebook" target="_blank"></a>
-    </div>
+  <a class="social-share__icon fa fa-facebook" href="http://www.facebook.com/sharer.php?u={{ page.url | prepend: site.url }}" title="Share {{ page.title }} on Facebook" target="_blank"></a>
 
-    <div class="small-3 columns">
-      <a class="fi-social-google-plus" href="https://plus.google.com/share?url={{ page.url | prepend: site.url }}" title="Compartilhar {{ page.title }} no Google Plus" target="_blank"></a>
-    </div>
-  </div>
+  <a class="social-share__icon fa fa-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ page.url | prepend: site.url }}" title="Share {{ page.title }} on LinkedIn" target="_blank"></a>
+
+  <a class="social-share__icon fa fa-google-plus" href="https://plus.google.com/share?url={{ page.url | prepend: site.url }}" title="Share {{ page.title }} on Google Plus" target="_blank"></a>
 </section>

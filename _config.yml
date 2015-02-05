@@ -1,16 +1,17 @@
 title: Filipe Fernandes
-description: Front-end Developer
+description: Front-end Architect and Founder at Choco la Design
 
-headline: Compartilhar é a forma mais simples de aprender.
-sub_headline: Aqui é meu espaço para compartilhar as coisas simples que vejo por aí.
+profile_name: Filipe Fernandes
+profile_jobtitle: Front-end Architect
+profile_bio: "Hey! My name is Filipe Fernandes, I'm a Front-end Architect crazy about CSS stuff and build simple but powerfull websites."
 
 email: contato@filipefernandes.com.br
+twitter:  http://twitter.com/filipesf
+linkedin: http://linkedin.com/in/filipesf
+github:   http://github.com/filipesf
 
 baseurl: ""
 url: "http://filipesf.github.io"
-
-twitter_username: filipesf
-github_username:  filipesf
 
 markdown: kramdown
 
@@ -26,19 +27,19 @@ gems: ["jekyll-timeago"]
 
 jekyll_timeago:
   depth: 1
-  today: 'hoje'
-  yesterday: 'ontem'
-  tomorrow: 'amanhã'
-  and: 'e'
-  suffix: 'atrás'
-  prefix: 'Publicado'
+  today: 'today'
+  yesterday: 'yesterday'
+  tomorrow: 'tomorrow'
+  and: 'and'
+  suffix: 'ago'
+  prefix: 'Published'
   suffix_future: ''
-  prefix_future: 'em'
-  years: 'anos'
-  year: 'ano'
-  months: 'meses'
-  month: 'mês'
-  weeks: 'semanas'
-  week: 'semana'
-  days: 'dias'
-  day: 'dia'
+  prefix_future: 'at'
+  years: 'years'
+  year: 'year'
+  months: 'months'
+  month: 'month'
+  weeks: 'weeks'
+  week: 'week'
+  days: 'days'
+  day: 'day'

@@ -1,0 +1,43 @@
+//=====================================
+//
+//  SOCIAL SHARE
+//
+//=====================================
+
+
+
+.social-share {
+  text-align: right;
+  margin: $base-spacing 0;
+
+  @include e(cta) {
+    font-family: $headers-font-family;
+    font-size: $font-size--medium;
+    font-weight: $font-weight--bold;
+  }
+
+  @include e(icon) {
+    $icon-size: 35px;
+
+    @include size($icon-size);
+    background-color: $color-silver;
+    border-radius: 100%;
+    color: $color-carbon;
+    font-size: $font-size--medium;
+    line-height: $icon-size;
+    text-align: center;
+    margin-left: $base-spacing--half / 2;
+    transition: $transition-property $transition-duration $transition-type;
+
+    &:hover {
+      border: none;
+      color: $color-snow;
+
+      &[class*="twitter"]     { background-color: $color-twitter; }
+      &[class*="github"]      { background-color: $color-github; }
+      &[class*="facebook"]    { background-color: $color-facebook; }
+      &[class*="linkedin"]    { background-color: $color-linkedin; }
+      &[class*="google-plus"] { background-color: $color-google-plus; }
+    }
+  }
+}

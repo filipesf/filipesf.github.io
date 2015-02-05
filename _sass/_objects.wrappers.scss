@@ -39,4 +39,8 @@
   @include mq(small-only) {
     padding: 0 $base-spacing;
   }
+
+  @include mq(medium-only) {
+    padding: 0 $base-spacing;
+  }
 }

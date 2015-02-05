@@ -17,6 +17,12 @@
 
   @include e(title) {
     @include font-size($font-size--giant);
+
+    @include mq(small-only) {
+      @include font-size($font-size--big);
+      line-height: 1.2;
+    }
+
     color: $color-primary;
     font-weight: $font-weight--light;
     line-height: 1.2;
@@ -27,6 +33,12 @@
 
   @include e(subtitle) {
     @include font-size($font-size--large);
+
+    @include mq(small-only) {
+      @include font-size($font-size--medium);
+      line-height: 1.5;
+    }
+
     color: palette(carbon, xxlight);
     font-family: $font-family--primary;
     font-weight: $font-weight--light;
@@ -36,6 +48,11 @@
 
   @include e(video) {
     @include size(100%, 450px);
+
+    @include mq(small-only) {
+      @include size(100%, 250px);
+    }
+
     margin: $base-spacing 0;
   }
 }
