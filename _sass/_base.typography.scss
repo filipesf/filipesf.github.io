@@ -41,6 +41,15 @@ h4 { @include font-size($h4-font-size); }
 h5 { @include font-size($h5-font-size); }
 h6 { @include font-size($h6-font-size); }
 
+@include mq(small-only) {
+  h1 { @include font-size($h2-font-size); }
+  h2 { @include font-size($h3-font-size); }
+  h3 { @include font-size($h4-font-size); }
+  h4 { @include font-size($h5-font-size); }
+  h5 { @include font-size($h6-font-size); }
+  h6 { @include font-size($h6-font-size); }
+}
+
 
 
 //-------------------------------------
