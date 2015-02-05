@@ -1,11 +1,8 @@
 title: Filipe Fernandes
 description: Front-end Architect and Founder at Choco la Design
 
-profile_name: Filipe Fernandes
-profile_jobtitle: Front-end Architect
-profile_bio: "Hey! My name is Filipe Fernandes, I'm a Front-end Architect crazy about CSS stuff and build simple but powerfull websites."
-
 email: contato@filipefernandes.com.br
+
 twitter:  http://twitter.com/filipesf
 linkedin: http://linkedin.com/in/filipesf
 github:   http://github.com/filipesf
@@ -23,7 +20,7 @@ port: 7777
 sass:
   style: :compressed
 
-gems: ["jekyll-timeago"]
+gems: [jekyll-timeago]
 
 jekyll_timeago:
   depth: 1
@@ -32,9 +29,9 @@ jekyll_timeago:
   tomorrow: 'tomorrow'
   and: 'and'
   suffix: 'ago'
-  prefix: 'Published'
+  prefix: ''
   suffix_future: ''
-  prefix_future: 'at'
+  prefix_future: ''
   years: 'years'
   year: 'year'
   months: 'months'

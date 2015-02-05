@@ -7,7 +7,8 @@ permalink: articles/
     <span class="article__meta">
       <time class="article__meta__datetime" datetime="{{ post.date | %H:%M:%S }}">
         <i class="fa fa-clock-o"></i>
-        {{ post.date | date_to_long_string }}
+        <!-- {{ post.date | date_to_long_string }} -->
+        {{ post.date | timeago }}
       </time>
       <span class="article__meta__category">
         <i class="fa fa-tags"></i>
