@@ -22,17 +22,20 @@
   }
 
   @include e(icon) {
-    $icon-size: 35px;
-
-    @include size($icon-size);
+    @include size(35px);
     background-color: $color-silver;
     border-radius: 100%;
-    color: $color-carbon;
     font-size: $font-size--medium;
-    line-height: $icon-size;
+    line-height: 37px;
     text-align: center;
     margin-left: $base-spacing--half / 2;
     transition: $transition-property $transition-duration $transition-type;
+
+    &[class*="twitter"]     { color: $color-twitter; }
+    &[class*="github"]      { color: $color-github; }
+    &[class*="facebook"]    { color: $color-facebook; }
+    &[class*="linkedin"]    { color: $color-linkedin; }
+    &[class*="google-plus"] { color: $color-google-plus; }
 
     &:hover {
       border: none;
