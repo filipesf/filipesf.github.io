@@ -53,4 +53,13 @@
 
     margin: $base-spacing 0;
   }
+
+  h3,
+  h4,
+  h5,
+  h6 { font-weight: $font-weight--medium; }
+
+  @include mq(small-only) {
+    h3 { @include font-size($h4-font-size); }
+  }
 }
