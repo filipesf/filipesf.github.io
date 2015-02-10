@@ -40,6 +40,10 @@ hr {
   border: none;
   border-bottom: 1px solid palette(smoke, xlight);
   margin: $base-spacing--double 0;
+
+  @include mq(small-only) {
+    margin: $base-spacing 0;
+  }
 }
 
 

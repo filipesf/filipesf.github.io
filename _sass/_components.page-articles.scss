@@ -33,17 +33,15 @@
 
   @include e(subtitle) {
     @include font-size($font-size--large);
+    color: palette(carbon, xxlight);
+    font-family: $font-family--primary;
+    font-weight: $font-weight--light;
+    line-height: 1.5;
 
     @include mq(small-only) {
       @include font-size($font-size--medium);
       line-height: 1.5;
     }
-
-    color: palette(carbon, xxlight);
-    font-family: $font-family--primary;
-    font-weight: $font-weight--light;
-    line-height: 1.5;
-    margin-bottom: $base-spacing--double;
   }
 
   @include e(video) {
