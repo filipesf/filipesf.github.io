@@ -16,6 +16,7 @@ class Jekyll < Thor
     open(filename, 'w') do |post|
       post.puts "---"
       post.puts "layout: post"
+      post.puts "cover: /img/"
       post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
       post.puts "excerpt: "
       post.puts "date: #{date} #{time}"

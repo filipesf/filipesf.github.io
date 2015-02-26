@@ -26,7 +26,7 @@ Me senti motivado a escrever esse post depois de assistir o vídeo abaixo, do Bo
 
 Acredito que essa foi a definição mais sensata do que tem causado a corrupção no Brasil. E uma coisa é fato: um problema puxa o outro. No fim, essa bomba econônica em que estamos traz diversos problemas e o principal deles é social.
 
-<h4>O problema</h4>
+<h3 class="article__heading">O problema</h3>
 
 Andei observando que o que retrata essa realidade muito bem é uma questão muito simples: a fila do ônibus.
 
@@ -40,7 +40,7 @@ As pessoas simplesmente não respeitam nada nem ninguém. É um empurra empurra 
 
 O que isso mostra é que estamos todos cobrando nossos governantes quando nós mesmos não somos os exemplos que queremos ver no poder. Seguindo a linha do exemplo que o Bob Fernandes deu, se uma pessoa que tem atitudes como a dessas pessoas que empurram as outras sem cerimônias for para o poder, vai ser capaz de atos tão corruptos quanto os nossos atuais governantes.
 
-<h4>A mudança</h4>
+<h3 class="article__heading">A mudança</h3>
 
 O ponto que me deixa mais preocupado é que os brasileiros, de maneira geral, precisam de alguém dizendo o que se deve fazer. Raras são as pessoas que tomam atitudes para resolver algum problema, mas todas tem bala na aguluha na hora de reclamar de algo. Quer dizer, precisa-se de um fiscal para que as pessoas se respeitem. Ninguém tem autonomia, afinal, o que impede os passageiros do ônibus se organizarem entre si e manter a fila funcionando como sempre funcionou? Onde está a mentalidade das pessoas de que elas mesmas devem resolver seus problemas?
 
