@@ -21,7 +21,7 @@ So until when my son completed 1yo, I kept my work as a freelancer for a unique 
 
 After October 19th, 2013, I would never be alone anymore. From that time forward, I had another life to take care and I can't wake up every day thinking if my clients would pay me or not. I needed certainties and no doubts.
 
-<h3 class="article__heading">2. Routine</h3>
+<h3 class="article__heading">2. Routine is something necessary</h3>
 
 Having a family requires some routines or your personal life turns a mess.
 
