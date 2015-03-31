@@ -2,14 +2,14 @@
 layout: post
 cover: /img/own-business-or-others-company.jpg
 title: "Have their own business or work for someone else: Do the right thing"
-excerpt: Is not a easy choice when life want to teach us a lesson.
+excerpt: Is not an easy choice when life want to teach us a lesson.
 date: 2015-02-26 1:07:25
 published: true
 comments: true
 tags: Entrepreneurship
 ---
 
-I just read this article at [Entrepreneur](http://www.entrepreneur.com) called [5 Reasons Why I Quit My Own Business to Work for Someone Else](http://www.entrepreneur.com/article/242951) and I've been thinking what the reasons why I've take the same decision 5 months ago. And the answer is: My life had to teach me a lesson and just now I can realize this.
+I just read this article at [Entrepreneur](http://www.entrepreneur.com) called [5 Reasons Why I Quit My Own Business to Work for Someone Else](http://www.entrepreneur.com/article/242951) and I've been thinking about the reasons why I've take the same decision 5 months ago. And the answer is: My life had to teach me a lesson and just now I can realize this.
 
 Well, all those 5 reasons listed by [Brandon Turner](https://www.linkedin.com/in/brandonrturner) are on my list too, but I have three more reasons why I left my full time job as a freelancer and back to work in a company which is not mine.
 
@@ -17,7 +17,7 @@ Well, all those 5 reasons listed by [Brandon Turner](https://www.linkedin.com/in
 
 When you work as a freelancer, you have a bunch of inconsistencies every day. But, unfortunately, the irregular date to receive your payments is the worst.
 
-So until when my son completed 1yo, I kept my work as a freelancer for a unique reason: my wife needed me more then ever at the first months. And this decision wasn't easy, was very tough.
+So until my son completed 1yo, I kept my work as a freelancer for an unique reason: my wife needed me more then ever at the first months. And this decision wasn't easy, was very tough.
 
 After October 19th, 2013, I would never be alone anymore. From that time forward, I had another life to take care and I can't wake up every day thinking if my clients would pay me or not. I needed certainties and no doubts.
 
@@ -25,7 +25,7 @@ After October 19th, 2013, I would never be alone anymore. From that time forward
 
 Having a family requires some routines or your personal life turns a mess.
 
-Working as a freelancer, routine is almost a impossible thing. Thats because you needs to do home stuff, keep the eyes in your kids, do the work and so on.
+Working as a freelancer, routine is almost an impossible thing. That's because you needs to do home stuff, keep the eyes in your kids, do the work and so on.
 
 When you have a full time job, you have a time to wake up, time to work, time to go back to home, time for your family and you can keep everything in his own place.
 
