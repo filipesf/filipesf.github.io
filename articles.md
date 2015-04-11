@@ -25,3 +25,5 @@ permalink: articles/
   </article>
   <hr>
 {% endfor %}
+
+{% include social-links.html %}

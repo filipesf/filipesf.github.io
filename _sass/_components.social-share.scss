@@ -7,13 +7,13 @@
 
 
 .social-share {
-  text-align: right;
+  text-align: center;
 
   @include mq(small-only) {
     text-align: center;
   }
 
-  margin: $base-spacing 0;
+  margin: $base-spacing--double 0;
 
   @include e(cta) {
     font-family: $headers-font-family;
@@ -22,11 +22,11 @@
   }
 
   @include e(icon) {
-    @include size(35px);
+    @include size(56px);
     background-color: $color-silver;
     border-radius: 100%;
-    font-size: $font-size--medium;
-    line-height: 37px;
+    font-size: 28px;
+    line-height: 56px;
     text-align: center;
     margin-left: $base-spacing--half / 2;
     transition: $transition-property $transition-duration $transition-type;
