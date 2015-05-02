@@ -3,12 +3,12 @@ description: Front-end Architect and Founder at Choco la Design
 
 email: contato@filipefernandes.com.br
 
-twitter:  http://twitter.com/filipesf
-linkedin: http://linkedin.com/in/filipesf
+linkedin: http://lnkdin.me/filipesf
 github:   http://github.com/filipesf
+twitter:  http://twitter.com/filipesf
 
 baseurl: ""
-url: "http://filipesf.github.io"
+url: "http://filipesf.com"
 permalink: articles/:title
 port: 7777
 
