@@ -26,6 +26,7 @@
     margin: 0;
     padding: 0;
 
+
     @include e(item) {
       display: inline-block;
       margin-left: $base-spacing;
@@ -35,6 +36,8 @@
 
         @include mq(small-only) { display: none; }
       }
+
+      &:nth-of-type(2) { @include mq(small-only) { margin-left: 0; } }
 
       a {
         @include font-size($font-size--large);
