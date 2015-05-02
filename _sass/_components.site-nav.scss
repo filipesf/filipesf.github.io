@@ -32,6 +32,8 @@
 
       &:first-of-type {
         margin-left: 0;
+
+        @include mq(small-only) { display: none; }
       }
 
       a {
@@ -39,6 +41,7 @@
         display: inline-block;
         font-family: $headers-font-family;
         padding: $base-spacing 0;
+
         &:hover {
           border: none;
           text-decoration: underline;
