@@ -5,7 +5,6 @@ title: "Have their own business or work for someone else: Do the right thing"
 excerpt: Is not an easy choice when life want to teach us a lesson.
 date: 2015-02-26 1:07:25
 published: true
-comments: true
 tags: Entrepreneurship
 ---
 
