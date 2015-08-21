@@ -1,11 +1,9 @@
 ---
-date: 2014-10-09 23:10
-title: Como a paternidade me ensinou a rever minhas prioridades
-author: Filipe Fernandes
-excerpt: Tem vezes que a vida não nos dá escolhas e temos que fazer de tudo para que a cada tomada de decisão seja uma nova oportunidade de crescimento em busca de uma vida mais equilibrada para nós e nossa família.
 layout: post
-comments: true
-dsq_thread_id: 3100979396
+title: Como a paternidade me ensinou a rever minhas prioridades
+excerpt: Tem vezes que a vida não nos dá escolhas e temos que fazer de tudo para que a cada tomada de decisão seja uma nova oportunidade de crescimento em busca de uma vida mais equilibrada para nós e nossa família.
+date: 2014-10-09 23:10
+published: false
 tags: Work
 ---
 Olha, se tem uma coisa que a paternidade faz com a gente é acelerar o processo de amadurecimento. Acho que a gente ganha um ano de experiência de vida pra cada mês passa depois que nossos filhos nascem. Se minhas contas tiverem certas, eu estou beirando os 38 anos. Haha!

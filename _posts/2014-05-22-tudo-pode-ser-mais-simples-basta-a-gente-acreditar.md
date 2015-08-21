@@ -1,11 +1,9 @@
 ---
-date: 2014-05-22 22:56
-title: Tudo pode ser mais simples, basta a gente acreditar
-author: filipesf
-excerpt: A diferença da opinião entre crianças e adultos sobre o futuro do mundo é tão grande que eu acredito ser uma criança que cresceu demais, porque não vejo as cosias da mesma forma que os adultos veem.
 layout: post
-comments: true
-dsq_thread_id: 2705879453
+title: Tudo pode ser mais simples, basta a gente acreditar
+excerpt: A diferença da opinião entre crianças e adultos sobre o futuro do mundo é tão grande que eu acredito ser uma criança que cresceu demais, porque não vejo as cosias da mesma forma que os adultos veem.
+date: 2014-05-22 22:56
+published: false
 tags: Simplify
 ---
 Acabei de assistir um vídeo que uma amiga postou no Facebook e fiquei feliz, mas ao mesmo tempo horrorizado com o que eu vi.

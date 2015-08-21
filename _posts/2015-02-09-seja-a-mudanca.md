@@ -3,8 +3,7 @@ layout: post
 title: "Seja a mudança"
 excerpt: As pessoas acreditam que podem mudar umas as outras, mas esquecem que antes de mudar uma sociedade precisamos mudar a nós mesmos.
 date: 2015-02-09 17:13:02
-published: true
-comments: true
+published: false
 tags: Society
 ---
 

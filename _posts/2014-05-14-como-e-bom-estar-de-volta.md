@@ -1,11 +1,9 @@
 ---
-date: 2014-05-14 23:27
-title: Como é bom estar de volta!
-author: Filipe Fernandes
-excerpt: Os maiores inimigos do crescimento profissional são a falta de motivação e o comodismo. É quando a pessoa não sabe aonde quer chegar e se contenta em ficar aonde está.
 layout: post
-comments: true
-dsq_thread_id: 2681371033
+title: Como é bom estar de volta!
+excerpt: Os maiores inimigos do crescimento profissional são a falta de motivação e o comodismo. É quando a pessoa não sabe aonde quer chegar e se contenta em ficar aonde está.
+date: 2014-05-14 23:27
+published: false
 tags: Work
 ---
 Foi com esse pensamento que passei um tempo tentando outras coisas na minha vida profissional e tentei sair um pouco da minha zona de conforto. Apesar dessa minha vontade maluca de querer fazer coisas novas, elas nem sempre precisam ser algo totalmente diferente do habitual, o que tornam as experiências muito menos frustrantes.
