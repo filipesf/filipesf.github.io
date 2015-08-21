@@ -6,7 +6,7 @@ class Jekyll < Thor
     title = title.join(" ")
     date = Time.now.strftime('%Y-%m-%d')
     time = Time.now.strftime('%H:%M:%S')
-    filename = "_posts/#{date}-#{title.to_url}.md"
+    filename = "_posts/#{date}-#{title.to_url}.html"
 
     if File.exist?(filename)
       abort("#{filename} already exists!")
@@ -21,7 +21,6 @@ class Jekyll < Thor
       post.puts "excerpt: "
       post.puts "date: #{date} #{time}"
       post.puts "published: false"
-      post.puts "comments: true"
       post.puts "tags: "
       post.puts "---"
     end
