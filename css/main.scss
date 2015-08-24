@@ -4,34 +4,19 @@
 
 @charset "UTF-8";
 
-/*-----------------------------------*\
-    #UTILITIES
-\*-----------------------------------*/
+@import "settings.variables";
+@import "settings.colors";
+@import "settings.functions";
+@import "settings.mixins";
 
-@import "utilities.variables";
-@import "utilities.colors";
-@import "utilities.functions";
-@import "utilities.mixins";
+@import "generic.normalize";
 
-/*-----------------------------------*\
-    #BASE
-\*-----------------------------------*/
-
-@import "base.normalize";
-@import "base.page";
-@import "base.typography";
-
-/*-----------------------------------*\
-    #OBJECTS
-\*-----------------------------------*/
+@import "elements.page";
+@import "elements.typography";
 
 @import "objects.media";
 @import "objects.buttons";
 @import "objects.wrappers";
-
-/*-----------------------------------*\
-    #COMPONENTS
-\*-----------------------------------*/
 
 @import "components.site-nav";
 @import "components.page-head";
@@ -43,9 +28,5 @@
 @import "components.social-share";
 @import "components.buttons";
 
-/*-----------------------------------*\
-    #REPLACES
-\*-----------------------------------*/
-
-@import "replaces.helpers";
-@import "replaces.text-colors";
+@import "trumps.helpers";
+@import "trumps.text-colors";
