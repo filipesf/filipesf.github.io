@@ -1,33 +1,5 @@
 $(document).ready(function() {
 
-  // SEND CONTACT FORM
-  var form = $('#contactform');
-  var submit = $('.button');
-  var alert = $('.alert');
-
-  form.on('submit', function(e) {
-    e.preventDefault();
-
-    $.ajax({
-      url: 'mail.php',
-      type: 'POST',
-      dataType: 'html',
-      data: form.serialize(),
-      beforeSend: function() {
-        alert.fadeOut();
-        submit.html('Sending...');
-      },
-      success: function(data) {
-        alert.html(data).fadeIn();
-        form.trigger('reset');
-        submit.html('Send');
-      },
-      error: function(e) {
-        console.log(e)
-      }
-    });
-  });
-
   // SCROLL MENU
   $(function() {
     $('a[href*=#]:not([href=#])').click(function() {
@@ -40,19 +12,6 @@ $(document).ready(function() {
           }, 1000);
           return false;
         }
-      }
-    });
-  });
-
-  // BACK TOP
-  $(function(){
-    var bar = $('.bk-top');
-    var top = bar.css('top');
-    $(window).scroll(function() {
-      if($(this).scrollTop() > 140) {
-        bar.stop().animate({'top' : '0px'}, 100);
-      } else {
-        bar.stop().animate({'top' : top}, 100);
       }
     });
   });
