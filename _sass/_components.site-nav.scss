@@ -34,7 +34,7 @@
       &:first-of-type {
         margin-left: 0;
 
-        @include mq(small-only) { display: none; }
+        // @include mq(small-only) { display: none; }
       }
 
       &:nth-of-type(2) { @include mq(small-only) { margin-left: 0; } }
