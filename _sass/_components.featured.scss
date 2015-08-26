@@ -39,4 +39,25 @@
     font-style: italic;
   }
 
+  @include m(cta) {
+    margin: $base-spacing;
+    margin-top: $base-spacing--double;
+
+    .work-details__title {
+      @include font-size($font-size--large, 1.2);
+      color: palette('primary', 'xxdark');
+
+      a {
+        @include border-radius(2px);
+        background-color: palette('primary');
+        color: palette('snow');
+        display: block;
+        text-align: center;
+        padding: $base-spacing;
+        transition: $transition-property $transition-duration $transition-type;
+
+        &:hover { background-color: palette('primary', 'dark'); }
+      }
+    }
+  }
 }
