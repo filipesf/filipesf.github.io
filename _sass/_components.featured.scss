@@ -12,7 +12,6 @@
     font-weight: $font-weight--bold;
 
     @include mq(small-only) { @include font-size($font-size--large, 1.2); }
-
   }
 }
 
@@ -25,6 +24,8 @@
     @include font-size($font-size--large, 1.2);
     font-weight: $font-weight--medium;
     margin: 0;
+
+    i { @include font-size($font-size--small); }
   }
 
   @include e(job) {
