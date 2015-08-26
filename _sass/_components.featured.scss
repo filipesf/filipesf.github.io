@@ -57,6 +57,11 @@
         transition: $transition-property $transition-duration $transition-type;
 
         &:hover { background-color: palette('primary', 'dark'); }
+
+        @include mq(small-only) {
+          margin-left: -$base-spacing;
+          margin-right: -$base-spacing;
+        }
       }
     }
   }
