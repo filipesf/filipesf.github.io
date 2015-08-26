@@ -20,18 +20,6 @@
     margin-top: em(15px);
     padding: em(10px) em(20px);
     width: auto;
-
-    // Small modifier
-    @include m(small) {
-      font-size: em(12px);
-      padding: em(5px) em(15px);
-    }
-
-    // Large modifier
-    @include m(large) {
-      font-size: em(18px);
-      padding: em(15px) em(25px);
-    }
   }
 }
 
