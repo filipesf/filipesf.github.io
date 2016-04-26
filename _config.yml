@@ -13,7 +13,7 @@ permalink: articles/:title
 port: 7777
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 
 sass:
   style: :compressed
