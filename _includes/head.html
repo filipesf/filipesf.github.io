@@ -6,6 +6,8 @@
   <title>{% if page.title %}{{ page.title }} | {{ site.title }} • {{ site.description }}{% else %}{{ site.title }} • {{ site.description }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.title }}, {{ site.description }}{% endif %}">
 
+  <meta name="google-site-verification" content="IEz0KTIw1QttKPejNtFK__R9zIFPBEeCIi4YIXpMlAg" />
+
   {% if page.cover %}<meta property="og:image" content="{{ page.cover | prepend: site.url }}"/>{% else %}<meta property="og:image" content="{{ "/img/og.png" | prepend: site.url }}"/>{% endif %}
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}"/>
   <meta property="og:site_name" content="{{ site.title }}"/>
