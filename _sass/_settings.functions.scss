@@ -35,7 +35,7 @@
   @if not unitless($em-context) {
     $em-context: strip-units($em-context);
   }
-  @return $target / $em-context * 1em;
+  @return $target / $em-context * 1rem;
 }
 
 

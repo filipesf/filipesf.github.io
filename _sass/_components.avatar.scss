@@ -1,0 +1,25 @@
+//=====================================
+//
+//  Avatar
+//
+//=====================================
+
+
+
+.avatar {
+  margin: 0;
+  margin-right: 1.5rem;
+  padding: 0;
+  width: em(640px);
+
+  @include mq(small-only) {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+  }
+
+  & > img {
+    border-radius: 100%;
+    width: 100%;
+  }
+}
