@@ -7,13 +7,14 @@
 
 
 .hero {
-  color: $color-primary;
+  color: $color-raven;
+  text-align: center;
 
   @include e(title) {
     @include font-size($font-size--big);
 
     @include mq(small-only) {
-      @include font-size($font-size--huge);
+      @include font-size($font-size--large);
       line-height: 1.2;
     }
 
@@ -23,13 +24,19 @@
 
   @include e(subtitle) {
     @include font-size($font-size--large);
+    font-family: $font-family--primary;
     font-weight: $font-weight--light;
     line-height: 1.2;
     margin: 0;
+
+    @include mq(small-only) {
+      @include font-size($font-size--medium);
+      line-height: 1.2;
+    }
   }
 
   a {
-    color: palette(primary, xdark);
+    color: palette(primary, dark);
 
     i { @include font-size($font-size--regular); }
   }

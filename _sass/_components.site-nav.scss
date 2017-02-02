@@ -7,14 +7,14 @@
 
 
 .nav {
-  padding-top: $base-spacing;
+  padding-top: $base-spacing--double;
   display: flex;
   justify-content: center;
 
   @include e(brand) {
-    @include size(65px);
+    @include size(100px);
     box-sizing: content-box;
-    margin-right: $base-spacing--half;
+    // margin-right: $base-spacing--half;
     display: block;
 
     @include e(path) { fill: $color-primary; }
