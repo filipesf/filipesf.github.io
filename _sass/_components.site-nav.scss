@@ -7,16 +7,15 @@
 
 
 .nav {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
   padding-top: $base-spacing;
+  display: flex;
+  justify-content: center;
 
   @include e(brand) {
     @include size(65px);
     box-sizing: content-box;
-    float: left;
     margin-right: $base-spacing--half;
+    display: block;
 
     @include e(path) { fill: $color-primary; }
   }

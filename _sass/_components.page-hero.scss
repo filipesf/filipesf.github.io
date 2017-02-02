@@ -10,11 +10,10 @@
   color: $color-primary;
 
   @include e(title) {
-    @include font-size($font-size--giant);
+    @include font-size($font-size--big);
 
     @include mq(small-only) {
       @include font-size($font-size--huge);
-      text-align: center;
       line-height: 1.2;
     }
 
