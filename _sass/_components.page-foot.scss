@@ -9,7 +9,7 @@
 .footer {
   @include wrapper();
   text-align: center;
-  padding-bottom: $base-spacing--double;
+  // padding-bottom: $base-spacing--double;
 
   @include e(list) {
     list-style: none;
