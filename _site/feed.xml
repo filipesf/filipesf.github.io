@@ -3,10 +3,10 @@
   <channel>
     <title>Filipe Fernandes</title>
     <description>UI Engineer at The AA Ireland and Founder at Choco la Design</description>
-    <link>http://localhost:7777/</link>
-    <atom:link href="http://localhost:7777/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 02 Feb 2017 12:13:04 +0000</pubDate>
-    <lastBuildDate>Thu, 02 Feb 2017 12:13:04 +0000</lastBuildDate>
+    <link>http://filipesf.com/</link>
+    <atom:link href="http://filipesf.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 02 Feb 2017 13:50:31 +0000</pubDate>
+    <lastBuildDate>Thu, 02 Feb 2017 13:50:31 +0000</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -46,8 +46,8 @@
 &lt;p&gt;We always have pros and cons on both decisions, but it’s up to you to find out what the ideal for what you are going through. Only you know the answer.&lt;/p&gt;
 </description>
         <pubDate>Thu, 26 Feb 2015 01:07:25 +0000</pubDate>
-        <link>http://localhost:7777/articles/have-their-own-business-or-work-for-someone-else-do-the-right-thing</link>
-        <guid isPermaLink="true">http://localhost:7777/articles/have-their-own-business-or-work-for-someone-else-do-the-right-thing</guid>
+        <link>http://filipesf.com/articles/have-their-own-business-or-work-for-someone-else-do-the-right-thing</link>
+        <guid isPermaLink="true">http://filipesf.com/articles/have-their-own-business-or-work-for-someone-else-do-the-right-thing</guid>
         
         <category>Entrepreneurship</category>
         
