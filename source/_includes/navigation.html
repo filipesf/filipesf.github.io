@@ -6,11 +6,7 @@
   <ul class="c-nav__list">
     {% for item in site.data.nav %}
       <li class="c-nav__item">
-        {% if item.name == "Hire me!" %}
-          <a class="c-nav__link" href="{{ item.link }}" title="{{ item.title }}" target="_blank">{{ item.name }}</a>
-        {% else %}
-          <a class="c-nav__link" href="{{ item.link }}" title="{{ item.title }}">{{ item.name }}</a>
-        {% endif %}
+        <a class="c-nav__link" href="{{ item.link }}" title="{{ item.title }}">{{ item.name }}</a>
       </li>
     {% endfor %}
   </ul>
