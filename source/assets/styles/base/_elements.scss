@@ -36,6 +36,7 @@
  *    navigating between pages that do/do not have enough content to produce
  *    scrollbars naturally.
  * 5. Ensure the page always fills at least the entire height of the viewport.
+ * 6. Add smooth scrolling when clicking on anchor links.
  */
 html {
   font-size: 1em;                      /* [1] */
@@ -45,6 +46,7 @@ html {
   text-size-adjust: 100%;              /* [3] */
   overflow-y: scroll;                  /* [4] */
   min-height: 100%;                    /* [5] */
+  scroll-behavior: smooth;             /* [6] */
 }
 
 
