@@ -1,7 +1,7 @@
 <ul class="c-social">
   {% for item in site.data.social %}
     <li class="c-social__item">
-      <a class="c-social__link" href="{{ item.link }}" title="{{ item.title }}" target="_blank" rel="noindex nofollow">{% include icons/sm-{{ item.name }}.svg %}</a>
+      <a class="c-social__link" href="{{ item.link }}" title="{{ item.title }}" target="_blank" rel="noopener noindex nofollow">{% include icons/sm-{{ item.name }}.svg %}</a>
     </li>
   {% endfor %}
 </ul>

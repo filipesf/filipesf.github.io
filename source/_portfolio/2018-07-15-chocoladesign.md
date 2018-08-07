@@ -1,7 +1,7 @@
 ---
 title: "Choco la Design"
 link: "https://chocoladesign.com/"
-thumbnail: "/uploads/portfolio/chocoladesign/thumb-chocoladesign.png"
+thumbnail: "/uploads/portfolio/chocoladesign/thumb-chocoladesign.jpg"
 categories: [Portfolio]
 tags: [Adobe Xd, Zeplin, Design System, Mobile First, Responsive Web Design, HTML, CSS, JavaScript, Sass, Jekyll, PWA]
 reverse: false
