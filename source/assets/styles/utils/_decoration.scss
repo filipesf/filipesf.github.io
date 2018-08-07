@@ -1,0 +1,82 @@
+/* ==========================================================================
+   DECORATION
+   ========================================================================== */
+
+/// @group Decoration
+/// @require {function} color
+/// @require {function} rem
+/// @type map
+$elevations: (
+  1: (
+    0 rem(1) rem(3) rgba(color(gray, 400), .12),
+    0 rem(1) rem(2) rgba(color(gray, 400), .24)
+  ),
+  2: (
+    0 rem(3) rem(6) rgba(color(gray, 400), .16),
+    0 rem(3) rem(6) rgba(color(gray, 400), .23)
+  ),
+  3: (
+    0 rem(10) rem(20) rgba(color(gray, 400), .19),
+    0 rem(6) rem(6) rgba(color(gray, 400), .23)
+  ),
+  4: (
+    0 rem(14) rem(28) rgba(color(gray, 400), .25),
+    0 rem(10) rem(10) rgba(color(gray, 400), .22)
+  ),
+  5: (
+    0 rem(19) rem(38) rgba(color(gray, 400), .3),
+    0 rem(15) rem(12) rgba(color(gray, 400), .22)
+  ),
+);
+
+/// @group Decoration
+/// @require {variable} $elevations
+/// @param {number} $level
+@mixin elevation($level) {
+  box-shadow: map-get($elevations, $level);
+}
+
+/// @group Decoration
+/// @require {function} color
+/// @require {function} rem
+/// @type map
+$shadows: (
+  flat: 0 rem(12) 0 rem(-6)
+);
+
+/// @group Decoration
+/// @param {string} $type
+@mixin shadow($type, $color: color(gray, 300)) {
+  box-shadow: map-get($shadows, $type) $color;
+}
+
+/// @group Decoration
+/// @require {mixin} shadow
+@mixin floatbox($color: color(gray, 300)) {
+  @include shadow(flat, $color);
+  border: rem(3) solid $color;
+}
+
+/// @group Decoration
+/// @param {string} $color [black]
+/// @param {number} $amount [.4]
+/// @output Creates a gradient overlay mask to the element
+@mixin gradient-mask($color: black, $amount: .4) {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba($color, 0), rgba($color, $amount));
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}

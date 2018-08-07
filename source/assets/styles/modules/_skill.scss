@@ -1,0 +1,30 @@
+/* ==========================================================================
+   SKILL
+   ========================================================================== */
+
+.c-skill {
+  @include dash(color(brand));
+  max-width: rem(640);
+
+  &:after {
+    @include rectangle(rem(50), rem(4));
+  }
+
+  &:last-of-type:after {
+    margin-bottom: 0;
+  }
+}
+
+
+
+.c-skill__title {
+  @include type-scale(4, 0);
+  margin-bottom: size(1);
+}
+
+
+
+.c-skill__description {
+  @include type-scale(2, 0);
+  margin: 0;
+}

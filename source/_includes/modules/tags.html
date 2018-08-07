@@ -1,0 +1,10 @@
+<div class="c-tags">
+  {% if include.title %}
+    <strong>{{ include.title }}</strong>
+  {% endif %}
+  <ul class="c-tags__list">
+    {% for item in include.items %}
+      <li class="c-tags__item">{{ item }}</li>
+    {% endfor %}
+  </ul>
+</div>

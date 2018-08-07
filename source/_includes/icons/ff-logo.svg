@@ -1,0 +1,4 @@
+<svg class="c-logo" viewBox="0 0 512 512">
+  <path class="c-logo__background" d="M512 512H0V0h512z" fill="none" />
+  <path class="c-logo__foreground" d="M291 373.16l-35 70.09-35.95-72.1V256.76H163l-27.27-54.67h84.31v-61.67H105L69.25 68.75h373.5L407 140.42H291v61.67h85.31L349 256.76h-58z" />
+</svg>

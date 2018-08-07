@@ -1,0 +1,15 @@
+- name: linkedin
+  title: I share
+  link: https://linkedin.com/in/filipesf
+
+- name: chocola
+  title: I write
+  link: https://chocoladesign.com
+
+- name: github
+  title: I code
+  link: https://github.com/filipesf
+
+- name: twitter
+  title: I tweet
+  link: https://twitter.com/filipesf

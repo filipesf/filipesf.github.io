@@ -1,0 +1,59 @@
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+/// @group Animations
+@keyframes fadein {
+  from {
+    transform: translateY(rem(32));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/// @group Animations
+/// @type map
+$animations: (
+  intro: (
+    opacity: 0,
+    animation-name: fadein,
+    animation-duration: 1s,
+    animation-fill-mode: forwards,
+  ),
+
+  scroll: (
+    animation-name: updown,
+    animation-duration: 2s,
+    animation-iteration-count: infinite,
+  ),
+);
+
+/// @group Animations
+/// @type map
+$animation-order: (
+  1: 0ms,
+  2: 50ms,
+  3: 150ms,
+  4: 250ms,
+  5: 350ms,
+  6: 450ms,
+  7: 550ms,
+  8: 650ms,
+  9: 750ms,
+);
+
+/// @group Animations
+/// @param {string} $name
+/// @param {number|bool} $delay [false]
+@mixin animation($name, $delay: false) {
+  @each $property, $value in map-get($animations, $name) {
+    #{$property}: #{$value};
+  }
+  @if $delay {
+    animation-delay: map-get($animation-order, $delay)
+  }
+}

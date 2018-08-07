@@ -1,0 +1,14 @@
+{% assign portfolio = site.portfolio | sort: "date" | reverse %}
+
+<section class="l-portfolio" id="portfolio">
+  {% include
+    modules/headline.html
+    title="Featured work"
+  %}
+
+  <div class="l-portfolio__container">
+    {% for project in portfolio %}
+      {% include modules/project.html item=project %}
+    {% endfor %}
+  </div>
+</section>

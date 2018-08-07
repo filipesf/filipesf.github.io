@@ -1,0 +1,17 @@
+<nav class="c-nav">
+  <a href="/" title="{{ site.title }} – {{ site.description }}" rel="bookmark">
+    {% include icons/ff-logo.svg %}
+  </a>
+
+  <ul class="c-nav__list">
+    {% for item in site.data.nav %}
+      <li class="c-nav__item">
+        {% if item.name == "Hire me!" %}
+          <a class="c-nav__link" href="{{ item.link }}" title="{{ item.title }}" target="_blank">{{ item.name }}</a>
+        {% else %}
+          <a class="c-nav__link" href="{{ item.link }}" title="{{ item.title }}">{{ item.name }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

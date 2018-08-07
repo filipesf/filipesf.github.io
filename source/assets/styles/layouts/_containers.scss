@@ -1,0 +1,116 @@
+/* ==========================================================================
+   CONTAINERS
+   ========================================================================== */
+
+/* ABOUT
+   ========================================================================== */
+
+.l-about {}
+
+
+
+/* SKILLS
+   ========================================================================== */
+
+.l-skills {
+  @include section;
+}
+
+
+
+.l-skills__container {
+  display: grid;
+  grid-column-gap: size(6);
+  grid-template-columns: auto;
+  justify-content: start;
+  max-width: rem(640);
+
+  @include media-query(1440) {
+    grid-template-columns: auto auto;
+    max-width: 100%;
+  }
+}
+
+
+
+/* PROCESS
+   ========================================================================== */
+
+.l-process {}
+
+
+
+/* PORTFOLIO
+   ========================================================================== */
+
+.l-portfolio {
+  @include section;
+}
+
+
+
+.l-portfolio__container {
+  margin: 0 size(-3);
+
+  @include media-query(medium) {
+    margin: 0;
+  }
+}
+
+
+
+/* HIRE ME
+   ========================================================================== */
+
+.l-hireme {
+  @include section;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color(brand);
+  background-color: black;
+}
+
+
+
+.l-hireme__cta {
+  @include transition(default);
+  @include type-scale(3);
+  display: block;
+  padding: size(4);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  background-color: color(brand);
+  color: white;
+
+  @include media-query(667) {
+    @include type-scale(6);
+    padding: size(4) size(6);
+  }
+
+  @include on-event {
+    background-color: rgba(color(brand), .75);
+  }
+}
+
+
+
+/* OFFLINE
+   ========================================================================== */
+
+.l-offline {
+  padding: 0 size(3);
+
+  @include media-query(813) {
+    padding: size(12);
+    padding-top: 0;
+  }
+
+
+
+  .c-btn {
+    @include animation(intro, 7);
+    display: inline-block;
+  }
+}

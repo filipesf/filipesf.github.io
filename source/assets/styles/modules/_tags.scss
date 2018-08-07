@@ -1,0 +1,37 @@
+/* ==========================================================================
+   TAGS
+   ========================================================================== */
+
+.c-tags {
+  color: color(gray, 700);
+
+  & + .c-tags {
+    margin-top: size(1);
+  }
+}
+
+
+
+.c-tags__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: size(2);
+  margin-left: rem(-4);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+
+.c-tags__item {
+  @include type-scale(-1);
+  display: block;
+  padding: 0 size(1);
+  margin: rem(4);
+  list-style: none;
+  border: 1px solid;
+}

@@ -1,0 +1,130 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+body {
+  @include type-scale(0);
+  font-family: $font-family-primary;
+  font-weight: 400;
+  color: black;
+}
+
+
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-weight: 700;
+}
+
+
+
+h1 { @include type-scale(7); }
+h2 { @include type-scale(6); }
+h3 { @include type-scale(5); }
+h4 { @include type-scale(4); }
+h5 { @include type-scale(3); }
+h6 { @include type-scale(2); }
+
+@include media-query(813) {
+  h1 { @include type-scale(9); }
+  h2 { @include type-scale(8); }
+  h3 { @include type-scale(7); }
+  h4 { @include type-scale(6); }
+  h5 { @include type-scale(5); }
+  h6 { @include type-scale(4); }
+}
+
+
+
+p {
+  letter-spacing: rem(0.1);
+
+  a {
+    font-weight: 700;
+    color: color(brand);
+  }
+
+  code {
+    font-weight: 500;
+  }
+}
+
+
+
+small {
+  @include type-scale(-1);
+}
+
+
+
+a {
+  text-decoration: underline;
+  color: inherit;
+
+  @include on-event {
+    text-decoration: none;
+  }
+}
+
+
+
+sup {
+  a {
+    text-decoration: none;
+  }
+}
+
+
+
+code {
+  font-family: $font-family-monospaced;
+  font-style: normal;
+  font-weight: 600;
+
+  @include media-query(medium) {
+    font-weight: 400;
+  }
+}
+
+
+
+blockquote {
+  @include type-scale(2, 0);
+  position: relative;
+  padding-right: 0;
+  padding-left: size(6);
+  margin-top: size(4);
+  margin-right: 0;
+  margin-bottom: size(4);
+  margin-left: size(-2);
+
+  @include media-query(medium) {
+    padding-right: size(6);
+    margin-top: size(3);
+    margin-bottom: size(3);
+    margin-left: size(0);
+  }
+
+
+
+  &:before {
+    @include type-scale(14, 0);
+    content: '“';
+    position: absolute;
+    top: size(-4);
+    left: 0;
+    z-index: -1;
+  }
+
+
+
+  p {
+    font-style: italic;
+    font-weight: 300;
+    color: color(gray, 600);
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

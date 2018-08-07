@@ -1,0 +1,20 @@
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+
+.c-logo {
+  @include rectangle(size(4));
+  display: block;
+
+  @include media-query(medium) {
+    @include rectangle(size(5));
+  }
+}
+
+.c-logo__background {
+  fill: transparent;
+}
+
+.c-logo__foreground {
+  fill: black;
+}

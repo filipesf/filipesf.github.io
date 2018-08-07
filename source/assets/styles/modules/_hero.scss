@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.c-hero {
+  padding: size(3);
+
+  @include media-query(813) {
+    padding: size(6) size(12);
+  }
+}
+
+
+
+.c-hero__container {
+  max-width: rem(1200);
+}
+
+
+
+.c-hero__title {
+  @include animation(intro, 3);
+  @include dash(color(brand));
+  @include type-scale(4, 1);
+  margin: 0;
+  font-weight: 700;
+
+  @include media-query(medium) {
+    @include type-scale(8);
+  }
+
+  @include media-query(813) {
+    @include type-scale(12);
+    margin-bottom: size(2);
+  }
+}
+
+
+
+.c-hero__subtitle {
+  @include animation(intro, 4);
+  @include type-scale(3, 1);
+  max-width: rem(960);
+  font-weight: 300;
+
+  @include media-query(medium) {
+    @include type-scale(6);
+  }
+
+  @include media-query(813) {
+    @include type-scale(9, 1);
+  }
+}

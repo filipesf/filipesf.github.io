@@ -1,0 +1,51 @@
+# Handling Reading
+encoding: utf-8
+lang: en-gb
+
+# Permalink & URL
+permalink: pretty
+url: https://filipesf.com
+
+# Site info
+title: Filipe Fernandes
+description: Product Designer based in Dublin, Ireland
+headline: I help companies build end-to-end digital products with great user experience.
+
+# Contacts
+contact:
+  email: me@filipesf.com
+  phone: +353 83 847 9047
+  skype: filipe.s.fernandes
+
+# Files
+source: source
+destination: build
+
+# Collections
+collections:
+  pages:
+    output: true
+  portfolio:
+    output: false
+  process:
+    output: false
+
+# Assets
+sass:
+  sass_dir: assets/styles
+  style: compressed
+compress:
+  clippings: all
+  blanklines: false
+  startings: [html, head, body]
+  endings: all
+
+# Conversion
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Server
+host: 0.0.0.0
+port: 7988

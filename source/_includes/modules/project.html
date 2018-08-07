@@ -1,0 +1,29 @@
+{% assign project = include.item %}
+{% assign class = "c-project" %}
+{% if project.reverse %}
+  {% assign class = "c-project c-project--reverse" %}
+{% endif %}
+
+<section class="{{ class }}">
+  <div class="c-project__container">
+    <h4 class="c-project__title">{{ project.title }}</h4>
+
+    <article class="c-project__content">
+      {{ project.content | markdownify }}
+
+      {% if project.notes %}
+        <small class="c-project__notes"><em>{{ project.notes }}</em></small>
+      {% endif %}
+
+      {% if project.link %}
+        <a class="c-btn" href="{{ project.link }}" title="Live project: {{ project.title }}" target="_blank" rel="nofollow">Live project →</a>
+      {% endif %}
+    </article>
+
+    {% include modules/tags.html items=project.tags %}
+  </div>
+
+  <figure class="c-project__thumb">
+    <img class="c-project__img" src="{{ project.thumbnail }}">
+  </figure>
+</section>

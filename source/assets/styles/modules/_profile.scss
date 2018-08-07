@@ -1,0 +1,72 @@
+/* ==========================================================================
+   PROFILE
+   ========================================================================== */
+
+.c-profile {
+  @include section;
+}
+
+
+
+.c-profile__container {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: start;
+  max-width: rem(1280);
+  margin: 0 size(-3);
+
+  @include media-query(medium) {
+    grid-template-columns: auto auto;
+    margin: 0;
+  }
+}
+
+
+
+.c-profile__content {
+  @include animation(intro, 6);
+  @include type-scale(1, 0);
+  margin-top: size(-20);
+  margin-right: size(2);
+  margin-left: size(2);
+  padding: size(2);
+  order: 2;
+
+  @include media-query(667) {
+    margin-top: size(-30);
+    margin-right: size(3);
+    margin-left: size(3);
+  }
+
+  @include media-query(medium) {
+    padding: size(3) size(3) 0 0;
+    margin-top: size(4);
+    margin-right: size(-12);
+    margin-left: 0;
+    order: unset;
+  }
+
+  @include media-query(769) {
+    @include type-scale(3, 0);
+  }
+
+
+
+  .c-icon {
+    @include rectangle(size(4));
+  }
+}
+
+
+
+.c-profile__thumb,
+.c-profile__img {
+  width: 100%;
+}
+
+
+
+.c-profile__thumb {
+  @include animation(intro, 5);
+  z-index: -1;
+}

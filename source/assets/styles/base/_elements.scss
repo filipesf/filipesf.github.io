@@ -1,0 +1,116 @@
+/* ==========================================================================
+   ELEMENTS
+   ========================================================================== */
+
+/**
+ * 1. Set the global `box-sizing` state to `border-box`.
+ * 2. As well as using normalize.css, it is often advantageous to remove all
+ *    margins from certain elements.
+ * 3. Removed outline globaly; Using @mixin on-event(); to handle focus state.
+ * 4. Optimise animations by informing the browser which elements will change
+ *    and what properties will change.
+ *
+ * @link http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+ * @link http://paulirish.com/2012/box-sizing-border-box-ftw
+ */
+*, *::before, *::after {
+  box-sizing: border-box; /* [1] */
+  padding: 0;             /* [2] */
+  margin: 0;              /* [2] */
+  outline: none;          /* [3] */
+  will-change: auto;      /* [4] */
+}
+
+
+
+/**
+ * High-, page-level styling.
+ *
+ * 1. Set the default `font-size` and `line-height` for the entire project,
+ *    sourced from our default variables. The `font-size` is calculated to exist
+ *    in ems, the `line-height` is calculated to exist unitlessly.
+ * 2. Fonts on OSX will look more consistent with other systems that do not
+ *    render text using sub-pixel anti-aliasing.
+ * 3. Prevent certain mobile browsers from automatically zooming fonts.
+ * 4. Force scrollbars to always be visible to prevent awkward ‘jumps’ when
+ *    navigating between pages that do/do not have enough content to produce
+ *    scrollbars naturally.
+ * 5. Ensure the page always fills at least the entire height of the viewport.
+ */
+html {
+  font-size: 1em;                      /* [1] */
+  line-height: 1.5;                    /* [1] */
+  -webkit-font-smoothing: antialiased; /* [2] */
+  -moz-osx-font-smoothing: grayscale;  /* [2] */
+  text-size-adjust: 100%;              /* [3] */
+  overflow-y: scroll;                  /* [4] */
+  min-height: 100%;                    /* [5] */
+}
+
+
+
+/**
+ * Define vertical rhythm for all block level elements.
+ */
+h1, h2, h3, h4, h5, h6, hgroup,
+p, address, blockquote, figure,
+form, noscript, fieldset,
+ul, ol, dd, dl,
+pre, table, hr {
+  margin-bottom: size(3);
+}
+
+
+
+ul, ol {
+  margin-left: size(3);
+
+  @include media-query(medium) {
+    margin-left: size(6);
+  }
+}
+
+
+
+/**
+ * 1. Remove extra vertical spacing when nesting lists;
+ * 2. Adjust nesting list depth.
+ */
+li {
+  + li {
+    margin-top: size(1);
+  }
+
+
+
+  > ul,
+  > ol {
+    margin-bottom: 0;     /* [1] */
+    margin-left: size(3); /* [2] */
+  }
+}
+
+
+
+/**
+ * Give a help cursor to elements that give extra info on `:hover`.
+ */
+abbr[title],
+dfn[title] {
+  cursor: help;
+}
+
+
+
+/**
+ * 1. Fluid images for responsive purposes.
+ * 2. Offset `alt` text from surrounding copy.
+ * 3. Setting `vertical-align` removes the whitespace that appears under `img`
+ *    elements when they are dropped into a page as-is. Safer alternative to
+ *    using `display: block;`.
+ */
+img {
+  max-width: 100%;        /* [1] */
+  font-style: italic;     /* [2] */
+  vertical-align: middle; /* [3] */
+}

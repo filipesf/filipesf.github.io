@@ -1,0 +1,15 @@
+- name: Work
+  title: Check out my latest work
+  link: "/#portfolio"
+
+- name: Process
+  title: Learn more about my design process
+  link: "/#process"
+
+- name: About
+  title: As they say... Tell us about yourself
+  link: "/#about"
+
+- name: Hire me!
+  title: Did you enjoy? Hire me! 😁
+  link: "mailto:me@filipesf.com?subject=Hi%20Filipe%2C%20I%20have%20a%20pretty%20interesting%20project%20for%20you!%20%3B)"

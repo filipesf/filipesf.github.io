@@ -1,0 +1,15 @@
+<section class="l-skills t-gray">
+  {% include
+    modules/headline.html
+    title="Skills"
+  %}
+
+  <div class="l-skills__container">
+    {% for skill in site.data.skills %}
+      <div class="c-skill">
+        <h4 class="c-skill__title">{{ skill.title }}</h4>
+        <p class="c-skill__description">{{ skill.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>

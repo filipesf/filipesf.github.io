@@ -1,0 +1,13 @@
+/* ==========================================================================
+   BUTTON
+   ========================================================================== */
+
+.c-btn {
+  @include button;
+  background-color: color(brand);
+  color: white;
+
+  @include on-event {
+    background-color: color(brand, dark);
+  }
+}

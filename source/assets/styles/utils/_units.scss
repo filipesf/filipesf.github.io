@@ -1,0 +1,109 @@
+/* ==========================================================================
+   UNITS
+   ========================================================================== */
+
+/// @group Units
+/// @type {number}
+$base-unit: 8px;
+
+/// @group Units
+/// @param {number} $num - Number to remove unit from
+/// @return {number} - Unitless number
+@function stript-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+/// @group Units
+/// @param {number} $number
+/// @param {number} $exponent
+/// @return {number} - Exponential $number
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
+  }
+
+  @return $value;
+}
+
+/// @group Units
+/// @require {function} pow
+/// @param {number} $float - Number to format
+/// @param {number} $digits [5] - Number of digits to leave
+/// @return {number}
+@function precision($float, $digits: 5) {
+  $pow: pow(10, $digits);
+  @return round($float * $pow) / $pow;
+}
+
+/// @group Units
+/// @require {variable} $font-unit
+/// @require {variable} $font-unit-ratio
+/// @require {function} precision
+/// @require {function} pow
+/// @param {number} $scale
+/// @return {number} - Modular scale
+@function modular-scale($scale, $base, $ratio) {
+  $modular-scale: $base * pow($ratio, $scale);
+  @return precision($modular-scale, 3);
+}
+
+/// @group Units
+/// @param {number} $num - Number to be converted
+/// @return {number} - Rem number
+@function rem($num) {
+  @return stript-unit($num) / 16 * 1rem;
+}
+
+/// Should only be used for media queries.
+/// @group Units
+/// @param {number} $num - Number to be converted
+/// @return {number} - Em number
+@function em($num) {
+  @return stript-unit($num) / 16 * 1em;
+}
+
+/// @group Units
+/// @require {variable} $base-unit
+/// @param {number} $scale
+/// @return {number} - Scaled base unit
+@function size($scale: 1) {
+  @return rem($base-unit * $scale);
+}
+
+/// @group Units
+/// @param {number} $width
+/// @param {number} $height [$width] - $width as default for square shapes
+/// @example scss
+///   // _foo.scss
+///   .foo {
+///     @include rectangle(48px);
+///   }
+///
+///   // foo.css
+///   .foo {
+///     width: 48px;
+///     height: 48px;
+///   }
+///
+///   // _bar.scss
+///   .bar {
+///     @include rectangle(48px, 24px);
+///   }
+///
+///   // bar.css
+///   .bar {
+///     width: 48px;
+///     height: 24px;
+///   }
+@mixin rectangle($width, $height: $width) {
+  height: $height;
+  width: $width;
+}

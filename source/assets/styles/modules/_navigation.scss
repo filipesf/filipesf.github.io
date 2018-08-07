@@ -1,0 +1,81 @@
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.c-nav {
+  @include animation(intro, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: size(2) size(3);
+
+  @include media-query(medium) {
+    position: static;
+    top: unset;
+  }
+
+  @include media-query(813) {
+    padding: size(3) size(12);
+  }
+}
+
+
+
+.c-nav__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.c-nav__item {
+  @include type-scale(-1, 2);
+  list-style: none;
+  margin: 0;
+
+  @include media-query(813) {
+    @include type-scale(0);
+  }
+}
+
+
+
+.c-nav__link {
+  @include transition(default);
+  position: relative;
+  display: block;
+  padding: size(1);
+  text-decoration: none;
+  color: inherit;
+
+  &:after {
+    @include transition(default);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    height: rem(2);
+    width: 0;
+    background-color: color(brand);
+  }
+
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+
+
+
+  &[href^="mailto"] {
+    background-color: color(brand);
+    margin-left: size(1);
+    color: white;
+
+    @include on-event {
+      background-color: color(brand, dark);
+    }
+  }
+}

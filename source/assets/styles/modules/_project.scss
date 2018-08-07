@@ -1,0 +1,83 @@
+/* ==========================================================================
+   WORK
+   ========================================================================== */
+
+.c-project {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: start;
+
+  @include media-query(1025) {
+    grid-template-columns: auto auto;
+  }
+
+  & + .c-project {
+    margin-top: size(8);
+
+    @include media-query(769) {
+      margin-top: size(16);
+    }
+  }
+}
+
+
+
+.c-project__container {
+  @include animation(intro, 7);
+  position: relative;
+  padding: size(2);
+  margin: size(-4) size(2) 0;
+  background-color: white;
+  color: black;
+  order: 2;
+
+  @include media-query(1025) {
+    max-width: rem(480);
+    margin-top: size(8);
+    margin-right: size(-16);
+    margin-left: 0;
+    order: unset;
+  }
+}
+
+
+
+.c-project__title {
+  margin-bottom: size(1);
+}
+
+
+
+.c-project__thumb {
+  @include animation(intro, 6);
+  margin: 0;
+  z-index: -1;
+}
+
+
+
+.c-project__notes {
+  @include type-scale(-1);
+  display: block;
+  margin-bottom: size(3);
+  color: color(gray, 600)
+}
+
+
+
+.c-project__content {
+  @include type-scale(1, 0);
+  margin-bottom: size(3);
+}
+
+
+
+.c-project--reverse {
+  .c-project__container {
+    @include media-query(1025) {
+      margin-right: 0;
+      margin-left: size(-20);
+      order: 2;
+    }
+  }
+}

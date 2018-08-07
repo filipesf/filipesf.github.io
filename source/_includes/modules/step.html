@@ -1,0 +1,17 @@
+{% assign step = include.item %}
+{% assign class = "c-step"  %}
+{% if step.theme %}
+  {% assign class = "c-step t-" | append: step.theme  %}
+{% endif %}
+
+<section class="{{ class }}" id="{{ step.title }}">
+  {% include
+    modules/headline.html
+    title=step.title
+    subtitle=step.subtitle
+  %}
+
+  <article class="c-step__content">
+    {{ step.content | markdownify }}
+  </article>
+</section>

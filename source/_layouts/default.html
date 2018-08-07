@@ -1,0 +1,18 @@
+---
+layout: compress
+---
+
+{% assign theme = "" %}
+{% if page.theme %}
+  {% assign theme = "t-" | append: page.theme %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang }}">
+  {% include head.html %}
+  <body class="{{ theme }}">
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
+  </body>
+</html>

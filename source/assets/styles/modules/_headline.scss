@@ -1,0 +1,34 @@
+/* ==========================================================================
+   HEADLINE
+   ========================================================================== */
+
+.c-headline {
+  @include dash(color(brand));
+  margin-bottom: size(6);
+}
+
+
+
+.c-headline__title {
+  @include animation(intro, 6);
+  @include type-scale(9);
+  margin-bottom: size(1);
+
+  @include media-query(813) {
+    @include type-scale(12);
+    margin-bottom: size(2);
+  }
+}
+
+
+
+.c-headline__subtitle {
+  @include animation(intro, 7);
+  @include type-scale(3, 1);
+  max-width: rem(960);
+  font-weight: 300;
+
+  @include media-query(813) {
+    @include type-scale(8);
+  }
+}

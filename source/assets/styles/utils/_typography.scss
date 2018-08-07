@@ -1,0 +1,81 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+/// @group Typography
+/// @type number
+$font-unit: 1rem;
+
+/// @group Typography
+/// @type number
+$font-unit-ratio: 1.125;
+
+/// @group Typography
+/// @type number
+$line-unit: 1.5;
+
+/// @group Typography
+/// @type string
+$font-family-primary: 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+/// @group Typography
+/// @type list
+$font-family-monospaced: 'Operator Mono', 'Inconsolata', 'Monaco', 'Consolas', 'Andale Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+
+/// @group Typography
+/// @require {variable} $font-unit
+/// @require {variable} $font-unit-ratio
+/// @param {number} $scale
+/// @return {number} - Rem Number
+@function font-scale($scale: 0) {
+  @return modular-scale($scale, $font-unit, $font-unit-ratio);
+}
+
+/// @group Typography
+/// @require {variable} $line-unit
+/// @param {number} $scale
+/// @return {number} - Unitless number
+@function line-scale($scale) {
+  $size: font-scale($scale);
+  @return ceil($size / $line-unit) * ($line-unit / $size);
+}
+
+/// @group Typography
+/// @require {function} font-scale
+/// @require {function} line-scale
+/// @param {number} $scale
+/// @output Place `font-size` and `line-height`
+/// @example scss
+///   // _headline.scss
+///   h1 {
+///     @include type-scale(3);
+///   }
+///
+///   // headline.css
+///   h1 {
+///     font-size: 2.37037rem;
+///     line-height: 1.26562
+///   }
+@mixin type-scale($font, $line: $font) {
+  font-size: font-scale($font);
+  line-height: line-scale($line);
+}
+
+/// @group Typography
+/// @param {number} $lines
+/// @param {number} $text-wrap-width [100%]
+/// @output Truncate text in the container and add a ellipsis at the end
+@mixin text-wrap($lines, $text-wrap-width: 100%) {
+  overflow: hidden;
+
+  @if $lines > 1 {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    text-overflow: -o-ellipsis-lastline;
+  } @else {
+    max-width: $text-wrap-width;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

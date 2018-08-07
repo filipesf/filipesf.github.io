@@ -1,0 +1,97 @@
+/* ==========================================================================
+   THEMES
+   ========================================================================== */
+
+/* GRAY
+   ========================================================================== */
+
+.t-gray {
+  .c-hero,
+  .l-header,
+  &.l-skills,
+  &.c-step {
+    background-color: color(gray, 200);
+    color: black;
+  }
+}
+
+
+
+/* BLACK
+   ========================================================================== */
+
+.t-black {
+  .c-hero,
+  .l-header,
+  .l-about,
+  .l-offline,
+  &.c-step,
+  &.c-profile,
+  .c-profile__content {
+    background-color: black;
+    color: white;
+  }
+
+  .c-logo__foreground {
+    fill: white;
+  }
+}
+
+
+
+/* PURPLE
+   ========================================================================== */
+
+.t-purple {
+  .c-hero,
+  .l-header,
+  &.l-skills,
+  &.l-hireme,
+  &.c-step {
+    background-color: color(brand);
+    color: white;
+  }
+
+
+
+  &.c-step {
+    .c-headline:after {
+      background-color: black;
+    }
+  }
+
+
+
+  .c-headline:after,
+  .c-hero__title:after {
+    background-color: black;
+  }
+
+
+
+  .c-logo__foreground {
+    fill: white;
+  }
+
+
+
+  .c-nav__link {
+    &:after {
+      background-color: black;
+    }
+
+    &[href$="#hire-me"] {
+      background-color: black;
+
+      &:hover {
+        background-color: color(gray, 900);
+      }
+    }
+  }
+
+
+
+  .c-tags {
+    color: white;
+  }
+}
