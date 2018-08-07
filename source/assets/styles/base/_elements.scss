@@ -64,10 +64,6 @@ pre, table, hr {
 
 ul, ol {
   margin-left: size(3);
-
-  @include media-query(medium) {
-    margin-left: size(6);
-  }
 }
 
 

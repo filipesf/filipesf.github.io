@@ -31,8 +31,13 @@
   color: black;
   order: 2;
 
+  @include media-query(667) {
+    padding: size(4);
+    margin: size(-8) size(4) 0;
+  }
+
   @include media-query(1025) {
-    max-width: rem(480);
+    max-width: rem(640);
     margin-top: size(8);
     margin-right: size(-16);
     margin-left: 0;
