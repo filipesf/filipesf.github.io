@@ -11,7 +11,7 @@
 
 .c-headline__title {
   @include animation(intro, 6);
-  @include type-scale(9);
+  @include type-scale(7);
   margin-bottom: size(1);
 
   @include media-query(813) {
