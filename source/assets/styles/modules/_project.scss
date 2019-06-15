@@ -18,6 +18,16 @@
       margin-top: size(16);
     }
   }
+
+  &:nth-child(even) {
+    .c-project__container {
+      @include media-query(1025) {
+        margin-right: 0;
+        margin-left: size(-20);
+        order: 2;
+      }
+    }
+  }
 }
 
 
@@ -73,16 +83,4 @@
 .c-project__content {
   @include type-scale(1, 0);
   margin-bottom: size(3);
-}
-
-
-
-.c-project--reverse {
-  .c-project__container {
-    @include media-query(1025) {
-      margin-right: 0;
-      margin-left: size(-20);
-      order: 2;
-    }
-  }
 }
