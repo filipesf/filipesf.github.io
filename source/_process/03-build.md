@@ -10,6 +10,7 @@ analised, I like to choose everthing I think is necessary to bringht the project
 in to reality. That said, I keep a couple of mothods, mental models, tools and
 technologies in my arsenal to help me and my team to make it all happen.
 
-- **Methods:** Lean UX, Design Sprint, Atomic Design, Design Patterns
-- **Tools:** Adobe Xd, Adobe Photoshop, Adobe Illustrator, SketchApp, InVision
-- **Techs:** HTML, CSS, JavaScript, React, Storybook, Webpack, Wordpress, Jekyll
+- **Design:** Sketch, Zeplin, InVision, Adobe Xd, Illustrator, Photoshop.
+- **Development:** Git, Vim, Sublime, Webpack, Gulp, MacOS.
+- **Technologies:** HTML, CSS, Javascript, Sass, React, Jekyll, Wordpress.
+- **Methodologies:** Atomic Design, Design Sprint, Lean UX.
