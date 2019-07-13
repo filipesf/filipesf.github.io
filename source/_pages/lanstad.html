@@ -1,0 +1,517 @@
+---
+permalink: /lanstad/
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lanstad – Login</title>
+    <meta name="robots" content="noindex" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lanstad is a complete project management workspace featuring an XML editing content suite, content transformation facility and Digital Asset Management.">
+    <link rel="shortcut icon" href="/uploads/portfolio/lanstad/favicon.png">
+
+    <style>
+      /* VARIABLES
+         =================================================================== */
+      :root {
+        --font-size-xs: .75rem;
+        --font-size-s: .875rem;
+        --font-size-m: 1rem;
+
+        --color-brand-blue: #021656;
+        --color-brand-yellow: #fbbf00;
+        --color-brand-orange: #eb642d;
+        --color-brand-orange-dark: #da5722;
+
+        --color-gray-0: #f8f9fa;
+        --color-gray-2: #e9ecef;
+        --color-gray-4: #ced4da;
+        --color-gray-5: #adb5bd;
+        --color-gray-7: #495057;
+        --color-gray-8: #343a40;
+        --color-gray-9: #212529;
+
+        --color-util-danger: #fa5252;
+
+        --border-radius-default: 8px;
+        --border-radius-s: 4px;
+
+        --transition-default: all ease-in-out 200ms;
+
+        --box-shadow-s: 0 12px 6px -12px rgba(0, 0, 0, .15);
+        --box-shadow-m: 0 16px 12px -12px rgba(0, 0, 0, .15);
+        --box-shadow-l: 0 16px 24px -12px rgba(0, 0, 0, .2);
+        --box-shadow-button: 0 12px 6px -12px rgba(235, 100, 45, 1);
+        --box-shadow-danger: 0 12px 6px -12px rgba(250, 82, 82, .5);
+      }
+
+
+
+      /* ANIMATIONS
+         =================================================================== */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fade-out {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-in-up {
+        from {
+          transform: translateY(48px);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fade-out-down {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        to {
+          transform: translateY(48px);
+          opacity: 0;
+        }
+      }
+
+      @keyframes shake {
+        0%, to {
+          transform: translateZ(0)
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+          transform: translate3d(-10px, 0, 0)
+        }
+
+        20%, 40%, 60%, 80% {
+          transform: translate3d(10px, 0, 0)
+        }
+      }
+
+
+
+      /* ELEMENTS
+       ===================================================================== */
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        outline-color: var(--color-brand-orange);
+        animation-duration: 1s;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--font-size-m);
+        line-height: 1.5;
+        font-family: "system-ui","-apple-system","BlinkMacSystemFont","Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+
+
+      /* BACKGROUND
+         =================================================================== */
+      .c-background {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: var(--color-brand-orange);
+        opacity: 0;
+        animation-name: fade-in;
+        animation-fill-mode: forwards;
+        animation-duration: 750ms;
+        animation-delay: 500ms;
+      }
+
+      .c-background__shape {
+        fill: var(--color-brand-yellow);
+      }
+
+
+
+      /* LOGO
+         =================================================================== */
+      .c-logo {
+        display: block;
+        width: 56px;
+        margin: 0 auto 32px;
+      }
+
+      .c-logo__text,
+      .c-logo__orange,
+      .c-logo__yellow {
+        fill-rule: nonzero;
+      }
+
+      .c-logo__text {
+        fill: var(--color-brand-blue);
+      }
+
+      .c-logo__orange {
+        fill: var(--color-brand-orange);
+      }
+
+      .c-logo__yellow {
+        fill: var(--color-brand-yellow);
+      }
+
+
+
+      /* LOGIN
+         =================================================================== */
+      .c-login {
+        opacity: 0;
+        animation-name: fade-in-up;
+        animation-fill-mode: forwards;
+        animation-delay: 1500ms;
+      }
+
+      .c-login__container {
+        width: 320px;
+        max-width: 100%;
+        padding: 24px 24px 16px 24px;
+        border-radius: var(--border-radius-default);
+        background-color: white;
+        box-shadow: var(--box-shadow-l);
+      }
+
+      .c-login__container.has-error {
+        animation-name: shake;
+        animation-fill-mode: forwards;
+        animation-duration: 750ms;
+      }
+
+
+
+      /* LINKS
+         =================================================================== */
+      .c-links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+
+      .c-links__item {
+        display: block;
+        padding: 4px 0;
+        font-size: var(--font-size-xs);
+        color: var(--color-gray-7);
+        text-decoration: none;
+      }
+
+      .c-links__item:hover,
+      .c-links__item:focus,
+      .c-links__item:active {
+        text-decoration: underline;
+      }
+
+
+
+      /* FORM
+         =================================================================== */
+      .c-form {
+        display: grid;
+        grid-gap: 16px;
+      }
+
+      .f-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        padding: 0;
+      }
+
+      .f-label {
+        position: absolute;
+        top: 50%; left: 0;
+        padding: 0 6px;
+        margin-left: 6px;
+        font-size: var(--font-size-s);
+        font-weight: 700;
+        transition: var(--transition-default);
+        transform: translateY(-50%);
+        background-color: white;
+        color: var(--color-gray-8);
+      }
+
+      .f-text {
+        width: 100%;
+        border: none;
+        margin: 0;
+        padding: 12px;
+        border: 1px solid var(--color-gray-2);
+        border-radius: var(--border-radius-s);
+        order: -1;
+        font-size: var(--font-size-m);
+        box-shadow: none;
+        transition: var(--transition-default);
+        background-color: transparent;
+        color: var(--color-gray-9);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      .f-text:hover,
+      .f-text:focus {
+        outline: none;
+        border-color: var(--color-gray-5);
+      }
+
+      .f-text:focus {
+        box-shadow: var(--box-shadow-s);
+      }
+
+      .f-text:focus + .f-label,
+      .f-text.is-filled + .f-label {
+        font-size: var(--font-size-s);
+        top: 0;
+      }
+
+      .f-text.has-error {
+        border-color: var(--color-util-danger);
+      }
+
+      .f-submitted .c-background {
+        animation-name: fade-out;
+        animation-fill-mode: forwards;
+        animation-duration: 750ms;
+        animation-delay: 500ms;
+        opacity: 1;
+      }
+
+      .f-submitted .c-login {
+        animation-name: fade-out-down;
+        animation-fill-mode: forwards;
+        animation-duration: 750ms;
+        animation-delay: 0ms;
+        opacity: 1;
+      }
+
+
+
+      /* BUTTON
+         =================================================================== */
+      .c-button {
+        font-size: var(--font-size-m);
+        font-weight: 700;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-s);
+        padding: 12px;
+        background-color: var(--color-brand-orange);
+        color: white;
+        transition: var(--transition-default);
+        cursor: pointer;
+      }
+
+      .c-button:hover,
+      .c-button:focus,
+      .c-button:active {
+        background-color: var(--color-brand-orange-dark);
+      }
+
+      .c-button:focus,
+      .c-button:active {
+        box-shadow: var(--box-shadow-button);
+        outline: none;
+      }
+
+
+      /* REVEAL
+         =================================================================== */
+      .c-reveal {
+        position: absolute;
+        right: 12px;
+        border: none;
+        background-color: white;
+        cursor: pointer;
+      }
+
+      .c-reveal > .c-icon--eye {
+        fill: var(--color-gray-5);
+      }
+
+      .c-reveal:focus {
+        outline: none;
+        fill: var(--color-gray-4);
+      }
+
+      .c-reveal:hover > .c-icon--eye,
+      .c-reveal:focus > .c-icon--eye {
+        fill: var(--color-gray-7);
+      }
+
+      .f-text[type="text"] ~ .c-reveal > .c-icon--eye {
+        fill: var(--color-brand-orange-dark);
+      }
+
+
+
+      /* ICONS
+         =================================================================== */
+      .c-icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        transition: var(--transition-default);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="c-login">
+      <div class="c-login__container js-login">
+        <svg class="c-logo" viewBox="0 0 2004 1840">
+          <path class="c-logo__text" d="M889.776,1625.51142 L889.776,1823.96347 L793.584,1823.96347 L793.584,1649.56621 C793.584,1603.46119 777.552,1583.41553 743.484,1583.41553 C707.412,1583.41553 689.376,1603.46119 689.376,1645.55708 L689.376,1823.96347 L593.184,1823.96347 L593.184,1823.96347 L593.184,1507.24201 L683.364,1507.24201 L683.364,1541.31963 C703.404,1509.24658 729.456,1497.21918 769.536,1497.21918 C803.604,1497.21918 833.664,1509.24658 855.708,1529.29224 C881.76,1551.34247 889.776,1575.39726 889.776,1625.51142 Z M478.956,1507.24201 L569.136,1507.24201 L569.136,1823.96347 L478.956,1823.96347 L478.956,1789.88584 C462.924,1819.95434 432.864,1833.9863 380.76,1833.9863 C310.62,1833.9863 256.512,1795.89954 232.464,1735.76256 L232.464,1823.96347 L0,1823.96347 L0,1401 L108.216,1401 L108.216,1729.74886 L230.46,1729.74886 C224.448,1709.7032 220.44,1689.65753 220.44,1665.60274 C220.44,1565.37443 288.576,1495.21461 382.764,1495.21461 C430.86,1495.21461 460.92,1509.24658 478.956,1539.31507 L478.956,1507.24201 Z M474.948,1665.60274 C474.948,1619.49772 440.88,1585.42009 394.788,1585.42009 C350.7,1585.42009 316.632,1619.49772 316.632,1667.60731 C316.632,1711.70776 350.7,1747.78995 396.792,1747.78995 C440.88,1745.78539 474.948,1711.70776 474.948,1665.60274 Z M2004,1401 L2004,1823.96347 L1913.82,1823.96347 L1913.82,1789.88584 C1885.764,1821.9589 1859.712,1833.9863 1815.624,1833.9863 C1723.44,1833.9863 1657.308,1763.82648 1657.308,1665.60274 C1657.308,1567.379 1723.44,1495.21461 1815.624,1495.21461 C1853.7,1495.21461 1883.76,1507.24201 1909.812,1533.30137 L1909.812,1401 L2004,1401 L2004,1401 Z M1913.82,1663.59817 C1913.82,1619.49772 1879.752,1583.41553 1833.66,1583.41553 C1787.568,1583.41553 1751.496,1617.49315 1751.496,1663.59817 C1751.496,1711.70776 1783.56,1745.78539 1833.66,1745.78539 C1879.752,1745.78539 1913.82,1709.7032 1913.82,1663.59817 Z M1557.108,1507.24201 L1647.288,1507.24201 L1647.288,1823.96347 L1557.108,1823.96347 L1557.108,1789.88584 C1541.076,1819.95434 1511.016,1833.9863 1458.912,1833.9863 C1362.72,1833.9863 1298.592,1763.82648 1298.592,1663.59817 C1298.592,1563.36986 1366.728,1493.21005 1460.916,1493.21005 C1509.012,1493.21005 1539.072,1507.24201 1557.108,1537.3105 L1557.108,1507.24201 L1557.108,1507.24201 Z M1551.096,1665.60274 C1551.096,1619.49772 1517.028,1585.42009 1470.936,1585.42009 C1426.848,1585.42009 1392.78,1619.49772 1392.78,1667.60731 C1392.78,1711.70776 1426.848,1747.78995 1472.94,1747.78995 C1519.032,1745.78539 1551.096,1711.70776 1551.096,1665.60274 Z M1314.624,1507.24201 L1268.532,1507.24201 L1268.532,1401 L1172.34,1401 L1172.34,1507.24201 L1126.248,1507.24201 L1126.248,1553.34703 C1108.212,1517.26484 1070.136,1497.21918 1020.036,1497.21918 C949.896,1497.21918 891.78,1543.3242 891.78,1601.45662 C891.78,1641.54795 919.836,1679.6347 959.916,1689.65753 L977.952,1695.67123 L995.988,1699.68037 L1014.024,1705.69406 C1018.032,1705.69406 1020.036,1707.69863 1024.044,1709.7032 C1042.08,1715.71689 1050.096,1725.73973 1050.096,1737.76712 C1050.096,1751.79909 1036.068,1761.82192 1018.032,1761.82192 C997.992,1761.82192 985.968,1751.79909 981.96,1733.75799 L887.772,1733.75799 C893.784,1797.90411 943.884,1840 1014.024,1840 C1088.172,1840 1146.288,1793.89498 1146.288,1733.75799 C1146.288,1705.69406 1138.272,1685.6484 1118.232,1667.60731 C1102.2,1651.57078 1086.168,1645.55708 1034.064,1631.52511 C1002,1623.50685 985.968,1611.47945 985.968,1597.44749 C985.968,1585.42009 997.992,1577.40183 1016.028,1577.40183 C1034.064,1577.40183 1042.08,1583.41553 1044.084,1601.45662 L1138.272,1601.45662 C1138.272,1595.44292 1136.268,1589.42922 1136.268,1583.41553 L1172.34,1583.41553 L1172.34,1823.96347 L1268.532,1823.96347 L1268.532,1579.40639 L1314.624,1579.40639 L1314.624,1507.24201 Z"></path>
+          <polyline class="c-logo__orange" points="1648 0 1648 1291 357 1291"></polyline>
+          <polyline class="c-logo__yellow" points="357 1291 357 0 1648 0"></polyline>
+        </svg>
+
+        <form action="#" class="c-form js-form">
+          <div class="f-field">
+            <input class="f-text js-user" id="username" type="text" required>
+            <label class="f-label" for="username">Username</label>
+          </div>
+
+          <div class="f-field">
+            <input class="f-text js-pass" id="password" type="password" required>
+            <label class="f-label" for="password">Password</label>
+            <button class="c-reveal js-reveal" type="button" aria-label="Reveal password">
+              <svg class="c-icon c-icon--eye" viewBox="0 0 24 14"><path d="M8.20779221,0.727130786 C9.4891839,0.242374505 10.7532405,0 12,0 C13.2467595,0 14.5021582,0.22506204 15.7662338,0.675192873 C17.0303094,1.12532371 18.1385234,1.67932257 19.0909091,2.3372061 C20.0432948,2.99508962 20.9004291,3.65296328 21.6623377,4.3108468 C22.4242462,4.96873033 22.9956691,5.5227292 23.3766234,5.97286003 L24,6.6480529 C23.9307356,6.75192925 23.8268405,6.88177273 23.6883117,7.03758725 C23.5497829,7.19340177 23.2467556,7.50502613 22.7792208,7.97246969 C22.311686,8.43991325 21.8355003,8.8813811 21.3506494,9.29688648 C20.8657984,9.71239186 20.251086,10.1798284 19.5064935,10.6992101 C18.761901,11.2185919 18.0173197,11.6600597 17.2727273,12.0236269 C16.5281348,12.3871941 15.6883164,12.6901623 14.7532468,12.9325404 C13.8181771,13.1749186 12.9004374,13.2961058 12,13.2961058 C10.7532405,13.2961058 9.49784182,13.0710438 8.23376623,12.6209129 C6.96969065,12.1707821 5.86147662,11.6167832 4.90909091,10.9588997 C3.95670519,10.3010162 3.09957091,9.65179876 2.33766234,9.01122796 C1.57575377,8.37065716 1.00433091,7.80800206 0.623376623,7.32324578 L0,6.6480529 C0.173161039,6.47492566 0.389609091,6.24120739 0.649350649,5.94689107 C0.909092208,5.65257476 1.46319922,5.11588836 2.31168831,4.33681576 C3.1601774,3.55774317 4.03462753,2.88255704 4.93506494,2.31123714 C5.83550234,1.73991724 6.92640052,1.21188707 8.20779221,0.727130786 Z M8.36541759,10.2739625 C9.36925965,11.2777084 10.580775,11.7795738 12,11.7795738 C13.419225,11.7795738 14.6307403,11.2777084 15.6345824,10.2739625 C16.6384245,9.27021656 17.140338,8.05881724 17.140338,6.63972818 C17.140338,5.22063912 16.6384245,4.01789265 15.6345824,3.03145269 C14.6307403,2.04501273 13.419225,1.55180015 12,1.55180015 C10.580775,1.55180015 9.36925965,2.04501273 8.36541759,3.03145269 C7.36157552,4.01789265 6.85966201,5.22063912 6.85966201,6.63972818 C6.85966201,8.05881724 7.36157552,9.27021656 8.36541759,10.2739625 Z M8.94048494,6.6480529 C8.94048494,6.23200579 9.02716012,5.83329996 9.20051308,5.45192344 C9.37386605,5.07054692 9.590554,4.74984875 9.85058344,4.4898193 C10.1106129,4.22978986 10.4313111,4.0131019 10.8126876,3.83974894 C11.1940641,3.66639598 11.5927699,3.57972079 12.008817,3.57972079 C12.8409113,3.57972079 13.5603153,3.88308393 14.1670506,4.4898193 C14.773786,5.09655467 15.0771492,5.81595868 15.0771492,6.6480529 C15.0771492,7.48014713 14.773786,8.19955113 14.1670506,8.8062865 C13.5603153,9.41302188 12.8409113,9.71638501 12.008817,9.71638501 C11.1767228,9.71638501 10.4573188,9.41302188 9.85058344,8.8062865 C9.24384807,8.19955113 8.94048494,7.48014713 8.94048494,6.6480529 Z"></path></svg>
+            </button>
+          </div>
+
+          <button class="c-button js-submit" type="submit">Sign in</button>
+        </form>
+
+        <div class="c-links">
+          <a class="c-links__item" href="#" title="Request access">Request access</a>
+          <a class="c-links__item" href="#" title="Forgot password?">Forgot password?</a>
+        </div>
+      </div>
+    </main>
+
+    <svg class="c-background js-background" viewBox="0 0 24 24">
+      <polygon class="c-background__shape js-shape" points="0 0 24 0 0 24"></polygon>
+    </svg>
+
+    <script>
+      /* BACKGROUND SIZE
+         ========================================================================== */
+      const updateBgShape = () => {
+        const bg = document.querySelector('.js-background');
+        const shape = document.querySelector('.js-shape');
+
+        bg.setAttribute('viewBox', `0 0 ${window.innerWidth} ${window.innerHeight}`);
+        shape.setAttribute('points', `0 0 ${window.innerWidth} 0 0 ${window.innerHeight}`);
+      }
+
+
+
+      /* FORM VALIDATION
+         =================================================================== */
+      const loginPanel = document.querySelector('.js-login');
+      const loginForm = document.querySelector('.js-form');
+      const inputUser = document.querySelector('.js-user');
+      const inputPass = document.querySelector('.js-pass');
+      const revealPass = document.querySelector('.js-reveal');
+      const submitLogin = document.querySelector('.js-submit');
+
+      /**
+       * Check if the input passed as argument is empty
+       */
+      const isInputEmpty = element => !element.value;
+
+      /**
+       * Validate if either inputs were filled
+       */
+      const validateSubmition = () => {
+        (isInputEmpty(inputUser) | isInputEmpty(inputPass))
+          ? loginPanel.classList.add('has-error')
+          : loginPanel.classList.remove('has-error');
+
+        isInputEmpty(inputUser)
+          ? inputUser.classList.add('has-error')
+          : inputUser.classList.remove('has-error');
+
+        isInputEmpty(inputPass)
+          ? inputPass.classList.add('has-error')
+          : inputPass.classList.remove('has-error');
+      }
+
+      /**
+       * Toggle `.is-filled` class if the input is not empty
+       */
+      const handleInputChange = element => {
+        element.target.value != ''
+          ? element.target.classList.add('is-filled')
+          : element.target.classList.remove('is-filled');
+      }
+
+      /**
+       * Toggle input type to reveal password
+       */
+      const revealPassword = element => {
+        inputPass.type == 'password'
+          ? inputPass.type = 'text'
+          : inputPass.type = 'password';
+      }
+
+      /**
+       * Form submition handler
+       */
+      const handleLoginForm = (e) => {
+        e.preventDefault();
+        document.documentElement.classList.add('f-submitted');
+        setTimeout(() => location.reload(), 1000)
+      }
+
+
+
+      /* EVENT LISTENERS
+         ========================================================================== */
+      inputUser.addEventListener('change', handleInputChange);
+      inputPass.addEventListener('change', handleInputChange);
+      revealPass.addEventListener('click', revealPassword);
+      submitLogin.addEventListener('click', validateSubmition);
+      loginForm.addEventListener('submit', handleLoginForm);
+
+      window.addEventListener('resize', updateBgShape);
+      window.onload = updateBgShape();
+    </script>
+  </body>
+</html>
