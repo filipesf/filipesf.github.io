@@ -80,7 +80,7 @@
       background-color: black;
     }
 
-    &[href$="#hire-me"] {
+    &[href*="mailto:"] {
       background-color: black;
 
       &:hover {

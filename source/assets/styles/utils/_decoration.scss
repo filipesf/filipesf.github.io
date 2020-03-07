@@ -41,7 +41,8 @@ $elevations: (
 /// @require {function} rem
 /// @type map
 $shadows: (
-  flat: 0 rem(12) 0 rem(-6)
+  flat: 0 12px 0 -6px,
+  button: 0 16px 24px -12px,
 );
 
 /// @group Decoration
