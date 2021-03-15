@@ -1,6 +1,6 @@
 ---
 title: "Choco la Design"
-link: "https://chocoladesign.com/"
+link: "https://chocoladesign.netlify.app/"
 thumbnail: "/uploads/portfolio/chocoladesign/thumb-chocoladesign.jpg"
 categories: [Portfolio]
 tags: [Adobe Xd, Zeplin, Design System, Mobile First, Responsive Web Design, HTML, CSS, JavaScript, Sass, Jekyll, PWA]
