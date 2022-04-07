@@ -12,6 +12,7 @@
         return cache.addAll([
           '/',
           '/offline/',
+          '/mentoria/',
         ]);
       });
   };
