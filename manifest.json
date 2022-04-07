@@ -1,0 +1,15 @@
+{
+  "lang": "en-gb",
+  "short_name": "filipesf",
+  "name": "Filipe Fernandes",
+  "description": "Product Designer based in Dublin, Ireland",
+  "display": "standalone",
+  "theme_color": "#6741d9",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "icons": [{
+    "src": "/assets/images/icon.png",
+    "sizes": "1024x1024",
+    "type": "image/png"
+  }]
+}
