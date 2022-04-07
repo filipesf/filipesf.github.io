@@ -29,6 +29,9 @@
   <link rel="canonical" href="{{ page.url | prepend: baseurl | prepend: site.url }}">
   <link rel="manifest" href="{{ '/manifest.json' | prepend: baseurl | prepend: site.url }}">
 
+  <!-- Scripts -->
+  {% include scripts.html %}
+
   <!-- Feed -->
   {% feed_meta %}
 
