@@ -59,18 +59,35 @@
 /// @require {mixin} rectangle
 /// @require {mixin} media-query
 /// @param {color} $color [black]
+/// @param {alignment} $alignment [left]
 /// @output Draws a dash bellow current element
-@mixin dash($color: black) {
+@mixin dash($color: black, $alignment: left) {
   &:after {
     @include rectangle(rem(50), rem(4));
     content: '';
     display: block;
-    margin: size(3) 0;
+    margin-top: size(3);
+    margin-bottom: size(3);
     background-color: $color;
+
+    @if $alignment == left {
+      margin-right: auto;
+    } @elseif $alignment == right {
+      margin-left: auto;
+    } @else {
+      margin-right: auto;
+      margin-left: auto;
+    }
 
     @include media-query(813) {
       @include rectangle(rem(100), rem(8));
-      margin: size(6) 0;
+      margin-top: size(6);
+      margin-bottom: size(6);
     }
   }
+}
+
+@mixin flat-shadow($color: base, $shade: dark, $border: 2) {
+  border: rem($border) solid color($color, $shade);
+  box-shadow: rem(6) rem(6) 0 color($color, $shade);
 }

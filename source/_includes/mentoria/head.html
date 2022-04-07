@@ -1,0 +1,42 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+
+  <title>{{ site.mentoria.title }}</title>
+  <meta name="description" content="{{ site.headline }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@filipesf">
+  <meta name="twitter:domain" content="filipesf.com">
+  <meta name="twitter:creator" content="@filipesf">
+  <meta name="twitter:title" content="{{ site.mentoria.title }}">
+  <meta name="twitter:description" content="{{ site.headline }}">
+  <meta name="twitter:image" content="{{ '/assets/images/screenshot.png' | prepend: baseurl | prepend: site.url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:url" content="{{ page.url | prepend: baseurl | prepend: site.url }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ site.mentoria.title }}" />
+  <meta property="og:description" content="{{ site.headline }}">
+  <meta property="og:image" content="{{ '/assets/images/screenshot.png' | prepend: baseurl | prepend: site.url}}" />
+
+  <!-- Application -->
+  <meta name="theme-color" content="#6741d9">
+  <meta name="apple-mobile-web-app-title" content="filipesf">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon-precomposed" href="{{ '/assets/images/icon.png' | prepend: baseurl | prepend: site.url}}" />
+  <link rel="canonical" href="{{ page.url | prepend: baseurl | prepend: site.url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | prepend: baseurl | prepend: site.url }}">
+
+  <!-- Feed -->
+  {% feed_meta %}
+
+  <!-- Styles -->
+  <style>
+    {% capture styles %}
+      {% include mentoria.scss %}
+    {% endcapture %}
+    {{ styles | scssify }}
+  </style>
+</head>

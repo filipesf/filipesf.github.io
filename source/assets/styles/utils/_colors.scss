@@ -5,6 +5,28 @@
 /// @group Colors
 /// @type map
 $colors: (
+  base: (
+    light: #f7f7f8,
+    grey: #d6d5d7,
+    dark: #18171c,
+  ),
+
+  primary: (
+    light: #ded9f2,
+    base: #6741d9,
+    dark: #2d2060,
+  ),
+
+  secondary: (
+    light:  #D9F2EB,
+    base:  #80FFDB,
+    dark:  #20604E,
+  ),
+
+  text: (
+    secondary: #6E6B7B,
+  ),
+
   brand: (
     base: #6741d9,
     dark: #5f3dc4,

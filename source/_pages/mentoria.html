@@ -1,0 +1,129 @@
+---
+layout: mentoria
+title: hahaha
+permalink: /mentoria
+---
+
+{% assign hero = site.data.mentoria.hero %}
+{% assign about = site.data.mentoria.about %}
+{% assign benefits = site.data.mentoria.benefits %}
+{% assign structure = site.data.mentoria.structure %}
+{% assign testimonials = site.data.mentoria.testimonials %}
+{% assign calltoaction = site.data.mentoria.calltoaction %}
+
+
+{% include mentoria/nav.html %}
+
+<section class="c-hero">
+  <div class="c-headline">
+    <h1 class="c-headline__title">{{ hero.title }}</h1>
+    <h2 class="c-headline__subtitle">{{ hero.subtitle }}</h2>
+  </div>
+
+  <a class="c-button" href="{{ hero.cta.link }}" title="{{ hero.cta.title }}">{{ hero.cta.name }}</a>
+</section>
+
+
+<section id="mentor" class="l-about">
+  <div class="c-headline">
+    <h3 class="c-headline__title">{{ about.title }}</h3>
+  </div>
+
+
+  <div class="c-profile">
+    <figure class="c-picture">
+      <img class="c-picture__img" src="{{ about.profile_pic.src }}" alt="{{ about.profile_pic.caption }}" />
+    </figure>
+
+    <article class="c-profile__content">
+      {% for item in about.text %}
+        <p>{{ item }}</p>
+      {% endfor %}
+
+      <img class="c-profile__companies" src="{{ about.companies_pic.src }}" alt="{{ about.companies_pic.caption }}" />
+    </article>
+  </div>
+</section>
+
+
+
+<section id="beneficios" class="l-benefits">
+  <div class="c-headline">
+    <h3 class="c-headline__title">{{ benefits.title }}</h3>
+  </div>
+
+  <ol class="c-feature-list">
+    {% for item in benefits.items %}
+      <li class="c-feature-list__item">
+        <span class="c-feature-list__id">0{{forloop.index}}</span>
+        <span class="c-feature-list__text">{{ item }}</span>
+      </li>
+    {% endfor %}
+  </ol>
+</section>
+
+
+
+<section id="estrutura" class="l-structure">
+  <div class="c-headline">
+    <h3 class="c-headline__title">{{ structure.title }}</h3>
+    <h4 class="c-headline__subtitle">{{ structure.subtitle }}</hh4>
+  </div>
+
+  <div class="l-structure__container">
+    <div class="c-display">
+      <h5 class="c-display__title">{{ structure.display.title }}</h5>
+      <h6 class="c-display__subtitle">{{ structure.display.subtitle }}</h6>
+    </div>
+
+    <div class="l-structure__content">
+      <ul class="c-feature-list">
+        {% for item in structure.items %}
+          <li class="c-feature-list__item">
+            <span class="c-feature-list__id">✓</span>
+            <span class="c-feature-list__text">{{ item }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <a class="c-button" href="{{ structure.cta.link }}" title="{{ structure.cta.title }}" target="_blank">{{ structure.cta.name }}</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="depoimentos" class="l-testimonials">
+  <div class="c-headline">
+    <h3 class="c-headline__title">{{ testimonials.title }}</h3>
+  </div>
+
+  <ul class="c-testimonials">
+    {% for item in testimonials.items %}
+      <li class="c-testimonial">
+        <blockquote class="c-testimonial__quote">
+          {{ item.content }}
+        </blockquote>
+
+        <div class="c-testimonial__author">
+          <img class="c-testimonial__avatar" src="{{ item.picture }}" alt="{{ item.author }}">
+          <div class="c-testimonial__info">
+            <span class="c-testimonial__name">{{ item.author }}</span>
+            <a class="c-testimonial__link" target="_blank" href="{{ item.link.url }}" title="Perfil de {{ item.author }}">@{{ item.link.label }}</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+
+
+<section id="calltoaction" class="l-calltoaction">
+  <div class="c-headline">
+    <h3 class="c-headline__title">{{ calltoaction.title }}</h3>
+    <h4 class="c-headline__subtitle">{{ calltoaction.subtitle }}</hh4>
+  </div>
+
+  <a class="c-button" target="_blank" href="{{ calltoaction.cta.link }}" title="{{ calltoaction.cta.title }}" target="_blank">{{ calltoaction.cta.name }}</a>
+</section>

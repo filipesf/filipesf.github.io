@@ -1,0 +1,96 @@
+nav:
+  - name: Mentor
+    title: Sobre Filipe Fernandes
+    link: "#mentor"
+
+  - name: Benefícios
+    title: Benefícios da mentoria
+    link: "#beneficios"
+
+  - name: Estrutura
+    title: Conheça a estrutura da mentoria
+    link: "#estrutura"
+
+  - name: Depoimentos
+    title: Saiba o que os mentorados tem a dizer
+    link: "#depoimentos"
+
+hero:
+  title: A jornada para a sua carreira na Irlanda começa aqui! 🚀🌍
+  subtitle: Reposicionar sua carreira atual, ou começar uma do zero, em um novo mercado não precisa ser um bicho de sete cabeças. Vem comigo que vou te ajuda nessa nova jornada!
+  cta:
+    name: Saiba como funciona a mentoria
+    title: Saiba como funciona a mentoria
+    link: "#estrutura"
+
+about:
+  title: Conheça um pouco mais do seu mentor
+  profile_pic:
+    src: /uploads/mentoria/filipe-fernandes.jpg
+    caption: Filipe Fernandes - Mentoria de carreira em Design e Desenvolvimento
+  companies_pic:
+    src: /uploads/mentoria/companies.png
+    caption: Bank of Ireland, Bank of America, Walmart, An Post, Hertz
+  text:
+    - Olá, meu nome é <a href="https://linkedin.com/in/filipesf" target="_blank" title="Filipe Fernandes • LinkedIn">Filipe Fernandes</a> e eu atuo como designer e desenvolvedor autodidata há mais de 10 anos.
+    - Depois minha carreira consolidada eu vinha buscando qualidade de vida, então em 2015 decidi vir para a Irlanda.
+    - Hoje já são 7 anos vivendo na ilha onde tive a oportunidade de passar por diversas empresas internacionais.
+    - Agora chegou a hora de compilar toda essa experiência e ajuda você a realizar seu sonho começar sua carreira na Europa!
+
+benefits:
+  title: Porque fazer a mentoria?
+  items:
+    - Reduza o tempo e aumente a velocidade do seu desenvolvimento profissional.
+    - Aprenda a superar seus desafios através da troca de experiências.
+    - Entenda o que funciona e o que não funciona nos processos seletivos.
+    - Receba orientações sobre as melhores formas de se qualificar para o mercado.
+    - Exercite sua autonomia e pensamento crítico nas suas tomadas de decisões.
+    - Tenha acesso à toda a rede de contatos que construí ao longo da minha carreira.
+
+structure:
+  title: Como funciona a mentoria
+  subtitle: Encontros individuais para ajudar você a se preparar para seu próximo emprego em Design e Desenvolvimento na Irlanda.
+  display:
+    title: <mark>4 encontros</mark> quinzenais de 1h30 cada
+    subtitle: <mark>Suporte via WhatsApp</mark> entre primeiro e o último encontro
+  items:
+    - Definir um plano de ação baseado no cenário atual da sua carreira.
+    - Entender sobre como o mercado de irlandês de tecnologia funciona.
+    - Avaliar currículo e LinkedIn para você se destacar no mercado.
+    - Revisar seu portfolio e projetos pessoais.
+    - Preparar para os processos seletivos, entrevistas e testes.
+    - Orientar sobre as possibilidades e o processo de visto de trabalho.
+  cta:
+    name: Agende uma mentoria gratuita
+    title: Agende uma mentoria gratuita
+    link: https://calendly.com/filipesf/sessao-zero
+
+testimonials:
+  title: Depoimentos dos mentorados
+  items:
+    - content: Eu sempre tive muito medo de não conseguir uma oportunidade por ter vindo para Irlanda como estudante. Mas depois de todo trabalho duro e de todos nossos encontros, <strong>recebi a oferta para aplicar visto de trabalho</strong> e agora atuo como Product Designer. Muito obrigada!
+      author: Mariana Azedo
+      picture: /uploads/mentoria/depo-mariana-azedo.jpg
+      link:
+        label: marianazedo
+        url: https://instagram.com/marianazedo
+    - content: Só queria te agradecer mais uma vez pelos feedbacks e pelo incentivo. É sempre uma injeção de ânimo pra continuar! Tô no início ainda, sei que tem muito chão pela frente, mas realmente consigo olhar pro futuro e me ver trabalhando com isso.
+      author: Pepito Rodriguez
+      picture: /uploads/mentoria/depo-pepito-rodriguez.jpg
+      link:
+        label: rodriguez_pepito
+        url: https://instagram.com/rodriguez_pepito
+    - content: Queria deixar aqui registrado meu agradecimento por toda força que você tem me dado, e que me motivaram a seguir em busca do meu espacinho aqui na Irlanda. Não teve uma vez que eu precisei de você e você não conseguiu me ajudar. Sou muito sortuda de ser sua mentorada.
+      author: Letícia Queiroz
+      picture: /uploads/mentoria/depo-leticia-queiroz.jpg
+      link:
+        label: leticiaqueiroz
+        url: https://instagram.com/leticiaqueirooz
+
+calltoaction:
+  title: Chegou a hora de começar sua nova jornada! 🤩
+  subtitle: Nessa primeira conversa vamos discutir seu caso com detalhes e negociar o início da sua mentoria e dessa nova fase na sua carreira.
+  cta:
+    name: Agende uma mentoria gratuita
+    title: Agende uma mentoria gratuita
+    link: https://calendly.com/filipesf/sessao-zero

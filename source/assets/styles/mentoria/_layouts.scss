@@ -1,0 +1,112 @@
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.l-about {
+  @include section;
+  // display: flex;
+  // flex-direction: column;
+
+  // @include media-query(813) {
+  //   display: grid;
+  //   flex-direction: row;
+  //   grid-template-columns: repeat(2, auto);
+  //   gap: size(16);
+  // }
+
+  .c-headline__title {
+    @include dash(color(primary, base))
+  }
+}
+
+
+
+/* ==========================================================================
+   Benefits
+   ========================================================================== */
+
+.l-benefits {
+  @include section;
+
+  .c-headline__title {
+    @include dash(color(primary, base))
+  }
+}
+
+
+
+/* ==========================================================================
+   Structure
+   ========================================================================== */
+
+.l-structure {
+  @include section;
+
+  .c-headline__title {
+    @include dash(color(primary, base))
+  }
+}
+
+
+
+.l-structure__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: size(6);
+
+  @include media-query(medium) {
+    flex-direction: row;
+    gap: size(8);
+
+    .c-feature-list {
+      max-height: 100%;
+    }
+  }
+}
+
+
+
+.l-structure__content {
+  display: flex;
+  flex-direction: column;
+  gap: size(6);
+}
+
+
+
+/* ==========================================================================
+   Testimonials
+   ========================================================================== */
+
+.l-testimonials {
+  @include section;
+
+  .c-headline__title {
+    @include dash(color(primary, base))
+  }
+}
+
+
+
+/* ==========================================================================
+   Call To ACtion
+   ========================================================================== */
+
+.l-calltoaction {
+  @include section;
+  text-align: center;
+
+  .c-headline {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .c-headline__title {
+    @include dash(color(primary, base), center)
+  }
+
+  .c-headline__subtitle {
+    margin: 0 auto;
+  }
+}
