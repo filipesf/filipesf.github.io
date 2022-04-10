@@ -402,6 +402,10 @@ mark {
   @include media-query(813) {
     margin-bottom: size(8);
   }
+
+  mark {
+    display: block;
+  }
 }
 
 

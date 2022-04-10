@@ -1,7 +1,7 @@
 nav:
-  - name: Mentor
-    title: Sobre Filipe Fernandes
-    link: "#mentor"
+  # - name: Mentor
+  #   title: Sobre Filipe Fernandes
+  #   link: "#mentor"
 
   - name: Benefícios
     title: Benefícios da mentoria
@@ -17,7 +17,7 @@ nav:
 
 hero:
   title: A jornada para a sua carreira na Irlanda começa aqui! 🚀🌍
-  subtitle: Reposicionar sua carreira atual, ou começar uma do zero, em um novo mercado não precisa ser um bicho de sete cabeças. Vem comigo que vou te ajuda nessa nova jornada!
+  subtitle: Reposicionar sua carreira atual ou começar uma do zero, em um novo mercado, não precisa ser um bicho de sete cabeças. Vem comigo que vou te ajudar nessa nova jornada!
   cta:
     name: Saiba como funciona a mentoria
     title: Saiba como funciona a mentoria
@@ -33,9 +33,9 @@ about:
     caption: Bank of Ireland, Bank of America, Walmart, An Post, Hertz
   text:
     - Olá, meu nome é <a href="https://linkedin.com/in/filipesf" target="_blank" title="Filipe Fernandes • LinkedIn">Filipe Fernandes</a> e eu atuo como designer e desenvolvedor autodidata há mais de 10 anos.
-    - Depois minha carreira consolidada eu vinha buscando qualidade de vida, então em 2015 decidi vir para a Irlanda.
-    - Hoje já são 7 anos vivendo na ilha onde tive a oportunidade de passar por diversas empresas internacionais.
-    - Agora chegou a hora de compilar toda essa experiência e ajuda você a realizar seu sonho começar sua carreira na Europa!
+    - Após consolidar minha carreira no Brasil, eu vinha buscando qualidade de vida. Então em 2015 decidi vir para a Irlanda.
+    - Hoje, já são 7 anos vivendo na ilha onde tive a oportunidade de passar por diversas empresas internacionais.
+    - Agora chegou a hora de compilar toda essa experiência e ajudar você a realizar seu sonho de começar sua carreira na Europa!
 
 benefits:
   title: Porque fazer a mentoria?
@@ -52,14 +52,15 @@ structure:
   subtitle: Encontros individuais para ajudar você a se preparar para seu próximo emprego em Design e Desenvolvimento na Irlanda.
   display:
     title: <mark>4 encontros</mark> quinzenais de 1h30 cada
-    subtitle: <mark>Suporte via WhatsApp</mark> entre primeiro e o último encontro
+    subtitle: <mark>Suporte via WhatsApp</mark> do primeiro ao último encontro
+  heading: "Sua mentoria inclui:"
   items:
-    - Definir um plano de ação baseado no cenário atual da sua carreira.
-    - Entender sobre como o mercado de irlandês de tecnologia funciona.
-    - Avaliar currículo e LinkedIn para você se destacar no mercado.
-    - Revisar seu portfolio e projetos pessoais.
-    - Preparar para os processos seletivos, entrevistas e testes.
-    - Orientar sobre as possibilidades e o processo de visto de trabalho.
+    - Plano de ação baseado no cenário atual da sua carreira.
+    - Imersão sobre o funcionamento do mercado irlandês de tecnologia.
+    - Análise de currículo e LinkedIn, para que você se destaque no mercado.
+    - Revisão do seu portfolio e projetos pessoais.
+    - Dicas e preparação para processos seletivos, entrevistas e testes.
+    - Orientação sobre possibilidades e o processo de visto de trabalho.
   cta:
     name: Agende uma mentoria gratuita
     title: Agende uma mentoria gratuita
