@@ -75,18 +75,18 @@ testimonials:
       link:
         label: marianazedo
         url: https://instagram.com/marianazedo
+    - content: Queria deixar aqui registrado meu agradecimento por toda força que você tem me dado, e que me motivaram a seguir em busca do meu espacinho aqui na Irlanda. Não teve uma vez que eu precisei de você e você não conseguiu me ajudar. Sou muito sortuda de ser sua mentorada.
+      author: Letícia Queiroz
+      picture: /uploads/mentoria/depo-leticia-queiroz.jpg
+      link:
+        label: leticiaqueirooz
+        url: https://instagram.com/leticiaqueirooz
     - content: Só queria te agradecer mais uma vez pelos feedbacks e pelo incentivo. É sempre uma injeção de ânimo pra continuar! Tô no início ainda, sei que tem muito chão pela frente, mas realmente consigo olhar pro futuro e me ver trabalhando com isso.
       author: Pepito Rodriguez
       picture: /uploads/mentoria/depo-pepito-rodriguez.jpg
       link:
         label: rodriguez_pepito
         url: https://instagram.com/rodriguez_pepito
-    - content: Queria deixar aqui registrado meu agradecimento por toda força que você tem me dado, e que me motivaram a seguir em busca do meu espacinho aqui na Irlanda. Não teve uma vez que eu precisei de você e você não conseguiu me ajudar. Sou muito sortuda de ser sua mentorada.
-      author: Letícia Queiroz
-      picture: /uploads/mentoria/depo-leticia-queiroz.jpg
-      link:
-        label: leticiaqueiroz
-        url: https://instagram.com/leticiaqueirooz
 
 calltoaction:
   title: Chegou a hora de começar sua nova jornada! 🤩
