@@ -1,8 +1,4 @@
 nav:
-  # - name: Mentor
-  #   title: Sobre Filipe Fernandes
-  #   link: "#mentor"
-
   - name: Benefícios
     title: Benefícios da mentoria
     link: "#beneficios"
@@ -62,8 +58,8 @@ structure:
     - Dicas e preparação para processos seletivos, entrevistas e testes.
     - Orientação sobre possibilidades e o processo de visto de trabalho.
   cta:
-    name: Agende uma mentoria gratuita
-    title: Agende uma mentoria gratuita
+    name: Agende, a 1ª mentoria é gratuita
+    title: Agende, a 1ª mentoria é gratuita
     link: https://calendly.com/filipesf/sessao-zero
 
 testimonials:
@@ -92,6 +88,6 @@ calltoaction:
   title: Chegou a hora de começar sua nova jornada! 🤩
   subtitle: Nessa primeira conversa vamos discutir seu caso com detalhes e negociar o início da sua mentoria e dessa nova fase na sua carreira.
   cta:
-    name: Agende uma mentoria gratuita
-    title: Agende uma mentoria gratuita
+    name: Agende, a 1ª mentoria é gratuita
+    title: Agende, a 1ª mentoria é gratuita
     link: https://calendly.com/filipesf/sessao-zero
