@@ -8,7 +8,7 @@ theme: black
 We will now synthesise, sort and organise all the information we have in order
 to shape the outcome that we are looking for. By doing that we will have a
 better understanding about major parts of the content and it’s structure. As
-part of this phase, I generaly include:
+part of this phase, I generally include:
 
 - **Data analysis:** What data do we have? What data do we need?
 - **Define personas:** Who are the users/customers? What are their needs?

@@ -6,9 +6,10 @@ theme: purple
 ---
 
 Every time I am about to build something, after all the notes taken and
-analised, I like to choose everthing I think is necessary to bringht the project
-in to reality. That said, I keep a couple of mothods, mental models, tools and
-technologies in my arsenal to help me and my team to make it all happen.
+analysed, I like to choose everything I think is necessary to bringht the
+project in to reality. That said, I keep a couple of mothods, mental models,
+tools and technologies in my arsenal to help me and my team to make it all
+happen.
 
 - **Design:** Sketch, Zeplin, InVision, Adobe Xd, Illustrator, Photoshop.
 - **Development:** Git, Vim, Sublime, Webpack, Gulp, MacOS.
