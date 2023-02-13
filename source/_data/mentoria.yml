@@ -83,6 +83,12 @@ testimonials:
       link:
         label: rodriguez_pepito
         url: https://instagram.com/rodriguez_pepito
+    - content: Sou muito grato ao Filipe pelo trabalho e atenção que teve comigo. As reuniões foram muito importante para mim, pois foi possível identificar onde deveria focar e estudar um pouco mais para me preparar para o mercado de trabalho. Em poucos dias tive entrevisitas marcadas.
+      author: Vitor Bianchi
+      picture: /uploads/mentoria/depo-vitor-bianchi.jpg
+      link:
+        label: vitorbianchibr
+        url: https://www.linkedin.com/in/vitorbianchibr/
 
 calltoaction:
   title: Chegou a hora de começar sua nova jornada! 🤩
