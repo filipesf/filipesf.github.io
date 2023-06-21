@@ -464,7 +464,11 @@ mark {
   padding: 0;
 
   @include media-query(medium) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-query(1441) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -476,13 +480,16 @@ mark {
   flex-direction: column;
   gap: size(3);
   width: 100%;
-  max-width: rem(480);
   padding: size(3);
   margin: 0;
   background-color: color(base, light);
 
   @include media-query(813) {
     justify-content: space-between;
+  }
+
+  @include media-query(1441) {
+    max-width: rem(480);
   }
 }
 
