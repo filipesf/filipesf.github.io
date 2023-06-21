@@ -508,7 +508,7 @@ mark {
 
 
 .c-testimonial__avatar {
-  @include rectangle(rem(48))
+  @include rectangle(rem(48));
   border-radius: 100%
 }
 

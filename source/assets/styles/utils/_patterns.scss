@@ -72,7 +72,7 @@
 
     @if $alignment == left {
       margin-right: auto;
-    } @elseif $alignment == right {
+    } @else if $alignment == right {
       margin-left: auto;
     } @else {
       margin-right: auto;

@@ -1,3 +1,4 @@
+@use 'sass:math';
 /* ==========================================================================
    UNITS
    ========================================================================== */
@@ -10,7 +11,7 @@ $base-unit: 8px;
 /// @param {number} $num - Number to remove unit from
 /// @return {number} - Unitless number
 @function stript-unit($num) {
-  @return $num / ($num * 0 + 1);
+  @return math.div($num, ($num * 0 + 1));
 }
 
 /// @group Units
@@ -26,7 +27,7 @@ $base-unit: 8px;
     }
   } @else if $exponent < 0 {
     @for $i from 1 through -$exponent {
-      $value: $value / $number;
+      $value: calc($value / $number);
     }
   }
 
@@ -40,7 +41,7 @@ $base-unit: 8px;
 /// @return {number}
 @function precision($float, $digits: 5) {
   $pow: pow(10, $digits);
-  @return round($float * $pow) / $pow;
+  @return calc(round($float * $pow) / $pow);
 }
 
 /// @group Units
@@ -59,7 +60,7 @@ $base-unit: 8px;
 /// @param {number} $num - Number to be converted
 /// @return {number} - Rem number
 @function rem($num) {
-  @return stript-unit($num) / 16 * 1rem;
+  @return calc(stript-unit($num) / 16 * 1rem);
 }
 
 /// Should only be used for media queries.
@@ -67,7 +68,7 @@ $base-unit: 8px;
 /// @param {number} $num - Number to be converted
 /// @return {number} - Em number
 @function em($num) {
-  @return stript-unit($num) / 16 * 1em;
+  @return calc(stript-unit($num) / 16 * 1em);
 }
 
 /// @group Units

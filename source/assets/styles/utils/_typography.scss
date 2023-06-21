@@ -37,7 +37,7 @@ $font-family-monospaced: 'Operator Mono', 'Inconsolata', 'Monaco', 'Consolas', '
 /// @return {number} - Unitless number
 @function line-scale($scale) {
   $size: font-scale($scale);
-  @return ceil($size / $line-unit) * ($line-unit / $size);
+  @return calc(ceil(calc($size / $line-unit)) * ($line-unit / $size));
 }
 
 /// @group Typography

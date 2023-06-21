@@ -98,6 +98,7 @@
 .l-calltoaction {
   @include section;
   text-align: center;
+  background-color: color(primary, light);
 
   .c-headline {
     margin-right: auto;
