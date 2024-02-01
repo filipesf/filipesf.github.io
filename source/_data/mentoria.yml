@@ -60,7 +60,7 @@ structure:
   cta:
     name: Agende, a 1ª mentoria é gratuita
     title: Agende, a 1ª mentoria é gratuita
-    link: https://calendly.com/filipesf/sessao-zero
+    link: https://cal.com/filipesf/intro
 
 testimonials:
   title: Depoimentos dos mentorados
@@ -89,6 +89,12 @@ testimonials:
       link:
         label: vitorbianchibr
         url: https://www.linkedin.com/in/vitorbianchibr/
+    - content: Suas explicações cuidadosas e completas sobre UI e UX Design não só me deram uma base firme, mas também me fizeram valorizar demais a importância do Visual Design.
+      author: Rachel Liu
+      picture: /uploads/mentoria/depo-rachel-liu.jpg
+      link:
+        label: rachelliu
+        url: https://www.linkedin.com/in/rachelliu38/
 
 calltoaction:
   title: Chegou a hora de começar sua nova jornada! 🤩
@@ -96,4 +102,4 @@ calltoaction:
   cta:
     name: Agende, a 1ª mentoria é gratuita
     title: Agende, a 1ª mentoria é gratuita
-    link: https://calendly.com/filipesf/mentoria
+    link: https://cal.com/filipesf/intro

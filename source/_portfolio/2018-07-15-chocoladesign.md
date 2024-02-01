@@ -1,4 +1,5 @@
 ---
+published: true
 title: "Choco la Design"
 link: "https://chocoladesign.netlify.app/"
 thumbnail: "/uploads/portfolio/chocoladesign/thumb-chocoladesign.jpg"
