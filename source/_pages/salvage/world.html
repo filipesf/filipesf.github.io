@@ -1,0 +1,750 @@
+---
+layout: null
+permalink: /salvage/world/
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvage RPG — Worldbuilding Playtest 01</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #1a1a18;
+    --paper: #f5f0e8;
+    --dust: #d9d0c0;
+    --rust: #a0522d;
+    --rust-light: #c4845c;
+    --ash: #6b6560;
+    --glow: #c9a826;
+    --glow-dim: rgba(201,168,38,0.15);
+    --radiation: #7a8c2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--dust);
+    z-index: 100;
+  }
+
+  .progress-bar__fill {
+    height: 100%;
+    background: var(--glow);
+    width: 0%;
+    transition: width 0.25s ease;
+  }
+
+  .header-bar {
+    position: fixed;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    background: var(--paper);
+    border-bottom: 1.5px solid var(--ink);
+    z-index: 90;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-bar__section,
+  .header-bar__count,
+  .meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .header-bar__section { color: var(--rust); font-weight: 700; }
+  .header-bar__count { color: var(--ash); }
+
+  .wizard {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 72px 16px 100px;
+  }
+
+  .screen { display: none; }
+  .screen--active { display: block; }
+
+  .welcome {
+    text-align: center;
+    padding-top: 16vh;
+  }
+
+  .welcome__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .welcome__subtitle {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--ash);
+  }
+
+  .welcome__intro {
+    margin: 18px auto 28px;
+    max-width: 480px;
+    color: var(--ash);
+    font-size: 0.9rem;
+  }
+
+  .welcome__field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .welcome__label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--ash);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .welcome__input {
+    width: 100%;
+    max-width: 280px;
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    background: transparent;
+    outline: none;
+    padding: 8px 6px;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .btn {
+    border: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 20px;
+    min-height: 44px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn--ghost { background: transparent; color: var(--ink); }
+  .btn--rust { background: var(--rust); border-color: var(--rust); }
+
+  .question__header { margin-bottom: 20px; }
+
+  .question__number {
+    color: var(--rust);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .question__text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .question__note {
+    margin-top: 8px;
+    color: var(--ash);
+    font-size: 0.82rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    border: 2px solid var(--dust);
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .option--selected {
+    border-color: var(--glow);
+    background: var(--glow-dim);
+  }
+
+  .option__letter {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .option--selected .option__letter {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: var(--paper);
+  }
+
+  .option__title { font-weight: 700; font-size: 0.95rem; }
+  .option__desc { margin-top: 2px; font-size: 0.82rem; color: var(--ash); }
+
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--paper);
+    border-top: 1.5px solid var(--ink);
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .bottom-nav .btn { flex: 1; }
+
+  .hidden { display: none !important; }
+
+  .result-screen {
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100dvh;
+    padding: 16px 16px 100px;
+  }
+
+  .result__header {
+    text-align: center;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+
+  .result__title {
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .result__name { color: var(--ash); font-size: 0.88rem; margin-top: 4px; }
+
+  .result-section { margin-bottom: 22px; }
+  .result-section__title {
+    font-family: 'Space Mono', monospace;
+    color: var(--glow);
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    margin-bottom: 8px;
+  }
+
+  .result-answers {
+    font-family: 'Space Mono', monospace;
+    white-space: pre-wrap;
+    line-height: 1.65;
+    color: var(--dust);
+    font-size: 0.82rem;
+  }
+
+  .result__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 26px;
+  }
+</style>
+</head>
+<body>
+  <div class="progress-bar"><div class="progress-bar__fill" id="progressFill"></div></div>
+
+  <div class="header-bar hidden" id="headerBar">
+    <span class="header-bar__section" id="headerSection">Worldbuilding Playtest 01</span>
+    <span class="header-bar__count" id="headerCount"></span>
+  </div>
+
+  <div class="wizard" id="wizard">
+    <div class="screen screen--active" id="screenWelcome">
+      <div class="welcome">
+        <div class="welcome__title">Salvage RPG</div>
+        <div class="welcome__subtitle">Worldbuilding — Recorte de Playtest</div>
+        <p class="welcome__intro">Formulário interativo baseado em <strong>06-worldbuilding-playtest-scope</strong>. Responda as 11 perguntas para gerar um resumo pronto para compartilhar no grupo.</p>
+        <div class="welcome__field">
+          <label class="welcome__label" for="nameInput">Seu nome</label>
+          <input id="nameInput" class="welcome__input" type="text" placeholder="Digite seu nome" autocomplete="name">
+        </div>
+        <button id="btnStart" class="btn" disabled>Começar</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screenQuestion">
+      <div class="question">
+        <div class="question__header">
+          <div class="question__number" id="qNumber"></div>
+          <div class="question__text" id="qText"></div>
+          <div class="question__note" id="qNote"></div>
+        </div>
+        <div class="options" id="qOptions"></div>
+      </div>
+    </div>
+
+    <div class="screen" id="screenResult"></div>
+  </div>
+
+  <div class="bottom-nav hidden" id="bottomNav">
+    <button class="btn btn--ghost" id="btnPrev">Anterior</button>
+    <button class="btn" id="btnNext" disabled>Próximo</button>
+  </div>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_PREFIX = 'salvage_wb_wizard_';
+
+  var QUESTIONS = [
+    {
+      id: '1',
+      text: 'Qual é o gatilho principal do cataclismo no cenário-base?',
+      options: [
+        { letter: 'A', title: 'Guerra/colapso nuclear', desc: '' },
+        { letter: 'B', title: 'Evento biológico/químico de larga escala', desc: '' },
+        { letter: 'C', title: 'Colapso geológico/climático', desc: '' },
+        { letter: 'D', title: 'Cataclismo composto (múltiplas causas encadeadas)', desc: '' }
+      ]
+    },
+    {
+      id: '2',
+      text: 'Como tratar respostas divergentes sobre a causa do cataclismo?',
+      note: 'Use esta resposta como regra de convergência para o grupo.',
+      options: [
+        { letter: 'A', title: 'Escolher 1 causa oficial e descartar as outras', desc: '' },
+        { letter: 'B', title: 'Marcar até 2 causas e encadear', desc: 'causa primária + efeito secundário' },
+        { letter: 'C', title: 'Marcar até 3 causas e montar linha de eventos', desc: '' },
+        { letter: 'D', title: 'Manter ambíguo no lore e revelar por playtests canónicos', desc: '' }
+      ]
+    },
+    {
+      id: '3',
+      text: 'Em que janela temporal começa o Playtest 01?',
+      options: [
+        { letter: 'A', title: 'Meses após o evento', desc: 'caos ainda aberto' },
+        { letter: 'B', title: '~1 a 3 anos após o evento', desc: 'recente e instável' },
+        { letter: 'C', title: '~5 a 10 anos', desc: 'primeiras estruturas mais firmes' },
+        { letter: 'D', title: 'Décadas depois', desc: 'ordem local mais consolidada' }
+      ]
+    },
+    {
+      id: '4',
+      text: 'Qual recorte de escala deve guiar a primeira iteração?',
+      options: [
+        { letter: 'A', title: 'Macro primeiro, depois micro', desc: 'mapa global → região de teste' },
+        { letter: 'B', title: 'Micro primeiro, com moldura macro mínima', desc: '' },
+        { letter: 'C', title: 'Paralelo: macro e micro definidos juntos', desc: 'versão enxuta' },
+        { letter: 'D', title: 'Só micro no Playtest 01', desc: 'macro como pano de fundo provisório' }
+      ]
+    },
+    {
+      id: '5',
+      text: 'Qual tom predominante do recorte inicial?',
+      options: [
+        { letter: 'A', title: 'Tenso e urgente, com esperança limitada', desc: '' },
+        { letter: 'B', title: 'Seco e brutal, foco em sobrevivência', desc: '' },
+        { letter: 'C', title: 'Exploração com perigo real e descoberta', desc: '' },
+        { letter: 'D', title: 'Estranho/horror controlado em mundo em ruptura', desc: '' }
+      ]
+    },
+    {
+      id: '6',
+      text: 'Qual estética-base deve liderar o recorte inicial?',
+      options: [
+        { letter: 'A', title: 'Vitoriano/steampunk com sucata', desc: '' },
+        { letter: 'B', title: 'Wasteland/desert punk', desc: '' },
+        { letter: 'C', title: 'Urbano em ruínas contemporâneo', desc: '' },
+        { letter: 'D', title: 'Híbrido por zona', desc: 'cada região com assinatura própria' }
+      ]
+    },
+    {
+      id: '7',
+      text: 'Referências-farol para direção de arte e ficção:',
+      options: [
+        { letter: 'A', title: 'Mad Max + Desert Punk', desc: '' },
+        { letter: 'B', title: 'The Order 1886 + Dishonored', desc: '' },
+        { letter: 'C', title: 'Hellboy + horror pulp', desc: '' },
+        { letter: 'D', title: 'Cowboy Bebop + fronteira improvisada', desc: '' }
+      ]
+    },
+    {
+      id: '8',
+      text: 'Como estruturar ameaças por região no Playtest 01?',
+      options: [
+        { letter: 'A', title: '1 ameaça dominante global com variações locais', desc: '' },
+        { letter: 'B', title: '1 ameaça principal diferente por região', desc: '' },
+        { letter: 'C', title: 'Matriz por região', desc: 'ambiente + facção + criatura' },
+        { letter: 'D', title: 'Região-foco + bordas com ameaças secundárias', desc: '' }
+      ]
+    },
+    {
+      id: '9',
+      text: 'Quantas facções iniciais entram no recorte de playtest?',
+      options: [
+        { letter: 'A', title: 'Sem facções formais (só grupos locais)', desc: '' },
+        { letter: 'B', title: '2 facções emergentes + comunidades neutras', desc: '' },
+        { letter: 'C', title: '3 facções com agenda e conflito explícitos', desc: '' },
+        { letter: 'D', title: '1 facção hegemónica + resistência local', desc: '' }
+      ]
+    },
+    {
+      id: '10',
+      text: 'Economia inicial de sucata no recorte de teste:',
+      options: [
+        { letter: 'A', title: 'Sucata como moeda universal', desc: 'modelo simples' },
+        { letter: 'B', title: 'Sucata + 1 recurso premium', desc: 'água, remédio ou munição' },
+        { letter: 'C', title: 'Sucata categorizada', desc: 'mecânica/química/eletrónica' },
+        { letter: 'D', title: 'Sucata + influência de facção', desc: 'preços e acesso' }
+      ]
+    },
+    {
+      id: '11',
+      text: 'Critério de sucesso do Playtest 01 (principal):',
+      options: [
+        { letter: 'A', title: 'Validar tom/estética e sensação de cenário', desc: '' },
+        { letter: 'B', title: 'Validar recorte regional jogável', desc: 'ameaças + rotas + pontos de interesse' },
+        { letter: 'C', title: 'Validar dinâmica de facções e economia de sucata', desc: '' },
+        { letter: 'D', title: 'Validar os três em conjunto', desc: 'pacote mínimo' }
+      ]
+    }
+  ];
+
+  var currentIndex = 0;
+  var playerName = '';
+
+  var $progressFill = document.getElementById('progressFill');
+  var $headerBar = document.getElementById('headerBar');
+  var $headerCount = document.getElementById('headerCount');
+
+  var $screenWelcome = document.getElementById('screenWelcome');
+  var $screenQuestion = document.getElementById('screenQuestion');
+  var $screenResult = document.getElementById('screenResult');
+
+  var $qNumber = document.getElementById('qNumber');
+  var $qText = document.getElementById('qText');
+  var $qNote = document.getElementById('qNote');
+  var $qOptions = document.getElementById('qOptions');
+
+  var $bottomNav = document.getElementById('bottomNav');
+  var $btnPrev = document.getElementById('btnPrev');
+  var $btnNext = document.getElementById('btnNext');
+  var $nameInput = document.getElementById('nameInput');
+  var $btnStart = document.getElementById('btnStart');
+
+  function skey(key) {
+    return STORAGE_PREFIX + key;
+  }
+
+  function save(key, value) {
+    try { localStorage.setItem(skey(key), value); } catch (e) {}
+  }
+
+  function load(key) {
+    try { return localStorage.getItem(skey(key)) || ''; } catch (e) { return ''; }
+  }
+
+  function clearAll() {
+    var toRemove = [];
+    var i;
+    var k;
+    try {
+      for (i = 0; i < localStorage.length; i++) {
+        k = localStorage.key(i);
+        if (k && k.indexOf(STORAGE_PREFIX) === 0) toRemove.push(k);
+      }
+      toRemove.forEach(function(k) { localStorage.removeItem(k); });
+    } catch (e) {}
+  }
+
+  function answeredCount() {
+    var count = 0;
+    QUESTIONS.forEach(function(q) {
+      if (load('q_' + q.id)) count++;
+    });
+    return count;
+  }
+
+  function updateProgress() {
+    var pct = (answeredCount() / QUESTIONS.length) * 100;
+    $progressFill.style.width = pct + '%';
+  }
+
+  function updateNextBtn() {
+    var q = QUESTIONS[currentIndex];
+    $btnNext.disabled = !load('q_' + q.id);
+    $btnNext.textContent = currentIndex === QUESTIONS.length - 1 ? 'Ver resultado' : 'Próximo';
+  }
+
+  function renderOptions(q) {
+    var currentAnswer = load('q_' + q.id);
+    var desc;
+    $qOptions.innerHTML = '';
+
+    q.options.forEach(function(opt) {
+      var div = document.createElement('div');
+      div.className = 'option' + (opt.letter === currentAnswer ? ' option--selected' : '');
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+
+      var letter = document.createElement('div');
+      letter.className = 'option__letter';
+      letter.textContent = opt.letter;
+
+      var content = document.createElement('div');
+      var title = document.createElement('div');
+      title.className = 'option__title';
+      title.textContent = opt.title;
+      content.appendChild(title);
+
+      if (opt.desc) {
+        desc = document.createElement('div');
+        desc.className = 'option__desc';
+        desc.textContent = opt.desc;
+        content.appendChild(desc);
+      }
+
+      div.appendChild(letter);
+      div.appendChild(content);
+
+      function choose() {
+        save('q_' + q.id, opt.letter);
+        renderQuestion(currentIndex);
+      }
+
+      div.addEventListener('click', choose);
+      div.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          choose();
+        }
+      });
+
+      $qOptions.appendChild(div);
+    });
+  }
+
+  function renderQuestion(index) {
+    currentIndex = index;
+    var q = QUESTIONS[index];
+
+    $screenWelcome.classList.remove('screen--active');
+    $screenResult.classList.remove('screen--active');
+    $screenQuestion.classList.add('screen--active');
+    $bottomNav.classList.remove('hidden');
+    $headerBar.classList.remove('hidden');
+
+    $qNumber.textContent = 'Pergunta ' + q.id;
+    $headerCount.textContent = (index + 1) + ' de ' + QUESTIONS.length;
+    $qText.textContent = q.text;
+    $qNote.textContent = q.note || '';
+
+    renderOptions(q);
+    $btnPrev.disabled = index === 0;
+    updateNextBtn();
+    updateProgress();
+    window.scrollTo(0, 0);
+  }
+
+  function answerLine(q) {
+    var answer = load('q_' + q.id);
+    if (!answer) return '';
+    var opt = q.options.find(function(o) { return o.letter === answer; });
+    return q.id + answer + '. ' + (opt ? opt.title : '');
+  }
+
+  function buildResultText() {
+    var lines = [];
+    lines.push('[' + playerName.toUpperCase() + ']');
+    lines.push('');
+    lines.push('— WORLDBUILDING E RECORTE DE PLAYTEST');
+    QUESTIONS.forEach(function(q) {
+      lines.push(answerLine(q));
+    });
+    lines.push('');
+    lines.push('Resumo para consenso e convergência do Playtest 01.');
+    return lines.join('\n');
+  }
+
+  function showResult() {
+    $screenWelcome.classList.remove('screen--active');
+    $screenQuestion.classList.remove('screen--active');
+    $screenResult.classList.add('screen--active');
+    $bottomNav.classList.add('hidden');
+    $headerBar.classList.add('hidden');
+    $progressFill.style.width = '100%';
+
+    document.body.style.background = 'var(--ink)';
+    document.getElementById('wizard').style.padding = '0';
+    document.getElementById('wizard').style.maxWidth = 'none';
+
+    var resultText = buildResultText();
+
+    var html = '';
+    html += '<div class="result-screen">';
+    html += '  <div class="result__header">';
+    html += '    <div class="result__title">Salvage RPG — Resultado</div>';
+    html += '    <div class="result__name">' + esc(playerName) + '</div>';
+    html += '  </div>';
+    html += '  <div class="result-section">';
+    html += '    <div class="result-section__title">Worldbuilding e recorte de playtest</div>';
+    html += '    <div class="result-answers" id="resultAnswers">' + esc(resultText) + '</div>';
+    html += '  </div>';
+    html += '  <div class="result__actions">';
+    html += '    <button class="btn btn--rust" id="btnCopyAll">Copiar tudo</button>';
+    html += '    <button class="btn btn--ghost" id="btnRestart">Recomeçar</button>';
+    html += '  </div>';
+    html += '</div>';
+
+    $screenResult.innerHTML = html;
+
+    document.getElementById('btnCopyAll').addEventListener('click', function() {
+      copyText(resultText, this);
+    });
+
+    document.getElementById('btnRestart').addEventListener('click', function() {
+      if (confirm('Tem certeza? Todas as respostas serão apagadas.')) {
+        clearAll();
+        location.reload();
+      }
+    });
+  }
+
+  function copyText(text, btn) {
+    function done() {
+      var old = btn.textContent;
+      btn.textContent = 'Copiado!';
+      btn.style.background = 'var(--radiation)';
+      btn.style.borderColor = 'var(--radiation)';
+      setTimeout(function() {
+        btn.textContent = old;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }, 1500);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function() {
+        fallbackCopy(text, done);
+      });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); if (cb) cb(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function esc(s) {
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function goNext() {
+    if (currentIndex === QUESTIONS.length - 1) {
+      showResult();
+      return;
+    }
+    renderQuestion(currentIndex + 1);
+  }
+
+  function goPrev() {
+    if (currentIndex > 0) renderQuestion(currentIndex - 1);
+  }
+
+  function init() {
+    var savedName = load('name');
+    var firstUnanswered;
+    if (savedName) {
+      playerName = savedName;
+      $nameInput.value = savedName;
+      $btnStart.disabled = false;
+    }
+
+    $nameInput.addEventListener('input', function() {
+      $btnStart.disabled = !this.value.trim();
+    });
+
+    $nameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && this.value.trim()) start();
+    });
+
+    $btnStart.addEventListener('click', start);
+    $btnNext.addEventListener('click', goNext);
+    $btnPrev.addEventListener('click', goPrev);
+
+    if (savedName) {
+      firstUnanswered = QUESTIONS.findIndex(function(q) { return !load('q_' + q.id); });
+      if (firstUnanswered === -1) {
+        showResult();
+      } else if (firstUnanswered > 0) {
+        renderQuestion(firstUnanswered);
+      }
+    }
+  }
+
+  function start() {
+    playerName = $nameInput.value.trim();
+    if (!playerName) return;
+    save('name', playerName);
+
+    var firstUnanswered = QUESTIONS.findIndex(function(q) { return !load('q_' + q.id); });
+    renderQuestion(firstUnanswered === -1 ? 0 : firstUnanswered);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!$screenQuestion.classList.contains('screen--active')) return;
+    if ((e.key === 'ArrowRight' || e.key === 'Enter') && !$btnNext.disabled) goNext();
+    if (e.key === 'ArrowLeft' && !$btnPrev.disabled) goPrev();
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>
