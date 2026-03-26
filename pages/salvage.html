@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvage RPG — Decisões de Design</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #1a1a18;
+    --paper: #f5f0e8;
+    --dust: #d9d0c0;
+    --rust: #a0522d;
+    --rust-light: #c4845c;
+    --ash: #6b6560;
+    --glow: #c9a826;
+    --glow-dim: rgba(201,168,38,0.15);
+    --radiation: #7a8c2a;
+    --danger: #8b2500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+    min-height: 100dvh;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    overflow-x: hidden;
+  }
+
+  /* ── PROGRESS BAR ── */
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--dust);
+    z-index: 100;
+  }
+
+  .progress-bar__fill {
+    height: 100%;
+    background: var(--glow);
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── HEADER BAR ── */
+
+  .header-bar {
+    position: fixed;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    background: var(--paper);
+    border-bottom: 1.5px solid var(--ink);
+    z-index: 90;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-bar__section {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--rust);
+  }
+
+  .header-bar__count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--ash);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN CONTAINER ── */
+
+  .wizard {
+    padding: 72px 16px 100px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── WELCOME SCREEN ── */
+
+  .screen {
+    display: none;
+  }
+
+  .screen--active {
+    display: block;
+  }
+
+  .welcome {
+    text-align: center;
+    padding-top: 20vh;
+  }
+
+  .welcome__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .welcome__subtitle {
+    font-size: 0.875rem;
+    color: var(--ash);
+    margin-bottom: 32px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .welcome__field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .welcome__label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ash);
+  }
+
+  .welcome__input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    padding: 8px 4px;
+    color: var(--ink);
+    width: 100%;
+    max-width: 280px;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .welcome__input:focus {
+    border-bottom-color: var(--glow);
+  }
+
+  .welcome__input::placeholder {
+    color: var(--dust);
+  }
+
+  /* ── BUTTONS ── */
+
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    cursor: pointer;
+    border-radius: 2px;
+    min-height: 48px;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .btn:active {
+    background: var(--ash);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .btn--ghost:active {
+    background: var(--dust);
+  }
+
+  .btn--rust {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--paper);
+  }
+
+  .btn--rust:active {
+    background: var(--rust-light);
+    border-color: var(--rust-light);
+  }
+
+  .btn--small {
+    font-size: 0.6875rem;
+    padding: 8px 16px;
+    min-height: 36px;
+  }
+
+  .btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .btn:disabled:active {
+    background: var(--ink);
+  }
+
+  .btn--ghost:disabled:active {
+    background: transparent;
+  }
+
+  /* ── SECTION INTERSTITIAL ── */
+
+  .interstitial {
+    display: none;
+    text-align: center;
+    padding-top: 30vh;
+    animation: interstitialIn 0.3s ease;
+  }
+
+  .interstitial--active {
+    display: block;
+  }
+
+  @keyframes interstitialIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .interstitial__line {
+    width: 48px;
+    height: 2px;
+    background: var(--rust);
+    margin: 0 auto 16px;
+  }
+
+  .interstitial__step {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ash);
+    margin-bottom: 8px;
+  }
+
+  .interstitial__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.375rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+
+  .interstitial__line--bottom {
+    width: 48px;
+    height: 2px;
+    background: var(--rust);
+    margin: 16px auto 0;
+  }
+
+  /* ── QUESTION CARD ── */
+
+  .question {
+    animation: questionIn 0.25s ease;
+  }
+
+  @keyframes questionIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .question__header {
+    margin-bottom: 20px;
+  }
+
+  .question__number {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--rust);
+    margin-bottom: 6px;
+  }
+
+  .question__text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .question__note {
+    font-size: 0.8125rem;
+    color: var(--ash);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ── OPTIONS ── */
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 2px solid var(--dust);
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: border-color 0.15s, background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 48px;
+  }
+
+  .option:active {
+    background: var(--glow-dim);
+  }
+
+  .option--selected {
+    border-color: var(--glow);
+    background: var(--glow-dim);
+  }
+
+  .option__letter {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .option--selected .option__letter {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: var(--paper);
+  }
+
+  .option__content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .option__title {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+  }
+
+  .option__desc {
+    font-size: 0.8125rem;
+    color: var(--ash);
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+
+  /* ── RANKING OPTIONS (Step 2, Q2) ── */
+
+  .option--ranking {
+    position: relative;
+  }
+
+  .option--ranking .option__rank {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--dust);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    color: var(--dust);
+  }
+
+  .option--ranking.option--ranked .option__rank {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: var(--paper);
+  }
+
+  /* ── BOTTOM NAV ── */
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--paper);
+    border-top: 1.5px solid var(--ink);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 90;
+  }
+
+  .bottom-nav .btn {
+    flex: 1;
+  }
+
+  /* ── RESULT SCREEN ── */
+
+  .result-screen {
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100dvh;
+    padding: 16px 16px 100px;
+  }
+
+  .result-screen .progress-bar,
+  .result-screen .header-bar {
+    display: none;
+  }
+
+  .result__header {
+    text-align: center;
+    padding: 24px 0 20px;
+    border-bottom: 2px solid var(--ash);
+    margin-bottom: 24px;
+  }
+
+  .result__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .result__name {
+    font-size: 0.875rem;
+    color: var(--ash);
+  }
+
+  .result-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+  }
+
+  .result-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .result-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .result-section__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--glow);
+  }
+
+  .result-section__copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: var(--rust);
+    color: var(--paper);
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 32px;
+  }
+
+  .result-section__copy:active {
+    background: var(--rust-light);
+  }
+
+  .result-section__copy--done {
+    background: var(--radiation);
+  }
+
+  .result-answers {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--dust);
+  }
+
+  .result-answers strong {
+    color: var(--paper);
+    font-weight: 700;
+  }
+
+  .result__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .result__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn--result-copy {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--paper);
+  }
+
+  .btn--result-copy:active {
+    background: var(--rust-light);
+    border-color: var(--rust-light);
+  }
+
+  .btn--result-copy--done {
+    background: var(--radiation);
+    border-color: var(--radiation);
+  }
+
+  .btn--restart {
+    background: transparent;
+    border-color: var(--ash);
+    color: var(--ash);
+  }
+
+  .btn--restart:active {
+    background: #333;
+  }
+
+  /* ── FOCUS STYLES ── */
+
+  .option:focus-visible {
+    outline: 2px solid var(--glow);
+    outline-offset: 2px;
+  }
+
+  /* ── HIDDEN STATES ── */
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* ── DESKTOP ── */
+
+  @media (min-width: 480px) {
+    .wizard {
+      padding-top: 80px;
+      padding-bottom: 110px;
+    }
+
+    .option:hover {
+      border-color: var(--rust-light);
+    }
+
+    .option--selected:hover {
+      border-color: var(--glow);
+    }
+
+    .btn:hover:not(:disabled) {
+      opacity: 0.85;
+    }
+
+    .result-section__copy:hover {
+      background: var(--rust-light);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .welcome {
+      padding-top: 25vh;
+    }
+
+    .welcome__title {
+      font-size: 2rem;
+    }
+
+    .question__text {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* ── PRINT ── */
+
+  @media print {
+    .progress-bar,
+    .header-bar,
+    .bottom-nav,
+    .result__actions { display: none !important; }
+
+    .result-screen {
+      padding: 10mm;
+    }
+
+    .result-section__copy { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar">
+  <div class="progress-bar__fill" id="progressFill"></div>
+</div>
+
+<!-- HEADER BAR -->
+<div class="header-bar hidden" id="headerBar">
+  <span class="header-bar__section" id="headerSection"></span>
+  <span class="header-bar__count" id="headerCount"></span>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="wizard" id="wizard">
+
+  <!-- WELCOME -->
+  <div class="screen screen--active" id="screenWelcome">
+    <div class="welcome">
+      <div class="welcome__title">Salvage RPG</div>
+      <div class="welcome__subtitle">Decisões de Design</div>
+      <p style="font-size:0.875rem;color:var(--ash);margin-bottom:32px;max-width:320px;margin-left:auto;margin-right:auto;">Responda cada bloco. Suas respostas ficam salvas automaticamente.</p>
+      <div class="welcome__field">
+        <label class="welcome__label" for="nameInput">Seu nome</label>
+        <input class="welcome__input" id="nameInput" type="text" placeholder="Digite seu nome" autocomplete="name" required>
+      </div>
+      <button class="btn" id="btnStart" disabled>Começar</button>
+    </div>
+  </div>
+
+  <!-- INTERSTITIAL -->
+  <div class="interstitial" id="screenInterstitial">
+    <div class="interstitial__line"></div>
+    <div class="interstitial__step" id="interstitialStep"></div>
+    <div class="interstitial__title" id="interstitialTitle"></div>
+    <div class="interstitial__line--bottom"></div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="screen" id="screenQuestion">
+    <div class="question" id="questionCard">
+      <div class="question__header">
+        <div class="question__number" id="qNumber"></div>
+        <div class="question__text" id="qText"></div>
+        <div class="question__note hidden" id="qNote"></div>
+      </div>
+      <div class="options" id="qOptions"></div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screenResult"></div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav hidden" id="bottomNav">
+  <button class="btn btn--ghost" id="btnPrev">Anterior</button>
+  <button class="btn" id="btnNext" disabled>Próximo</button>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── DATA ───────────────────────────────────────────
+
+  var STEPS = [
+    {
+      id: 'world',
+      title: 'Mundo e Tom',
+      stepLabel: 'Etapa 1 de 5',
+      blocks: [
+        {
+          name: 'Identidade e tom',
+          questions: [
+            {
+              id: '1_1',
+              text: 'Qual deve ser a fantasia central do jogo?',
+              options: [
+                { letter: 'A', title: 'Sobreviver com sucata', desc: 'improviso, escassez e adaptação' },
+                { letter: 'B', title: 'Explorar ruínas e descobrir segredos', desc: 'foco em mistério e descoberta' },
+                { letter: 'C', title: 'Construir algo novo a partir do fim', desc: 'reconstrução, comunidade e legado' },
+                { letter: 'D', title: 'Caçar poder pagando preço', desc: 'troca, sacrifício e risco calculado' }
+              ]
+            },
+            {
+              id: '1_2',
+              text: 'Qual o tom predominante?',
+              options: [
+                { letter: 'A', title: 'Seco e brutal', desc: 'sofrimento, escassez e violência; o mundo não vai melhorar' },
+                { letter: 'B', title: 'Tenso, mas com esperança', desc: 'é difícil, mas existe razão pra continuar lutando' },
+                { letter: 'C', title: 'Aventureiro com perigo real', desc: 'explorar é empolgante, mas consequências são sérias' },
+                { letter: 'D', title: 'Leve com momentos sérios', desc: 'predomina humor e absurdo, mas quando pesa, pesa de verdade' }
+              ]
+            },
+            {
+              id: '1_3',
+              text: 'Quanto de estranho/fantástico deve existir?',
+              options: [
+                { letter: 'A', title: 'Quase nada', desc: 'pós-apocalipse grounded; o horror vem da natureza e das pessoas' },
+                { letter: 'B', title: 'Pouco', desc: 'quase tudo é explicável, mas há fenômenos raros que ninguém entende' },
+                { letter: 'C', title: 'Médio', desc: 'mutações, anomalias e criaturas estranhas são parte do dia a dia' },
+                { letter: 'D', title: 'Alto', desc: 'mundo surreal, coisas impossíveis acontecem, inspiração Adventure Time' }
+              ]
+            },
+            {
+              id: '1_4',
+              text: 'O que a "troca" deve significar no coração do sistema?',
+              options: [
+                { letter: 'A', title: 'Sacrificar recursos', desc: 'quebrar, gastar, desmontar, queimar' },
+                { letter: 'B', title: 'Sacrificar o corpo', desc: 'ferimento, exaustão, contaminação' },
+                { letter: 'C', title: 'Sacrificar relações', desc: 'dívida, confiança, reputação, favores' },
+                { letter: 'D', title: 'Misturar tudo', desc: 'cada ganho importante cobra um tipo diferente de preço' }
+              ]
+            },
+            {
+              id: '1_5',
+              text: 'Qual deve ser o loop principal de jogo?',
+              options: [
+                { letter: 'A', title: 'Sair, pilhar, voltar vivo', desc: '' },
+                { letter: 'B', title: 'Explorar, entender, decidir o que fazer com a descoberta', desc: '' },
+                { letter: 'C', title: 'Pegar recurso, craftar, melhorar equipamento e abrigo', desc: '' },
+                { letter: 'D', title: 'Negociar com facções, sobreviver politicamente e correr riscos', desc: '' }
+              ]
+            },
+            {
+              id: '1_6',
+              text: 'Que tipo de campanha combina mais com a ideia atual?',
+              options: [
+                { letter: 'A', title: 'Road movie de sobreviventes', desc: '' },
+                { letter: 'B', title: 'Hexcrawl / exploração aberta', desc: '' },
+                { letter: 'C', title: 'Base-building e expansão de refúgio', desc: '' },
+                { letter: 'D', title: 'Missões curtas e perigosas entre zonas hostis', desc: '' }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'O mundo',
+          questions: [
+            {
+              id: '1_7',
+              text: 'O que causou o fim do mundo?',
+              options: [
+                { letter: 'A', title: 'Nuclear puro', desc: 'bombas caíram, civilização acabou, ponto final' },
+                { letter: 'B', title: 'Nuclear + algo estranho', desc: 'as bombas caíram, mas algo mais aconteceu junto' },
+                { letter: 'C', title: 'Catástrofe mista', desc: 'guerra, praga, desastre climático, tudo junto em cadeia' },
+                { letter: 'D', title: 'Indefinido / misterioso', desc: 'ninguém sabe ao certo; descobrir faz parte do jogo' }
+              ]
+            },
+            {
+              id: '1_8',
+              text: 'Quanto tempo se passou desde o evento?',
+              options: [
+                { letter: 'A', title: 'Horas a dias', desc: 'o evento é agora; caos total, ninguém entende nada' },
+                { letter: 'B', title: 'Semanas a meses', desc: 'já deu tempo de processar o choque, mas tudo ainda é instável' },
+                { letter: 'C', title: 'Anos a décadas', desc: 'rotinas novas se formaram; há quem nunca tenha visto o mundo de antes' },
+                { letter: 'D', title: 'Gerações', desc: 'o mundo antigo é lenda; a realidade atual é tudo que existe' }
+              ]
+            },
+            {
+              id: '1_9',
+              text: 'Os personagens lembram do mundo de antes?',
+              options: [
+                { letter: 'A', title: 'Sim, viveram nele', desc: 'memórias, referências, saudade e trauma' },
+                { letter: 'B', title: 'Parcialmente', desc: 'eram crianças ou ouviram relatos; é fragmentado' },
+                { letter: 'C', title: 'Não, nasceram depois', desc: 'o "antes" é mito, história oral, ruína sem contexto' },
+                { letter: 'D', title: 'A critério de cada jogador', desc: 'uns lembram, outros não; a assimetria é interessante' }
+              ]
+            },
+            {
+              id: '1_10',
+              text: 'Qual a escala geográfica do jogo?',
+              options: [
+                { letter: 'A', title: 'Um bunker / abrigo', desc: 'espaço confinado, tensão claustrofóbica' },
+                { letter: 'B', title: 'Um bairro / zona urbana', desc: 'algumas quadras de ruínas, fronteiras definidas' },
+                { letter: 'C', title: 'Uma cidade e seus arredores', desc: 'exploração ampla, zonas distintas' },
+                { letter: 'D', title: 'Uma região / território', desc: 'múltiplas comunidades, viagem entre assentamentos' }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'Estética e elementos',
+          questions: [
+            {
+              id: '1_11',
+              text: 'Qual a estética-base do cenário?',
+              options: [
+                { letter: 'A', title: 'Urbano contemporâneo', desc: 'prédios, concreto, estrada, lojas, metrô' },
+                { letter: 'B', title: 'Industrial / dieselpunk', desc: 'máquinas pesadas, sucata mecânica, fumaça' },
+                { letter: 'C', title: 'Futurista em ruínas', desc: 'tech avançada quebrada, restos de automação' },
+                { letter: 'D', title: 'Misturado', desc: 'bolsões diferentes, cada zona tem sua estética' }
+              ]
+            },
+            {
+              id: '1_12',
+              text: 'Existem facções organizadas?',
+              options: [
+                { letter: 'A', title: 'Não', desc: 'cada um por si, no máximo pequenos grupos familiares' },
+                { letter: 'B', title: 'Estão surgindo', desc: 'grupos se formam, disputas por território são recentes' },
+                { letter: 'C', title: 'Sim, já estabelecidas', desc: 'facções com identidade, território e regras próprias' },
+                { letter: 'D', title: 'Sim, e são a principal fonte de conflito', desc: 'ameaça vem mais das facções do que do ambiente' }
+              ]
+            },
+            {
+              id: '1_13',
+              text: 'Qual a relação dos sobreviventes com o mundo antigo?',
+              options: [
+                { letter: 'A', title: 'Reverenciam', desc: 'preservam relíquias, contam histórias, tentam reconstruir' },
+                { letter: 'B', title: 'Saqueiam sem cerimônia', desc: 'o passado é matéria-prima; nostalgia é luxo' },
+                { letter: 'C', title: 'Temem', desc: 'o mundo antigo causou o fim; mexer nas ruínas é perigoso' },
+                { letter: 'D', title: 'Mistura de tudo', desc: 'cada grupo tem sua relação própria; é fonte de tensão social' }
+              ]
+            },
+            {
+              id: '1_14',
+              text: 'Tecnologia do mundo antigo: como funciona?',
+              options: [
+                { letter: 'A', title: 'Não funciona', desc: 'tudo quebrou; sobrou só o que é mecânico e simples' },
+                { letter: 'B', title: 'Funciona com dificuldade', desc: 'dá pra remendar, mas ninguém fabrica peças novas' },
+                { letter: 'C', title: 'Funciona, mas não é compreendida', desc: 'sabe-se usar sem saber como; quase ritualístico' },
+                { letter: 'D', title: 'Funciona em bolsões', desc: 'certas áreas ou facções têm acesso; é fonte de poder e conflito' }
+              ]
+            },
+            {
+              id: '1_15',
+              text: 'Que tipos de habitantes/raças jogáveis existem?',
+              options: [
+                { letter: 'A', title: 'Só humanos', desc: 'todos são humanos; diversidade vem de origem, cultura e história pessoal' },
+                { letter: 'B', title: 'Humanos com variantes', desc: 'humanos puros + humanos mutados (alterados pela radiação/evento) como opção jogável' },
+                { letter: 'C', title: 'Múltiplas raças/espécies', desc: 'humanos + outras raças ou espécies (robôs, mutantes, criaturas) com traços mecânicos distintos' },
+                { letter: 'D', title: 'Aberto/emergente', desc: 'o jogo não define raças fixas; o que existe é descoberto durante o jogo pela mesa' }
+              ]
+            },
+            {
+              id: '1_16',
+              text: 'Os jogadores devem ter um objetivo macro?',
+              options: [
+                { letter: 'A', title: 'Sim: encontrar algo', desc: 'uma cura, um lugar seguro, uma pessoa, uma resposta' },
+                { letter: 'B', title: 'Sim: fundar ou proteger algo', desc: 'construir refúgio, defender comunidade, criar ordem' },
+                { letter: 'C', title: 'Sim: fugir de algo', desc: 'a zona está morrendo, o inimigo está chegando, é preciso sair' },
+                { letter: 'D', title: 'Não: sandbox', desc: 'o mundo está lá, os jogadores decidem o que importa' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'threats',
+      title: 'Ameaças e Escala',
+      stepLabel: 'Etapa 2 de 5',
+      blocks: [
+        {
+          name: null,
+          questions: [
+            {
+              id: '2_1',
+              text: 'Qual é a escala de poder dos personagens frente ao mundo?',
+              options: [
+                { letter: 'A', title: 'Frágeis e descartáveis', desc: 'qualquer confronto pode matar' },
+                { letter: 'B', title: 'Competentes, mas vulneráveis', desc: 'dá para enfrentar perigos se houver preparo, mas um erro é fatal' },
+                { letter: 'C', title: 'Sobreviventes resistentes', desc: 'o grupo aguenta bastante desde que administre recursos; morte é possível, não provável' },
+                { letter: 'D', title: 'Heróis do fim do mundo', desc: 'os personagens são excepcionais' }
+              ]
+            },
+            {
+              id: '2_2',
+              type: 'ranking',
+              text: 'Quais tipos de ameaça o jogo deve cobrir formalmente?',
+              note: 'Toque para ordenar por prioridade. Mínimo 3 opções.',
+              options: [
+                { letter: 'A', title: 'Humanos hostis', desc: 'bandidos, facções rivais, catadores desesperados, milícias' },
+                { letter: 'B', title: 'Fauna mutante ou contaminada', desc: 'predadores alterados, enxames, criaturas de zona quente' },
+                { letter: 'C', title: 'Máquinas e automação remanescente', desc: 'drones, sentinelas, sistemas de defesa antigos' },
+                { letter: 'D', title: 'Ambiente hostil', desc: 'radiação, desabamento, tempestade tóxica, calor extremo, fome, sede' },
+                { letter: 'E', title: 'Entidades incompreensíveis', desc: 'coisas que não se explicam, anomalias, presenças que desafiam entendimento' },
+                { letter: 'F', title: 'Ameaças sociais e políticas', desc: 'traição, escassez organizada, extorsão, facções controlando recursos' }
+              ]
+            },
+            {
+              id: '2_3',
+              text: 'Deve existir uma hierarquia formal de níveis de ameaça?',
+              options: [
+                { letter: 'A', title: 'Sim, fixa e clara', desc: 'trivial → menor → severa → extrema → apocalíptica, com efeitos mecânicos definidos por nível' },
+                { letter: 'B', title: 'Sim, mas leve', desc: '3 faixas (menor / severa / extrema) já bastam, como o SRD atual sugere' },
+                { letter: 'C', title: 'Não, só ficção', desc: 'o GM decide o perigo caso a caso; não precisa de escala formal' },
+                { letter: 'D', title: 'Híbrido', desc: 'faixas de referência para o GM, mas sem amarrar em tabela rígida' }
+              ]
+            },
+            {
+              id: '2_4',
+              text: 'Como representar ameaças mecanicamente?',
+              options: [
+                { letter: 'A', title: 'Perfil mínimo', desc: 'nome, intenção, como machuca, quantos Ferimentos aguenta' },
+                { letter: 'B', title: 'Perfil com comportamento', desc: 'adicionar 1–2 movimentos narrativos que a ameaça sempre tenta fazer' },
+                { letter: 'C', title: 'Relógio / clock', desc: 'ameaças maiores usam um relógio de progresso em vez de Ferimentos de resistência' },
+                { letter: 'D', title: 'Stats completos', desc: 'ameaças importantes têm atributos, Ferimentos e capacidades como um personagem' },
+                { letter: 'E', title: 'Misturar conforme escala', desc: 'perfil mínimo para ameaças menores, clock ou stats para ameaças maiores' }
+              ]
+            },
+            {
+              id: '2_5',
+              text: 'Ameaças ambientais devem ter mecânica própria?',
+              options: [
+                { letter: 'A', title: 'Sim, subsistemas específicos', desc: 'radiação, fome, sede, frio e desabamento cada um com sua trilha e regra' },
+                { letter: 'B', title: 'Uma mecânica unificada de pressão ambiental', desc: 'tudo passa por uma trilha genérica de "condição" ou "pressão"' },
+                { letter: 'C', title: 'Mesma resolução central', desc: 'role 2d6 + atributo para resistir; ambiente funciona como qualquer outro obstáculo' },
+                { letter: 'D', title: 'Tratamento narrativo puro', desc: 'o GM usa ameaças ambientais como pano de fundo e consequência ficcional, sem mecânica dedicada' }
+              ]
+            },
+            {
+              id: '2_6',
+              text: 'O jogo deve ter confrontos épicos ou "boss fights"?',
+              options: [
+                { letter: 'A', title: 'Sim, como momentos-chave', desc: 'o jogo deve permitir confrontos contra ameaças muito acima da escala normal, com mecânica que sustente a tensão prolongada' },
+                { letter: 'B', title: 'Raramente, e sempre evitáveis', desc: 'confrontos épicos existem, mas o jogo recompensa quem acha outra saída' },
+                { letter: 'C', title: 'Não, o foco é perigo cotidiano', desc: 'toda ameaça é do tamanho do dia a dia; não existe "chefão" mecânico' },
+                { letter: 'D', title: 'Sim, mas são eventos ambientais', desc: 'o "boss" é uma tempestade de radiação, um colapso estrutural ou uma horda — não um inimigo individual' }
+              ]
+            },
+            {
+              id: '2_7',
+              text: 'Ameaças sociais e políticas (facções, traição, escassez organizada) devem ter subsistema?',
+              options: [
+                { letter: 'A', title: 'Sim, subsistema de facções', desc: 'reputação, influência e consequências mecânicas por facção' },
+                { letter: 'B', title: 'Ferramentas leves', desc: 'relógio de tensão de facção ou trilha simples de relação, sem subsistema pesado' },
+                { letter: 'C', title: 'Puramente ficcional', desc: 'facções existem na narrativa, o GM as conduz sem mecânica dedicada' },
+                { letter: 'D', title: 'Não é prioridade agora', desc: 'resolver isso só se o playtest pedir' }
+              ]
+            },
+            {
+              id: '2_8',
+              text: 'Inimigos devem poder ser sempre evitados ou negociados?',
+              options: [
+                { letter: 'A', title: 'Sempre', desc: 'todo confronto deve ter alternativa viável; combate é uma escolha, nunca uma obrigação' },
+                { letter: 'B', title: 'Quase sempre', desc: 'a maioria pode ser evitada, mas existem situações onde a ficção fecha as portas' },
+                { letter: 'C', title: 'Depende do tipo', desc: 'humanos podem ser negociados, mas feras e máquinas nem sempre oferecem saída' },
+                { letter: 'D', title: 'Não necessariamente', desc: 'o mundo é hostil; às vezes a única opção é lutar, fugir correndo ou aceitar a perda' }
+              ]
+            },
+            {
+              id: '2_9',
+              text: 'Qual o papel de ameaças misteriosas ou incompreensíveis?',
+              options: [
+                { letter: 'A', title: 'Central e constante', desc: 'o mundo está cheio de coisas que ninguém entende; conviver com o inexplicável é parte do jogo' },
+                { letter: 'B', title: 'Presente, mas raro', desc: 'existem anomalias e coisas estranhas, mas a maioria dos perigos é compreensível' },
+                { letter: 'C', title: 'Apenas como tempero', desc: 'o mistério aparece em momentos pontuais, não é um tipo de ameaça com mecânica própria' },
+                { letter: 'D', title: 'Não combina com o tom', desc: 'o jogo deve ser grounded; se não dá para entender, não deveria estar na mesa' }
+              ]
+            },
+            {
+              id: '2_10',
+              text: 'Como a morte de personagem deve funcionar?',
+              options: [
+                { letter: 'A', title: 'Frequente e esperada', desc: 'personagens morrem; o jogo assume alta rotatividade e criação rápida' },
+                { letter: 'B', title: 'Rara, mas real', desc: 'morte é consequência possível de decisões ruins acumuladas, não de um azar isolado' },
+                { letter: 'C', title: 'Dramática e negociada', desc: 'morte só acontece quando faz sentido narrativo; o sistema protege contra mortes aleatórias' },
+                { letter: 'D', title: 'Quase impossível', desc: 'o foco é em consequências (mutação, perda, trauma, dívida), não em eliminar personagens' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'magic',
+      title: 'Magia e Poderes',
+      stepLabel: 'Etapa 3 de 5',
+      blocks: [
+        {
+          name: null,
+          questions: [
+            {
+              id: '3_1',
+              text: 'O cenário do Salvage deve ter poderes sobrenaturais?',
+              skipIf: 'A',
+              options: [
+                { letter: 'A', title: 'Não', desc: 'o jogo é 100% grounded; toda vantagem vem de equipamento, habilidade e posicionamento' },
+                { letter: 'B', title: 'Sim, mas raros e ambíguos', desc: 'ninguém sabe se é sobrenatural de verdade ou efeito da radiação, trauma e desespero' },
+                { letter: 'C', title: 'Sim, como elemento central', desc: 'poderes existem, são reconhecíveis no mundo e qualquer grupo vai interagir com eles de alguma forma' }
+              ]
+            },
+            {
+              id: '3_2',
+              text: 'Se existirem poderes, qual a origem principal?',
+              conditionalOn: '3_1',
+              hiddenIf: 'A',
+              options: [
+                { letter: 'A', title: 'Mutação / radiação', desc: '' },
+                { letter: 'B', title: 'Tecnologia antiga', desc: '' },
+                { letter: 'C', title: 'Algo sobrenatural', desc: '' },
+                { letter: 'D', title: 'Combinação ambígua', desc: '' }
+              ]
+            },
+            {
+              id: '3_3',
+              text: 'Como poderes funcionam mecanicamente?',
+              conditionalOn: '3_1',
+              hiddenIf: 'A',
+              options: [
+                { letter: 'A', title: 'Freeform narrativo', desc: '' },
+                { letter: 'B', title: 'Lista curta de poderes com efeitos definidos', desc: '' },
+                { letter: 'C', title: 'Poderes como itens especiais', desc: 'ocupam slots de inventário' },
+                { letter: 'D', title: 'Spell check (rolar para usar)', desc: '' },
+                { letter: 'E', title: 'Recurso de pontos (mana/PM)', desc: '' }
+              ]
+            },
+            {
+              id: '3_4',
+              text: 'Qual o custo de usar poderes?',
+              conditionalOn: '3_1',
+              hiddenIf: 'A',
+              options: [
+                { letter: 'A', title: 'Ferimentos', desc: '' },
+                { letter: 'B', title: 'Exposição', desc: '' },
+                { letter: 'C', title: 'Slots de inventário', desc: '' },
+                { letter: 'D', title: 'Sorte', desc: '' },
+                { letter: 'E', title: 'Recurso novo dedicado', desc: '' },
+                { letter: 'F', title: 'Combinação de custos existentes', desc: '' }
+              ]
+            },
+            {
+              id: '3_5',
+              text: 'Poderes são raros e temidos ou comuns e aceitos?',
+              conditionalOn: '3_1',
+              hiddenIf: 'A',
+              options: [
+                { letter: 'A', title: 'Raros e temidos', desc: '' },
+                { letter: 'B', title: 'Raros mas respeitados', desc: '' },
+                { letter: 'C', title: 'Relativamente comuns', desc: '' },
+                { letter: 'D', title: 'Varia por região/facção', desc: '' }
+              ]
+            },
+            {
+              id: '3_6',
+              text: 'Todos os personagens podem ter poderes?',
+              conditionalOn: '3_1',
+              hiddenIf: 'A',
+              options: [
+                { letter: 'A', title: 'Sim, qualquer um', desc: '' },
+                { letter: 'B', title: 'Depende do kit', desc: '' },
+                { letter: 'C', title: 'Depende da ficção', desc: '' },
+                { letter: 'D', title: 'Ninguém "tem" poderes fixos', desc: 'poderes vêm de itens, substâncias ou locais' }
+              ]
+            },
+            {
+              id: '3_7',
+              text: 'Poderes devem ser módulo separado ou parte do core?',
+              options: [
+                { letter: 'A', title: 'Core desde o início', desc: '' },
+                { letter: 'B', title: 'Módulo oficial separado', desc: '' },
+                { letter: 'C', title: 'Modular e expansível', desc: '' }
+              ]
+            },
+            {
+              id: '3_8',
+              text: 'Existe progressão de poder?',
+              options: [
+                { letter: 'A', title: 'Não — poderes são estáticos', desc: '' },
+                { letter: 'B', title: 'Sim, leve', desc: '1-2 graus' },
+                { letter: 'C', title: 'Sim, via custo crescente', desc: '' },
+                { letter: 'D', title: 'Sim, integrada à ficção', desc: '' }
+              ]
+            },
+            {
+              id: '3_9',
+              text: 'Como poderes interagem com o sistema de Exposição/radiação?',
+              options: [
+                { letter: 'A', title: 'São a mesma coisa', desc: '' },
+                { letter: 'B', title: 'Exposição é o custo', desc: '' },
+                { letter: 'C', title: 'Exposição pode despertar poderes', desc: '' },
+                { letter: 'D', title: 'Sem relação mecânica', desc: '' }
+              ]
+            },
+            {
+              id: '3_10',
+              text: 'Qual abordagem geral mais combina com o Salvage?',
+              options: [
+                { letter: 'A', title: 'Sem poderes', desc: '100% mundano' },
+                { letter: 'B', title: 'Poderes como loot perigoso', desc: '' },
+                { letter: 'C', title: 'Mutações como consequência', desc: '' },
+                { letter: 'D', title: 'Freeform leve com custo narrativo', desc: '' },
+                { letter: 'E', title: 'Sistema modular com custo forte', desc: '' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'progression',
+      title: 'Progressão e Evolução',
+      stepLabel: 'Etapa 4 de 5',
+      blocks: [
+        {
+          name: null,
+          questions: [
+            {
+              id: '4_1',
+              text: 'Atributos podem mudar ao longo do jogo?',
+              options: [
+                { letter: 'A', title: 'Fixos para sempre', desc: '' },
+                { letter: 'B', title: 'Redistribuíveis em marcos narrativos', desc: '' },
+                { letter: 'C', title: 'Melhoria pontual rara', desc: '+1, máx 1-2 vezes por campanha' },
+                { letter: 'D', title: 'Mudam por consequência ficcional', desc: 'pra cima ou pra baixo' }
+              ]
+            },
+            {
+              id: '4_2',
+              text: 'Kits são fixos ou podem mudar?',
+              options: [
+                { letter: 'A', title: 'Fixos para sempre', desc: '' },
+                { letter: 'B', title: 'Trocáveis em marcos', desc: '' },
+                { letter: 'C', title: 'Kit fixo, mas pode aprender habilidade de outro kit', desc: '' },
+                { letter: 'D', title: 'Kits evoluem', desc: '1-2 habilidades avançadas desbloqueáveis' }
+              ]
+            },
+            {
+              id: '4_3',
+              text: 'Personagem pode adquirir novas habilidades além do kit inicial?',
+              options: [
+                { letter: 'A', title: 'Não — só a habilidade do kit', desc: '' },
+                { letter: 'B', title: 'Sim, via equipamento especial', desc: 'largou o item, perdeu' },
+                { letter: 'C', title: 'Sim, via cicatrizes e experiências', desc: '' },
+                { letter: 'D', title: 'Sim, via aprendizado ficcional', desc: '' },
+                { letter: 'E', title: 'Combinação: equipamento dá temporário, marcos dão permanente', desc: '' }
+              ]
+            },
+            {
+              id: '4_4',
+              text: 'Equipamento é a única fonte de progressão mecânica ou existem outras?',
+              options: [
+                { letter: 'A', title: 'Sim, só equipamento', desc: '' },
+                { letter: 'B', title: 'Equipamento é a principal, mas marcos narrativos podem dar bônus pequenos', desc: '' },
+                { letter: 'C', title: 'Equipamento + relações', desc: '' },
+                { letter: 'D', title: 'Três pilares iguais', desc: 'equipamento, habilidades adquiridas e relações' }
+              ]
+            },
+            {
+              id: '4_5',
+              text: 'Cicatrizes, traumas e experiências devem ter efeito mecânico permanente?',
+              options: [
+                { letter: 'A', title: 'Não — são puramente ficcionais', desc: '' },
+                { letter: 'B', title: 'Sim, mas só negativos', desc: '' },
+                { letter: 'C', title: 'Sim, mistura de positivo e negativo', desc: '' },
+                { letter: 'D', title: 'Sim, só positivos (tipo prestige)', desc: 'recompensa por sobreviver' }
+              ]
+            },
+            {
+              id: '4_6',
+              text: 'O que dispara evolução?',
+              options: [
+                { letter: 'A', title: 'Marcos narrativos (GM decide)', desc: '' },
+                { letter: 'B', title: 'Sobrevivência (X sessões vivo)', desc: '' },
+                { letter: 'C', title: 'Conquista ficcional específica', desc: '' },
+                { letter: 'D', title: 'Decisão coletiva do grupo', desc: '' },
+                { letter: 'E', title: 'Falha como gatilho', desc: 'errar ensina' }
+              ]
+            },
+            {
+              id: '4_7',
+              text: 'Existe um teto de poder?',
+              options: [
+                { letter: 'A', title: 'Sim, baixo e explícito', desc: '' },
+                { letter: 'B', title: 'Sim, mas flexível', desc: '' },
+                { letter: 'C', title: 'Não em números, mas em tom', desc: '' },
+                { letter: 'D', title: 'Não precisa — a campanha tem fim', desc: '' }
+              ]
+            },
+            {
+              id: '4_8',
+              text: 'A progressão deve ser visível na ficha ou puramente ficcional?',
+              options: [
+                { letter: 'A', title: 'Puramente ficcional', desc: 'ficha não muda' },
+                { letter: 'B', title: 'Visível, mas mínima', desc: '1-2 campos novos' },
+                { letter: 'C', title: 'Visível e rastreável', desc: 'espaço dedicado' },
+                { letter: 'D', title: 'Visível só no inventário', desc: '' }
+              ]
+            },
+            {
+              id: '4_9',
+              text: 'Relações com NPCs e facções devem dar benefício mecânico?',
+              options: [
+                { letter: 'A', title: 'Não — relações são 100% ficcionais', desc: '' },
+                { letter: 'B', title: 'Sim, como vantagem posicional', desc: '' },
+                { letter: 'C', title: 'Sim, como recurso rastreável', desc: '' },
+                { letter: 'D', title: 'Sim, mas só no nível do grupo', desc: 'reputação coletiva' }
+              ]
+            },
+            {
+              id: '4_10',
+              text: 'Como evitar que progressão quebre o tom survival/escassez?',
+              options: [
+                { letter: 'A', title: 'Não tendo progressão mecânica', desc: '' },
+                { letter: 'B', title: 'Progressão lenta com custo embutido', desc: '' },
+                { letter: 'C', title: 'Teto baixo + degradação', desc: '' },
+                { letter: 'D', title: 'Progressão lateral', desc: 'mais opções, não mais poder' },
+                { letter: 'E', title: 'Ameaças escalam junto', desc: '' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'crafting',
+      title: 'Crafting e Economia',
+      stepLabel: 'Etapa 5 de 5',
+      blocks: [
+        {
+          name: null,
+          questions: [
+            {
+              id: '5_1',
+              text: 'O equipamento deve ser tratado como...',
+              options: [
+                { letter: 'A', title: 'Ferramenta de sobrevivência', desc: 'foco prático' },
+                { letter: 'B', title: 'Fonte principal de identidade', desc: 'o que você carrega define quem você é' },
+                { letter: 'C', title: 'Poder com custo', desc: 'manutenção, risco, peso' },
+                { letter: 'D', title: 'Recurso narrativo raro', desc: 'menos itens, mas mais significativos' }
+              ]
+            },
+            {
+              id: '5_2',
+              text: 'Como funciona o crafting?',
+              options: [
+                { letter: 'A', title: 'Freeform narrativo', desc: 'descreve e rola Engenho' },
+                { letter: 'B', title: 'Sistema de tags/componentes', desc: '' },
+                { letter: 'C', title: 'Receitas descobertas na ficção', desc: '' },
+                { letter: 'D', title: 'Híbrido', desc: 'improviso livre + receitas dão vantagem' }
+              ]
+            },
+            {
+              id: '5_3',
+              text: 'Sucata é genérica ou categorizada?',
+              options: [
+                { letter: 'A', title: 'Totalmente genérica (fungível)', desc: '' },
+                { letter: 'B', title: '3–4 categorias amplas', desc: 'mecânica, eletrônica, química, orgânica' },
+                { letter: 'C', title: 'Genérica com exceção narrativa', desc: 'componente especial gera missão' },
+                { letter: 'D', title: 'Totalmente abstrata', desc: 'sem contagem' }
+              ]
+            },
+            {
+              id: '5_4',
+              text: 'Qual a complexidade de montar algo?',
+              options: [
+                { letter: 'A', title: '1 rolagem e pronto', desc: '' },
+                { letter: 'B', title: '2 etapas: planejar + executar', desc: '' },
+                { letter: 'C', title: 'Projeto com progresso', desc: 'relógio/clock para itens complexos' },
+                { letter: 'D', title: 'Varia pela escala', desc: 'itens simples resolvem em 1 rolagem, itens complexos usam clock' }
+              ]
+            },
+            {
+              id: '5_5',
+              text: 'Como funciona o reparo de equipamento?',
+              options: [
+                { letter: 'A', title: 'Automático com sucata', desc: 'sem rolagem' },
+                { letter: 'B', title: 'Rolagem de Engenho + sucata', desc: '' },
+                { letter: 'C', title: 'Exige tempo e abrigo', desc: 'downtime' },
+                { letter: 'D', title: 'Depende do dano', desc: 'leve = rápido, grave = abrigo + rolagem' }
+              ]
+            },
+            {
+              id: '5_6',
+              text: 'Equipamento degrada com uso?',
+              options: [
+                { letter: 'A', title: 'Sim, com sistema formal', desc: '' },
+                { letter: 'B', title: 'Sim, mas só por ficção e consequência', desc: 'custo de 7–9' },
+                { letter: 'C', title: 'Apenas itens com tag "frágil" ou "descartável"', desc: '' },
+                { letter: 'D', title: 'Não, itens duram até a narrativa decidir', desc: '' }
+              ]
+            },
+            {
+              id: '5_7',
+              text: 'Existe economia de troca entre sobreviventes?',
+              options: [
+                { letter: 'A', title: 'Sucata é a moeda universal', desc: '' },
+                { letter: 'B', title: 'Sucata + itens de valor', desc: 'remédio, munição, água limpa' },
+                { letter: 'C', title: 'Troca direta', desc: 'não existe moeda; cada troca é negociada na ficção' },
+                { letter: 'D', title: 'Economia mista com reputação', desc: 'sucata como base, mas facções e relações afetam preços e disponibilidade' }
+              ]
+            },
+            {
+              id: '5_8',
+              text: 'O crafting pode criar itens superiores aos encontrados?',
+              options: [
+                { letter: 'A', title: 'Não, o teto é o que existe no mundo', desc: '' },
+                { letter: 'B', title: 'Sim, com custo alto e risco', desc: '' },
+                { letter: 'C', title: 'Sim, mas diferente', desc: 'mais tags ou combinações únicas, não "mais forte"' },
+                { letter: 'D', title: 'Depende do kit e da ficção', desc: '' }
+              ]
+            },
+            {
+              id: '5_9',
+              text: 'Como os kits Sucateiro e Catador se integram ao crafting?',
+              options: [
+                { letter: 'A', title: 'Rolagens com vantagem', desc: '' },
+                { letter: 'B', title: 'Efeitos exclusivos', desc: '' },
+                { letter: 'C', title: 'Economia de recursos', desc: 'gasta menos / encontra mais' },
+                { letter: 'D', title: 'Manter como está', desc: '' },
+                { letter: 'E', title: 'Combinação', desc: '1 vantagem única + habilidade atual' }
+              ]
+            },
+            {
+              id: '5_10',
+              text: 'Itens especiais ou raros existem? Como se diferenciam?',
+              options: [
+                { letter: 'A', title: 'Sim, por tags extras', desc: '' },
+                { letter: 'B', title: 'Sim, com efeito único nomeado', desc: '' },
+                { letter: 'C', title: 'Sim, mas são relíquias do mundo antigo', desc: '' },
+                { letter: 'D', title: 'Não formalmente', desc: 'qualquer item pode se tornar especial pela ficção' }
+              ]
+            },
+            {
+              id: '5_11',
+              text: 'O crafting é atividade de downtime ou pode acontecer no meio da ação?',
+              options: [
+                { letter: 'A', title: 'Só em downtime', desc: '' },
+                { letter: 'B', title: 'Improviso na ação, projeto no downtime', desc: '' },
+                { letter: 'C', title: 'A qualquer momento, com risco', desc: '' },
+                { letter: 'D', title: 'Não existe separação formal', desc: 'ficção decide' }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // ─── RESULT LABELS ──────────────────────────────────
+
+  var RESULT_TITLES = {
+    world: 'MUNDO E TOM',
+    threats: 'AMEAÇAS E ESCALA',
+    magic: 'MAGIA E PODERES',
+    progression: 'PROGRESSÃO E EVOLUÇÃO',
+    crafting: 'CRAFTING E ECONOMIA'
+  };
+
+  // ─── FLATTEN QUESTIONS ──────────────────────────────
+
+  // Build a flat list of all questions with step/block metadata
+  var allQuestions = [];
+  STEPS.forEach(function(step, si) {
+    step.blocks.forEach(function(block, bi) {
+      block.questions.forEach(function(q, qi) {
+        allQuestions.push({
+          stepIndex: si,
+          blockIndex: bi,
+          blockName: block.name,
+          stepId: step.id,
+          stepTitle: step.title,
+          stepLabel: step.stepLabel,
+          questionInStep: null, // computed below
+          totalInStep: null,
+          data: q
+        });
+      });
+    });
+  });
+
+  // ─── STATE ──────────────────────────────────────────
+
+  var playerName = '';
+  var currentIndex = 0; // index into the visible (active) question list
+  var showingInterstitial = false;
+
+  // ─── DOM REFS ───────────────────────────────────────
+
+  var $progressFill = document.getElementById('progressFill');
+  var $headerBar = document.getElementById('headerBar');
+  var $headerSection = document.getElementById('headerSection');
+  var $headerCount = document.getElementById('headerCount');
+  var $wizard = document.getElementById('wizard');
+
+  var $screenWelcome = document.getElementById('screenWelcome');
+  var $screenInterstitial = document.getElementById('screenInterstitial');
+  var $interstitialStep = document.getElementById('interstitialStep');
+  var $interstitialTitle = document.getElementById('interstitialTitle');
+  var $screenQuestion = document.getElementById('screenQuestion');
+  var $screenResult = document.getElementById('screenResult');
+
+  var $questionCard = document.getElementById('questionCard');
+  var $qNumber = document.getElementById('qNumber');
+  var $qText = document.getElementById('qText');
+  var $qNote = document.getElementById('qNote');
+  var $qOptions = document.getElementById('qOptions');
+
+  var $bottomNav = document.getElementById('bottomNav');
+  var $btnPrev = document.getElementById('btnPrev');
+  var $btnNext = document.getElementById('btnNext');
+
+  var $nameInput = document.getElementById('nameInput');
+  var $btnStart = document.getElementById('btnStart');
+
+  // ─── STORAGE ────────────────────────────────────────
+
+  function saveAnswer(qId, value) {
+    try { localStorage.setItem('salvage_wizard_' + qId, value); } catch(e) {}
+  }
+
+  function loadAnswer(qId) {
+    try { return localStorage.getItem('salvage_wizard_' + qId) || ''; } catch(e) { return ''; }
+  }
+
+  function saveName(name) {
+    try { localStorage.setItem('salvage_wizard_name', name); } catch(e) {}
+  }
+
+  function loadName() {
+    try { return localStorage.getItem('salvage_wizard_name') || ''; } catch(e) { return ''; }
+  }
+
+  function clearAll() {
+    try {
+      var keys = [];
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf('salvage_wizard_') === 0) keys.push(k);
+      }
+      keys.forEach(function(k) { localStorage.removeItem(k); });
+    } catch(e) {}
+  }
+
+  // ─── ACTIVE QUESTIONS (respecting conditionals) ─────
+
+  function getActiveQuestions() {
+    var active = [];
+    for (var i = 0; i < allQuestions.length; i++) {
+      var q = allQuestions[i];
+      if (q.data.conditionalOn && q.data.hiddenIf) {
+        var parentAnswer = loadAnswer(q.data.conditionalOn);
+        if (parentAnswer === q.data.hiddenIf) continue;
+      }
+      active.push(q);
+    }
+    // Compute per-step numbers
+    var stepCounts = {};
+    active.forEach(function(q) {
+      if (!stepCounts[q.stepId]) stepCounts[q.stepId] = { count: 0, total: 0 };
+      stepCounts[q.stepId].total++;
+    });
+    var stepProgress = {};
+    active.forEach(function(q) {
+      if (!stepProgress[q.stepId]) stepProgress[q.stepId] = 0;
+      stepProgress[q.stepId]++;
+      q.questionInStep = stepProgress[q.stepId];
+      q.totalInStep = stepCounts[q.stepId].total;
+    });
+    return active;
+  }
+
+  function getTotalAnswered() {
+    var active = getActiveQuestions();
+    var count = 0;
+    active.forEach(function(q) {
+      var a = loadAnswer(q.data.id);
+      if (a) count++;
+    });
+    return { answered: count, total: active.length };
+  }
+
+  // ─── PROGRESS ───────────────────────────────────────
+
+  function updateProgress() {
+    var info = getTotalAnswered();
+    var pct = info.total > 0 ? (info.answered / info.total * 100) : 0;
+    $progressFill.style.width = pct + '%';
+  }
+
+  // ─── RENDER QUESTION ───────────────────────────────
+
+  function renderQuestion(index) {
+    var active = getActiveQuestions();
+    if (index < 0 || index >= active.length) return;
+
+    var q = active[index];
+    currentIndex = index;
+    showingInterstitial = false;
+
+    // Header
+    $headerBar.classList.remove('hidden');
+    $headerSection.textContent = q.stepTitle;
+    $headerCount.textContent = q.questionInStep + ' de ' + q.totalInStep;
+
+    // Question number
+    var qNum = q.data.id.split('_');
+    $qNumber.textContent = 'Pergunta ' + qNum[1];
+    $qText.textContent = q.data.text;
+
+    // Note
+    if (q.data.note) {
+      $qNote.textContent = q.data.note;
+      $qNote.classList.remove('hidden');
+    } else {
+      $qNote.classList.add('hidden');
+    }
+
+    // Options
+    $qOptions.innerHTML = '';
+    var currentAnswer = loadAnswer(q.data.id);
+
+    if (q.data.type === 'ranking') {
+      renderRankingOptions(q, currentAnswer);
+    } else {
+      renderStandardOptions(q, currentAnswer);
+    }
+
+    // Screens
+    $screenWelcome.classList.remove('screen--active');
+    $screenInterstitial.classList.remove('interstitial--active');
+    $screenQuestion.classList.add('screen--active');
+    $screenResult.classList.remove('screen--active');
+
+    // Bottom nav
+    $bottomNav.classList.remove('hidden');
+    $btnPrev.disabled = (index === 0);
+    updateNextButton();
+    updateProgress();
+
+    // Re-trigger animation
+    $questionCard.style.animation = 'none';
+    void $questionCard.offsetHeight;
+    $questionCard.style.animation = '';
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+  }
+
+  function renderStandardOptions(q, currentAnswer) {
+    q.data.options.forEach(function(opt) {
+      var div = document.createElement('div');
+      div.className = 'option' + (currentAnswer === opt.letter ? ' option--selected' : '');
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+
+      var letterDiv = document.createElement('div');
+      letterDiv.className = 'option__letter';
+      letterDiv.textContent = opt.letter;
+
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'option__content';
+
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'option__title';
+      titleDiv.textContent = opt.title;
+      contentDiv.appendChild(titleDiv);
+
+      if (opt.desc) {
+        var descDiv = document.createElement('div');
+        descDiv.className = 'option__desc';
+        descDiv.textContent = opt.desc;
+        contentDiv.appendChild(descDiv);
+      }
+
+      div.appendChild(letterDiv);
+      div.appendChild(contentDiv);
+
+      div.addEventListener('click', function() {
+        selectStandardOption(q.data.id, opt.letter);
+      });
+
+      div.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectStandardOption(q.data.id, opt.letter);
+        }
+      });
+
+      $qOptions.appendChild(div);
+    });
+  }
+
+  function selectStandardOption(qId, letter) {
+    saveAnswer(qId, letter);
+
+    // Check if this triggers a skip (re-evaluate active questions)
+    var q = allQuestions.find(function(aq) { return aq.data.id === qId; });
+    if (q && q.data.skipIf && letter === q.data.skipIf) {
+      // Clear answers for skipped questions
+      allQuestions.forEach(function(aq) {
+        if (aq.data.conditionalOn === qId && aq.data.hiddenIf === letter) {
+          saveAnswer(aq.data.id, '');
+        }
+      });
+    }
+
+    // Re-render to update selection visual
+    renderQuestion(currentIndex);
+  }
+
+  function renderRankingOptions(q, currentAnswer) {
+    var ranked = currentAnswer ? currentAnswer.split(',').filter(Boolean) : [];
+
+    q.data.options.forEach(function(opt) {
+      var rankIndex = ranked.indexOf(opt.letter);
+      var isRanked = rankIndex !== -1;
+
+      var div = document.createElement('div');
+      div.className = 'option option--ranking' + (isRanked ? ' option--ranked' : '');
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+
+      var rankDiv = document.createElement('div');
+      rankDiv.className = 'option__rank';
+      rankDiv.textContent = isRanked ? String(rankIndex + 1) : opt.letter;
+      if (isRanked) {
+        rankDiv.style.background = 'var(--glow)';
+        rankDiv.style.borderColor = 'var(--glow)';
+        rankDiv.style.color = 'var(--paper)';
+      } else {
+        rankDiv.style.border = '2px solid var(--ink)';
+        rankDiv.style.background = 'transparent';
+        rankDiv.style.color = 'var(--ink)';
+      }
+
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'option__content';
+
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'option__title';
+      titleDiv.textContent = opt.title;
+      contentDiv.appendChild(titleDiv);
+
+      if (opt.desc) {
+        var descDiv = document.createElement('div');
+        descDiv.className = 'option__desc';
+        descDiv.textContent = opt.desc;
+        contentDiv.appendChild(descDiv);
+      }
+
+      div.appendChild(rankDiv);
+      div.appendChild(contentDiv);
+
+      div.addEventListener('click', function() {
+        selectRankingOption(q.data.id, opt.letter, q);
+      });
+
+      div.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectRankingOption(q.data.id, opt.letter, q);
+        }
+      });
+
+      $qOptions.appendChild(div);
+    });
+  }
+
+  function selectRankingOption(qId, letter, q) {
+    var currentAnswer = loadAnswer(qId);
+    var ranked = currentAnswer ? currentAnswer.split(',').filter(Boolean) : [];
+
+    var idx = ranked.indexOf(letter);
+    if (idx !== -1) {
+      // Deselect: remove and shift
+      ranked.splice(idx, 1);
+    } else {
+      // Add at end
+      ranked.push(letter);
+    }
+
+    saveAnswer(qId, ranked.join(','));
+    renderQuestion(currentIndex);
+  }
+
+  // ─── NEXT BUTTON STATE ──────────────────────────────
+
+  function updateNextButton() {
+    var active = getActiveQuestions();
+    if (currentIndex >= active.length) return;
+    var q = active[currentIndex];
+    var answer = loadAnswer(q.data.id);
+
+    if (q.data.type === 'ranking') {
+      var ranked = answer ? answer.split(',').filter(Boolean) : [];
+      $btnNext.disabled = ranked.length < 3;
+    } else {
+      $btnNext.disabled = !answer;
+    }
+
+    // Change label for last question
+    if (currentIndex === active.length - 1) {
+      $btnNext.textContent = 'Ver resultado';
+    } else {
+      $btnNext.textContent = 'Próximo';
+    }
+  }
+
+  // ─── INTERSTITIAL ───────────────────────────────────
+
+  function showInterstitial(stepIndex, callback) {
+    var step = STEPS[stepIndex];
+    $interstitialStep.textContent = step.stepLabel;
+    $interstitialTitle.textContent = step.title;
+
+    $screenWelcome.classList.remove('screen--active');
+    $screenQuestion.classList.remove('screen--active');
+    $screenResult.classList.remove('screen--active');
+    $screenInterstitial.classList.add('interstitial--active');
+    $bottomNav.classList.add('hidden');
+
+    showingInterstitial = true;
+
+    setTimeout(function() {
+      if (showingInterstitial) {
+        showingInterstitial = false;
+        callback();
+      }
+    }, 1200);
+  }
+
+  // ─── NAVIGATION ─────────────────────────────────────
+
+  function goNext() {
+    var active = getActiveQuestions();
+    var nextIndex = currentIndex + 1;
+
+    if (nextIndex >= active.length) {
+      showResult();
+      return;
+    }
+
+    // Check if entering a new step
+    var currentStep = active[currentIndex].stepIndex;
+    var nextStep = active[nextIndex].stepIndex;
+
+    if (nextStep !== currentStep) {
+      showInterstitial(nextStep, function() {
+        renderQuestion(nextIndex);
+      });
+    } else {
+      renderQuestion(nextIndex);
+    }
+  }
+
+  function goPrev() {
+    if (currentIndex > 0) {
+      renderQuestion(currentIndex - 1);
+    }
+  }
+
+  // ─── RESULT ─────────────────────────────────────────
+
+  function showResult() {
+    $screenWelcome.classList.remove('screen--active');
+    $screenQuestion.classList.remove('screen--active');
+    $screenInterstitial.classList.remove('interstitial--active');
+    $screenResult.classList.add('screen--active');
+    $headerBar.classList.add('hidden');
+    $bottomNav.classList.add('hidden');
+    $progressFill.style.width = '100%';
+
+    document.body.style.background = 'var(--ink)';
+    $wizard.style.padding = '0';
+    $wizard.style.maxWidth = 'none';
+
+    var html = '<div class="result-screen">';
+    html += '<div class="result__header">';
+    html += '<div class="result__title">Salvage RPG — Resultado</div>';
+    html += '<div class="result__name">' + escHtml(playerName) + '</div>';
+    html += '</div>';
+
+    var allText = '[' + playerName.toUpperCase() + ']\n\n';
+
+    STEPS.forEach(function(step) {
+      var sectionTitle = RESULT_TITLES[step.id];
+      var sectionText = '\u2014 ' + sectionTitle + '\n';
+      var hasAnswers = false;
+
+      var stepQuestions = allQuestions.filter(function(q) { return q.stepId === step.id; });
+      var activeQs = getActiveQuestions();
+      var activeIds = {};
+      activeQs.forEach(function(q) { activeIds[q.data.id] = true; });
+
+      stepQuestions.forEach(function(q) {
+        if (!activeIds[q.data.id]) return;
+        var answer = loadAnswer(q.data.id);
+        if (!answer) return;
+        hasAnswers = true;
+
+        var qNum = q.data.id.split('_')[1];
+
+        if (q.data.type === 'ranking') {
+          var ranked = answer.split(',').filter(Boolean);
+          var rankStr = ranked.map(function(l, i) {
+            var opt = q.data.options.find(function(o) { return o.letter === l; });
+            return l + (opt ? ' (' + opt.title + ')' : '');
+          }).join(' > ');
+          sectionText += qNum + ': ' + rankStr + '\n';
+        } else {
+          var opt = q.data.options.find(function(o) { return o.letter === answer; });
+          var title = opt ? opt.title : '';
+          sectionText += qNum + answer + '. ' + title + '\n';
+        }
+      });
+
+      if (!hasAnswers) return;
+
+      allText += sectionText + '\n';
+
+      html += '<div class="result-section">';
+      html += '<div class="result-section__header">';
+      html += '<span class="result-section__title">' + escHtml(sectionTitle) + '</span>';
+      html += '<button class="result-section__copy" data-section="' + step.id + '">Copiar</button>';
+      html += '</div>';
+      html += '<div class="result-answers">';
+
+      stepQuestions.forEach(function(q) {
+        if (!activeIds[q.data.id]) return;
+        var answer = loadAnswer(q.data.id);
+        if (!answer) return;
+        var qNum = q.data.id.split('_')[1];
+
+        if (q.data.type === 'ranking') {
+          var ranked = answer.split(',').filter(Boolean);
+          var rankStr = ranked.map(function(l) {
+            var opt = q.data.options.find(function(o) { return o.letter === l; });
+            return l + (opt ? ' (' + opt.title + ')' : '');
+          }).join(' > ');
+          html += '<strong>' + qNum + ':</strong> ' + escHtml(rankStr) + '\n';
+        } else {
+          var opt = q.data.options.find(function(o) { return o.letter === answer; });
+          var title = opt ? opt.title : '';
+          html += '<strong>' + qNum + answer + '.</strong> ' + escHtml(title) + '\n';
+        }
+      });
+
+      html += '</div></div>';
+    });
+
+    html += '<div class="result__actions">';
+    html += '<button class="btn btn--result-copy" id="btnCopyAll">Copiar tudo</button>';
+    html += '<button class="btn btn--restart" id="btnRestart">Recomeçar</button>';
+    html += '</div>';
+    html += '</div>';
+
+    $screenResult.innerHTML = html;
+
+    // Copy all
+    document.getElementById('btnCopyAll').addEventListener('click', function() {
+      copyToClipboard(allText, this);
+    });
+
+    // Per-section copy
+    var sectionBtns = $screenResult.querySelectorAll('.result-section__copy');
+    sectionBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var stepId = this.getAttribute('data-section');
+        var sectionEl = this.closest('.result-section');
+        var answersEl = sectionEl.querySelector('.result-answers');
+        var text = '[' + playerName.toUpperCase() + '] \u2014 ' + RESULT_TITLES[stepId] + '\n' + answersEl.textContent;
+        copyToClipboard(text, this);
+      });
+    });
+
+    // Restart
+    document.getElementById('btnRestart').addEventListener('click', function() {
+      if (confirm('Tem certeza? Todas as respostas serão apagadas.')) {
+        clearAll();
+        location.reload();
+      }
+    });
+
+    window.scrollTo(0, 0);
+  }
+
+  function copyToClipboard(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showCopyFeedback(btn);
+      }).catch(function() {
+        fallbackCopy(text, btn);
+      });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showCopyFeedback(btn); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+
+  function showCopyFeedback(btn) {
+    var orig = btn.textContent;
+    btn.textContent = 'Copiado!';
+    if (btn.classList.contains('btn--result-copy')) {
+      btn.classList.add('btn--result-copy--done');
+    } else {
+      btn.classList.add('result-section__copy--done');
+    }
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.classList.remove('btn--result-copy--done');
+      btn.classList.remove('result-section__copy--done');
+    }, 1500);
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // ─── INIT ───────────────────────────────────────────
+
+  function init() {
+    // Restore name
+    var savedName = loadName();
+    if (savedName) {
+      $nameInput.value = savedName;
+      $btnStart.disabled = false;
+      playerName = savedName;
+    }
+
+    // Name input events
+    $nameInput.addEventListener('input', function() {
+      $btnStart.disabled = !this.value.trim();
+    });
+
+    $nameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && this.value.trim()) {
+        startWizard();
+      }
+    });
+
+    $btnStart.addEventListener('click', function() {
+      startWizard();
+    });
+
+    // Nav buttons
+    $btnNext.addEventListener('click', goNext);
+    $btnPrev.addEventListener('click', goPrev);
+
+    // Check if we should resume
+    if (savedName) {
+      var active = getActiveQuestions();
+      var firstUnanswered = -1;
+      for (var i = 0; i < active.length; i++) {
+        var a = loadAnswer(active[i].data.id);
+        if (!a) { firstUnanswered = i; break; }
+      }
+
+      if (firstUnanswered === -1 && active.length > 0) {
+        // All answered — go directly to result
+        playerName = savedName;
+        showResult();
+        return;
+      }
+
+      if (firstUnanswered > 0) {
+        // Resume from first unanswered — skip interstitial
+        playerName = savedName;
+        saveName(playerName);
+        $screenWelcome.classList.remove('screen--active');
+        renderQuestion(firstUnanswered);
+        return;
+      }
+    }
+  }
+
+  function startWizard() {
+    playerName = $nameInput.value.trim();
+    if (!playerName) return;
+    saveName(playerName);
+
+    var active = getActiveQuestions();
+    var firstUnanswered = 0;
+    for (var i = 0; i < active.length; i++) {
+      if (!loadAnswer(active[i].data.id)) {
+        firstUnanswered = i;
+        break;
+      }
+      if (i === active.length - 1) firstUnanswered = i;
+    }
+
+    // Show interstitial for the first step of the first unanswered question
+    var targetStep = active[firstUnanswered].stepIndex;
+    showInterstitial(targetStep, function() {
+      renderQuestion(firstUnanswered);
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (showingInterstitial) return;
+    if ($screenQuestion.classList.contains('screen--active')) {
+      if (e.key === 'ArrowRight' || e.key === 'Enter') {
+        if (!$btnNext.disabled) goNext();
+      } else if (e.key === 'ArrowLeft') {
+        if (!$btnPrev.disabled) goPrev();
+      }
+    }
+  });
+
+  // Swipe support
+  var touchStartX = 0;
+  var touchStartY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (!$screenQuestion.classList.contains('screen--active')) return;
+    var dx = e.changedTouches[0].screenX - touchStartX;
+    var dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx)) return;
+    if (dx < 0 && !$btnNext.disabled) goNext();
+    if (dx > 0 && !$btnPrev.disabled) goPrev();
+  }, { passive: true });
+
+  init();
+
+})();
+</script>
+
+</body>
+</html>
