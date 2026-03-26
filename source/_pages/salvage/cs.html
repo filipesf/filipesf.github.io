@@ -1,0 +1,2191 @@
+---
+layout: null
+permalink: /salvage/cs/
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvage RPG — Ficha de Personagem v0.1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #1a1a18;
+    --paper: #f5f0e8;
+    --dust: #d9d0c0;
+    --rust: #a0522d;
+    --rust-light: #c4845c;
+    --ash: #6b6560;
+    --glow: #c9a826;
+    --radiation: #7a8c2a;
+    --danger: #8b2500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9.5pt;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sheet {
+    width: 190mm;
+    max-width: 190mm;
+    margin: 0 auto;
+    padding: 4mm 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 3mm;
+  }
+
+  /* ── HEADER ── */
+
+  .header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2.5pt solid var(--ink);
+    padding-bottom: 2mm;
+    margin-bottom: 1mm;
+  }
+
+  .header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 20pt;
+    font-weight: 700;
+    letter-spacing: -0.5pt;
+    text-transform: uppercase;
+  }
+
+  .header .version {
+    font-family: 'Space Mono', monospace;
+    font-size: 8pt;
+    color: var(--ash);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+
+  .section {
+    border: 1.5pt solid var(--ink);
+    padding: 3mm;
+    position: relative;
+    background: var(--paper);
+  }
+
+  .section--full {
+    grid-column: 1 / -1;
+  }
+
+  .section__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 1mm 2.5mm;
+    position: absolute;
+    top: -3.2mm;
+    left: 3mm;
+    line-height: 1;
+  }
+
+  /* ── IDENTITY ── */
+
+  .identity {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm 3mm;
+    padding-top: 5mm;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5mm;
+  }
+
+  .field__label {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--ash);
+  }
+
+  .field__line {
+    border-bottom: 0.75pt solid var(--dust);
+    min-height: 5mm;
+  }
+
+  .kit-row {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5mm 4mm;
+  }
+
+  .kit-row .field__label {
+    margin-right: 1mm;
+  }
+
+  .kit-option {
+    display: flex;
+    align-items: center;
+    gap: 1.5mm;
+    font-size: 8pt;
+  }
+
+  .kit-option .checkbox {
+    width: 3mm;
+    height: 3mm;
+    border: 1pt solid var(--ink);
+    flex-shrink: 0;
+  }
+
+  .kit-option .kit-name {
+    font-weight: 600;
+  }
+
+  /* ── ATTRIBUTES ── */
+
+  .attributes {
+    padding-top: 5mm;
+  }
+
+  .attr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5mm;
+  }
+
+  .attr-card {
+    border: 1pt solid var(--dust);
+    padding: 2mm 2.5mm;
+    display: flex;
+    align-items: center;
+    gap: 2.5mm;
+  }
+
+  .attr-card__box {
+    width: 10mm;
+    height: 10mm;
+    border: 1.5pt solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 14pt;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .attr-card__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .attr-card__name {
+    font-weight: 700;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+  }
+
+  .attr-card__hint {
+    font-size: 7pt;
+    color: var(--ash);
+    line-height: 1.2;
+  }
+
+  .attr-dist {
+    margin-top: 2mm;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 7.5pt;
+    color: var(--ash);
+    letter-spacing: 0.5pt;
+  }
+
+  /* ── TRACKS ── */
+
+  .tracks {
+    padding-top: 5mm;
+  }
+
+  .tracks__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+  }
+
+  .tracks__split .track {
+    margin-bottom: 0;
+  }
+
+  .track {
+    margin-bottom: 2.5mm;
+  }
+
+  .track:last-child {
+    margin-bottom: 0;
+  }
+
+  .track__label {
+    font-family: 'Space Mono', monospace;
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    margin-bottom: 1.5mm;
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+
+  .track__label .icon {
+    display: inline-block;
+    width: 2.5mm;
+    height: 2.5mm;
+    border-radius: 50%;
+  }
+
+  .track__label--wounds .icon { background: var(--danger); }
+  .track__label--luck .icon { background: var(--glow); }
+  .track__label--exposure .icon { background: var(--radiation); }
+
+  .track__boxes {
+    display: flex;
+    gap: 2mm;
+  }
+
+  .track__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1mm;
+  }
+
+  .track__pip {
+    width: 7mm;
+    height: 7mm;
+    border: 1.5pt solid var(--ink);
+  }
+
+  .track__pip--wounds { border-color: var(--danger); }
+  .track__pip--luck { border-color: var(--glow); }
+  .track__pip--exposure { border-color: var(--radiation); }
+
+  .track__pip-label {
+    font-size: 6pt;
+    color: var(--ash);
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+  }
+
+  /* ── BONDS ── */
+
+  .bonds {
+    padding-top: 5mm;
+  }
+
+  .bonds .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+
+  /* ── KIT DETAIL ── */
+
+  .kit-detail {
+    padding-top: 5mm;
+  }
+
+  .kit-detail__ability {
+    border: 1pt dashed var(--rust-light);
+    padding: 2mm;
+    min-height: 10mm;
+    margin-bottom: 2mm;
+    font-size: 8.5pt;
+  }
+
+  .kit-detail__ability-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--rust);
+    margin-bottom: 1mm;
+  }
+
+  .kit-detail__ability--advanced {
+    border: 1pt dashed var(--ash);
+    padding: 2mm;
+    min-height: 8mm;
+    margin-bottom: 2mm;
+    font-size: 8.5pt;
+    opacity: 0.7;
+  }
+
+  .kit-detail__ability-label--advanced {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--ash);
+    margin-bottom: 1mm;
+  }
+
+  .kit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  .kit-items .field__line {
+    min-height: 5mm;
+  }
+
+  /* ── INVENTORY & GEAR ── */
+
+  .inv-gear {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    padding-top: 5mm;
+  }
+
+  .inv-gear__col-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--rust);
+    margin-bottom: 1.5mm;
+  }
+
+  .inv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5mm;
+  }
+
+  .inv-slot {
+    border: 1pt solid var(--dust);
+    padding: 1.5mm 2mm;
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    min-height: 7mm;
+  }
+
+  .inv-slot__num {
+    font-family: 'Space Mono', monospace;
+    font-size: 7pt;
+    color: var(--dust);
+    font-weight: 700;
+    width: 3mm;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .inv-slot__content {
+    flex: 1;
+    border-bottom: 0.5pt solid var(--dust);
+    min-height: 4mm;
+  }
+
+  .inv-slot__tag {
+    font-size: 6.5pt;
+    color: var(--ash);
+    min-width: 14mm;
+    border-bottom: 0.5pt solid var(--dust);
+    min-height: 4mm;
+  }
+
+  .inv-legend {
+    margin-top: 1.5mm;
+    font-size: 6.5pt;
+    color: var(--ash);
+    display: flex;
+    gap: 3mm;
+    flex-wrap: wrap;
+  }
+
+  .gear-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  .gear-slot {
+    border: 1pt solid var(--dust);
+    padding: 2mm;
+    min-height: 10mm;
+  }
+
+  .gear-slot__label {
+    font-family: 'Space Mono', monospace;
+    font-size: 6pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--rust);
+    margin-bottom: 1mm;
+  }
+
+  .gear-slot__line {
+    border-bottom: 0.5pt solid var(--dust);
+    min-height: 4mm;
+  }
+
+  /* ── SCARS & FACTIONS ── */
+
+  .scars-factions {
+    grid-column: 1 / -1;
+    padding-top: 5mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+  }
+
+  .scars-col .fields,
+  .factions-col .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  .scars-col__subtitle,
+  .factions-col__subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--rust);
+    margin-bottom: 1.5mm;
+  }
+
+  .scar-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5mm;
+  }
+
+  .scar-entry__effect {
+    border-bottom: 0.5pt dashed var(--dust);
+    min-height: 4mm;
+    font-size: 7.5pt;
+    color: var(--ash);
+  }
+
+  .faction-entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+    align-items: end;
+  }
+
+  .faction-entry .field__line {
+    min-height: 4.5mm;
+  }
+
+  /* ── RULES REFERENCE ── */
+
+  .rules {
+    grid-column: 1 / -1;
+    padding-top: 5mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+  }
+
+  .rules-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5mm;
+  }
+
+  .rules-block__title {
+    font-family: 'Space Mono', monospace;
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    margin-bottom: 1.5mm;
+    color: var(--glow);
+  }
+
+  .rules-block p,
+  .rules-block li {
+    font-size: 7pt;
+    line-height: 1.35;
+  }
+
+  .rules-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .rules-block li {
+    padding-left: 2mm;
+    position: relative;
+    margin-bottom: 0.5mm;
+  }
+
+  .rules-block li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--glow);
+    font-weight: 700;
+  }
+
+  .result {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5mm;
+    margin-bottom: 1mm;
+  }
+
+  .result__num {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 8.5pt;
+    min-width: 7mm;
+  }
+
+  .result__num--success { color: var(--glow); }
+  .result__num--partial { color: var(--rust-light); }
+  .result__num--fail { color: var(--danger); }
+
+  .result__desc {
+    font-size: 7pt;
+  }
+
+  /* ── NOTES ── */
+
+  .notes {
+    grid-column: 1 / -1;
+    padding-top: 5mm;
+  }
+
+  .notes__box {
+    border: 0.75pt solid var(--dust);
+    min-height: 18mm;
+    padding: 2mm;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    margin-top: 1.5mm;
+  }
+
+  /* ── FOOTER ── */
+
+  .footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1pt solid var(--dust);
+    padding-top: 1.5mm;
+    margin-top: 1mm;
+  }
+
+  .footer__left,
+  .footer__right {
+    font-family: 'Space Mono', monospace;
+    font-size: 6pt;
+    color: var(--ash);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    body { background: white; }
+    .sheet { padding: 0; }
+  }
+
+  /* ── DESKTOP SCREEN — comfortable viewing ── */
+
+  @media screen and (min-width: 721px) {
+    body {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 32px 0 80px;
+    }
+
+    .sheet {
+      width: 900px;
+      max-width: 900px;
+      padding: 32px;
+      gap: 16px;
+      background: var(--paper);
+      border: 1px solid var(--dust);
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* Header */
+    .header {
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+      border-bottom-width: 3px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+    }
+
+    .header .version {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+
+    /* Sections */
+    .section {
+      padding: 20px 16px 14px;
+      border-width: 2px;
+    }
+
+    .section__title {
+      font-size: 11px;
+      padding: 4px 10px;
+      top: -9px;
+      left: 10px;
+      letter-spacing: 2px;
+    }
+
+    /* Identity */
+    .identity {
+      gap: 10px 16px;
+      padding-top: 20px;
+    }
+
+    .field__label {
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .field__line {
+      min-height: 28px;
+      font-size: 14px;
+      padding: 4px 2px;
+      border-bottom-width: 1px;
+    }
+
+    .kit-row {
+      gap: 4px 16px;
+      padding-top: 4px;
+    }
+
+    .kit-option {
+      font-size: 13px;
+      gap: 6px;
+      padding: 4px 0;
+    }
+
+    .kit-option .checkbox {
+      width: 16px;
+      height: 16px;
+      border-width: 1.5px;
+    }
+
+    .kit-option .kit-name {
+      font-size: 13px;
+    }
+
+    /* Attributes */
+    .attributes {
+      padding-top: 20px;
+    }
+
+    .attr-grid {
+      gap: 10px;
+    }
+
+    .attr-card {
+      padding: 10px;
+      gap: 10px;
+      border-width: 1px;
+    }
+
+    .attr-card__box {
+      width: 44px;
+      height: 44px;
+      font-size: 22px;
+      border-width: 2px;
+    }
+
+    .attr-card__name {
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .attr-card__hint {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .attr-dist {
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    /* Tracks */
+    .tracks {
+      padding-top: 20px;
+    }
+
+    .track {
+      margin-bottom: 12px;
+    }
+
+    .track__label {
+      font-size: 10px;
+      margin-bottom: 6px;
+      gap: 6px;
+      letter-spacing: 2px;
+    }
+
+    .track__label .icon {
+      width: 8px;
+      height: 8px;
+    }
+
+    .track__boxes {
+      gap: 8px;
+    }
+
+    .track__pip {
+      width: 32px;
+      height: 32px;
+      border-width: 2px;
+    }
+
+    .track__pip-label {
+      font-size: 9px;
+      letter-spacing: 0.5px;
+    }
+
+    .tracks__split {
+      gap: 16px;
+    }
+
+    /* Bonds */
+    .bonds {
+      padding-top: 20px;
+    }
+
+    .bonds .fields {
+      gap: 10px;
+    }
+
+    /* Kit detail */
+    .kit-detail {
+      padding-top: 20px;
+    }
+
+    .kit-detail__ability,
+    .kit-detail__ability--advanced {
+      min-height: 36px;
+      font-size: 13px;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    .kit-detail__ability-label,
+    .kit-detail__ability-label--advanced {
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .kit-items {
+      gap: 8px;
+    }
+
+    .kit-items .field__line {
+      min-height: 24px;
+    }
+
+    /* Inventory & Gear */
+    .inv-gear {
+      padding-top: 20px;
+      gap: 20px;
+    }
+
+    .inv-gear__col-subtitle {
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .inv-slot {
+      min-height: 32px;
+      padding: 6px 8px;
+      gap: 8px;
+      border-width: 1px;
+    }
+
+    .inv-slot__num {
+      font-size: 11px;
+      width: 16px;
+    }
+
+    .inv-slot__content {
+      min-height: 20px;
+      font-size: 13px;
+    }
+
+    .inv-slot__tag {
+      font-size: 10px;
+      min-width: 60px;
+      min-height: 20px;
+    }
+
+    .inv-legend {
+      font-size: 10px;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .gear-slot {
+      min-height: 44px;
+      padding: 8px;
+      border-width: 1px;
+    }
+
+    .gear-slot__label {
+      font-size: 9px;
+      margin-bottom: 4px;
+    }
+
+    .gear-slot__line {
+      min-height: 20px;
+      font-size: 13px;
+    }
+
+    /* Scars & Factions */
+    .scars-factions {
+      padding-top: 20px;
+      gap: 20px;
+    }
+
+    .scars-col__subtitle,
+    .factions-col__subtitle {
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .scars-col .fields,
+    .factions-col .fields {
+      gap: 10px;
+    }
+
+    .scar-entry__effect {
+      min-height: 20px;
+      font-size: 11px;
+    }
+
+    .faction-entry {
+      gap: 8px;
+    }
+
+    .faction-entry .field__line {
+      min-height: 24px;
+    }
+
+    /* Notes */
+    .notes {
+      padding-top: 20px;
+    }
+
+    .notes__box {
+      min-height: 80px;
+      padding: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      border-width: 1px;
+    }
+
+    /* Rules reference */
+    .rules {
+      padding-top: 20px;
+      gap: 12px;
+    }
+
+    .rules-block {
+      padding: 12px;
+    }
+
+    .rules-block__title {
+      font-size: 10px;
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+    }
+
+    .rules-block p,
+    .rules-block li {
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .rules-block li {
+      padding-left: 10px;
+      margin-bottom: 2px;
+    }
+
+    .result {
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .result__num {
+      font-size: 14px;
+      min-width: 28px;
+    }
+
+    .result__desc {
+      font-size: 11px;
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top-width: 1px;
+    }
+
+    .footer__left,
+    .footer__right {
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    /* Toolbar positioning */
+    .toolbar {
+      bottom: 24px;
+      right: 24px;
+      gap: 10px;
+    }
+
+    .toolbar__btn {
+      font-size: 10px;
+      padding: 8px 18px;
+    }
+  }
+
+  /* ── INTERACTIVE STATES ── */
+
+  [contenteditable="true"] {
+    outline: none;
+    cursor: text;
+    transition: background 150ms;
+  }
+
+  [contenteditable="true"]:hover {
+    background: rgba(201, 168, 38, 0.08);
+  }
+
+  [contenteditable="true"]:focus {
+    background: rgba(201, 168, 38, 0.15);
+    border-color: var(--glow) !important;
+  }
+
+  .checkbox--selected {
+    background: var(--glow) !important;
+  }
+
+  .track__pip--marked-wounds {
+    background: var(--danger) !important;
+  }
+
+  .track__pip--marked-luck {
+    background: var(--glow) !important;
+  }
+
+  .track__pip--marked-exposure {
+    background: var(--radiation) !important;
+  }
+
+  .kit-option, .track__pip {
+    cursor: pointer;
+  }
+
+  /* ── TOOLBAR ── */
+
+  .toolbar {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+  }
+
+  .toolbar__btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    padding: 6px 14px;
+    border: 1.5pt solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 150ms;
+  }
+
+  .toolbar__btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .toolbar__btn--danger {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .toolbar__btn--danger:hover {
+    background: var(--danger);
+    color: var(--paper);
+  }
+
+  /* ── PRESET DROPDOWN ── */
+
+  .toolbar__preset {
+    position: relative;
+  }
+
+  .toolbar__preset-menu {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 6px;
+    background: var(--paper);
+    border: 1.5pt solid var(--ink);
+    min-width: 180px;
+    z-index: 200;
+  }
+
+  .toolbar__preset-menu.open {
+    display: block;
+  }
+
+  .toolbar__preset-item {
+    display: block;
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    padding: 8px 12px;
+    border: none;
+    background: var(--paper);
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: all 150ms;
+  }
+
+  .toolbar__preset-item:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .toolbar__preset-item + .toolbar__preset-item {
+    border-top: 0.75pt solid var(--dust);
+  }
+
+  @media print {
+    .toolbar { display: none !important; }
+    [contenteditable="true"]:hover,
+    [contenteditable="true"]:focus {
+      background: transparent !important;
+    }
+  }
+
+  /* ── RESPONSIVE — MOBILE ── */
+
+  @media screen and (max-width: 720px) {
+
+    body {
+      font-size: 14px;
+      line-height: 1.45;
+      padding: 0 0 64px 0;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 100%;
+      padding: 12px;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    /* Force all sections to full width */
+    .section,
+    .section--full,
+    .header,
+    .rules,
+    .notes,
+    .scars-factions {
+      grid-column: 1 / -1;
+    }
+
+    /* Header */
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding-bottom: 8px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+    }
+
+    .header .version {
+      font-size: 10px;
+    }
+
+    /* Section titles */
+    .section__title {
+      font-size: 10px;
+      padding: 3px 8px;
+      top: -8px;
+      left: 8px;
+      letter-spacing: 1px;
+    }
+
+    .section {
+      padding: 16px 12px 12px;
+      border-width: 1.5px;
+    }
+
+    /* Identity — stack vertically */
+    .identity {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding-top: 16px;
+    }
+
+    .field__label {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .field__line {
+      min-height: 28px;
+      font-size: 14px;
+      padding: 4px 0;
+      border-bottom-width: 1px;
+    }
+
+    /* Kit row */
+    .kit-row {
+      gap: 4px 10px;
+    }
+
+    .kit-option {
+      font-size: 14px;
+      gap: 8px;
+      padding: 6px 0;
+    }
+
+    .kit-option .checkbox {
+      width: 20px;
+      height: 20px;
+      border-width: 1.5px;
+    }
+
+    /* Attributes — 2 col still works on most phones */
+    .attributes {
+      padding-top: 16px;
+    }
+
+    .attr-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .attr-card {
+      padding: 8px;
+      gap: 8px;
+      border-width: 1px;
+    }
+
+    .attr-card__box {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      border-width: 2px;
+    }
+
+    .attr-card__name {
+      font-size: 12px;
+    }
+
+    .attr-card__hint {
+      font-size: 10px;
+    }
+
+    .attr-dist {
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    /* Tracks */
+    .tracks {
+      padding-top: 16px;
+    }
+
+    .tracks__split {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .track {
+      margin-bottom: 12px;
+    }
+
+    .track__label {
+      font-size: 10px;
+      margin-bottom: 6px;
+      gap: 6px;
+    }
+
+    .track__label .icon {
+      width: 8px;
+      height: 8px;
+    }
+
+    .track__boxes {
+      gap: 8px;
+    }
+
+    .track__pip {
+      width: 36px;
+      height: 36px;
+      border-width: 2px;
+    }
+
+    .track__pip-label {
+      font-size: 9px;
+      margin-top: 2px;
+    }
+
+    /* Bonds */
+    .bonds {
+      padding-top: 16px;
+    }
+
+    .bonds .fields {
+      gap: 10px;
+    }
+
+    /* Kit detail */
+    .kit-detail {
+      padding-top: 16px;
+    }
+
+    .kit-detail__ability,
+    .kit-detail__ability--advanced {
+      min-height: 40px;
+      font-size: 13px;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    .kit-detail__ability-label,
+    .kit-detail__ability-label--advanced {
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .kit-items {
+      gap: 8px;
+    }
+
+    .kit-items .field__line {
+      min-height: 28px;
+    }
+
+    /* Inventory & Gear — stack on mobile */
+    .inv-gear {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding-top: 16px;
+    }
+
+    .inv-gear__col-subtitle {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .inv-grid {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .inv-slot {
+      min-height: 36px;
+      padding: 6px 8px;
+      gap: 8px;
+      border-width: 1px;
+    }
+
+    .inv-slot__num {
+      font-size: 11px;
+      width: 16px;
+    }
+
+    .inv-slot__content {
+      min-height: 20px;
+      font-size: 13px;
+    }
+
+    .inv-slot__tag {
+      font-size: 10px;
+      min-width: 50px;
+      min-height: 20px;
+    }
+
+    .inv-legend {
+      font-size: 10px;
+      gap: 6px;
+      margin-top: 6px;
+      flex-direction: column;
+    }
+
+    .gear-grid {
+      gap: 8px;
+    }
+
+    .gear-slot {
+      min-height: 40px;
+      padding: 8px;
+      border-width: 1px;
+    }
+
+    .gear-slot__label {
+      font-size: 9px;
+      margin-bottom: 4px;
+    }
+
+    .gear-slot__line {
+      min-height: 20px;
+      font-size: 13px;
+    }
+
+    /* Scars & Factions — stack */
+    .scars-factions {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding-top: 16px;
+    }
+
+    .scars-col__subtitle,
+    .factions-col__subtitle {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .scars-col .fields,
+    .factions-col .fields {
+      gap: 10px;
+    }
+
+    .scar-entry__effect {
+      min-height: 24px;
+      font-size: 12px;
+    }
+
+    .faction-entry {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .faction-entry .field__line {
+      min-height: 24px;
+    }
+
+    /* Notes */
+    .notes {
+      padding-top: 16px;
+    }
+
+    .notes__box {
+      min-height: 80px;
+      font-size: 13px;
+      padding: 8px;
+    }
+
+    /* Rules — stack vertically */
+    .rules {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-top: 16px;
+    }
+
+    .rules-block {
+      padding: 10px;
+    }
+
+    .rules-block__title {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .rules-block p,
+    .rules-block li {
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .rules-block li {
+      padding-left: 12px;
+      margin-bottom: 3px;
+    }
+
+    .result {
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .result__num {
+      font-size: 14px;
+      min-width: 32px;
+    }
+
+    .result__desc {
+      font-size: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .footer__left,
+    .footer__right {
+      font-size: 9px;
+    }
+
+    /* Toolbar — full width on mobile */
+    .toolbar {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 16px;
+      background: var(--paper);
+      border-top: 1.5px solid var(--ink);
+      justify-content: center;
+    }
+
+    .toolbar__btn {
+      font-size: 10px;
+      padding: 10px 20px;
+      min-height: 44px;
+    }
+  }
+
+  /* ── RESPONSIVE — SMALL TABLETS ── */
+
+  @media screen and (min-width: 480px) and (max-width: 720px) {
+    .inv-gear {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Salvage RPG</h1>
+    <span class="version">Ficha v0.1 · Playtest</span>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section section--full identity">
+    <span class="section__title">Identidade</span>
+    <div class="field">
+      <span class="field__label">Nome</span>
+      <div class="field__line" data-field="nome"></div>
+    </div>
+    <div class="field">
+      <span class="field__label">Raça / Espécie</span>
+      <div class="field__line" data-field="raca"></div>
+    </div>
+    <div class="field">
+      <span class="field__label">Aparência</span>
+      <div class="field__line" data-field="aparencia"></div>
+    </div>
+    <div class="field">
+      <span class="field__label">Detalhe marcante</span>
+      <div class="field__line" data-field="detalhe"></div>
+    </div>
+    <div class="kit-row">
+      <span class="field__label">Kit</span>
+      <div class="kit-option"><div class="checkbox"></div><span class="kit-name">Catador</span></div>
+      <div class="kit-option"><div class="checkbox"></div><span class="kit-name">Batedor</span></div>
+      <div class="kit-option"><div class="checkbox"></div><span class="kit-name">Sucateiro</span></div>
+      <div class="kit-option"><div class="checkbox"></div><span class="kit-name">Falador</span></div>
+      <div class="kit-option"><div class="checkbox"></div><span class="kit-name">Brutamontes</span></div>
+    </div>
+  </div>
+
+  <!-- ATTRIBUTES -->
+  <div class="section attributes">
+    <span class="section__title">Atributos</span>
+    <div class="attr-grid">
+      <div class="attr-card">
+        <div class="attr-card__box" data-field="attr-corpo"></div>
+        <div class="attr-card__info">
+          <span class="attr-card__name">Corpo</span>
+          <span class="attr-card__hint">força, resistência, impacto</span>
+        </div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-card__box" data-field="attr-instinto"></div>
+        <div class="attr-card__info">
+          <span class="attr-card__name">Instinto</span>
+          <span class="attr-card__hint">reagir, rastrear, perigo</span>
+        </div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-card__box" data-field="attr-engenho"></div>
+        <div class="attr-card__info">
+          <span class="attr-card__name">Engenho</span>
+          <span class="attr-card__hint">improvisar, consertar, sucata</span>
+        </div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-card__box" data-field="attr-presenca"></div>
+        <div class="attr-card__info">
+          <span class="attr-card__name">Presença</span>
+          <span class="attr-card__hint">convencer, negociar, liderar</span>
+        </div>
+      </div>
+    </div>
+    <div class="attr-dist">Distribua: +2 · +1 · 0 · −1</div>
+  </div>
+
+  <!-- TRACKS -->
+  <div class="section tracks">
+    <span class="section__title">Estado</span>
+
+    <div class="track">
+      <div class="track__label track__label--wounds"><span class="icon"></span>Ferimentos</div>
+      <div class="track__boxes">
+        <div class="track__box">
+          <div class="track__pip track__pip--wounds"></div>
+          <span class="track__pip-label">Abalado</span>
+        </div>
+        <div class="track__box">
+          <div class="track__pip track__pip--wounds"></div>
+          <span class="track__pip-label">Comprometido</span>
+        </div>
+        <div class="track__box">
+          <div class="track__pip track__pip--wounds"></div>
+          <span class="track__pip-label">Caído</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracks__split">
+      <div class="track">
+        <div class="track__label track__label--luck"><span class="icon"></span>Sorte</div>
+        <div class="track__boxes">
+          <div class="track__box">
+            <div class="track__pip track__pip--luck"></div>
+            <span class="track__pip-label">1</span>
+          </div>
+          <div class="track__box">
+            <div class="track__pip track__pip--luck"></div>
+            <span class="track__pip-label">2</span>
+          </div>
+          <div class="track__box">
+            <div class="track__pip track__pip--luck"></div>
+            <span class="track__pip-label">3</span>
+          </div>
+        </div>
+      </div>
+      <div class="track">
+        <div class="track__label track__label--exposure"><span class="icon"></span>Exposição</div>
+        <div class="track__boxes">
+          <div class="track__box">
+            <div class="track__pip track__pip--exposure"></div>
+            <span class="track__pip-label">1</span>
+          </div>
+          <div class="track__box">
+            <div class="track__pip track__pip--exposure"></div>
+            <span class="track__pip-label">2</span>
+          </div>
+          <div class="track__box">
+            <div class="track__pip track__pip--exposure"></div>
+            <span class="track__pip-label">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BONDS -->
+  <div class="section bonds">
+    <span class="section__title">Vínculos</span>
+    <div class="fields">
+      <div class="field">
+        <span class="field__label">Necessidade imediata</span>
+        <div class="field__line" data-field="necessidade"></div>
+      </div>
+      <div class="field">
+        <span class="field__label">Medo</span>
+        <div class="field__line" data-field="medo"></div>
+      </div>
+      <div class="field">
+        <span class="field__label">Vínculo com outro personagem</span>
+        <div class="field__line" data-field="vinculo"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KIT DETAIL -->
+  <div class="section kit-detail">
+    <span class="section__title">Kit</span>
+    <div class="kit-detail__ability-label">Habilidade do kit</div>
+    <div class="kit-detail__ability" data-field="kit-ability"></div>
+    <div class="kit-detail__ability-label--advanced">Habilidade avançada (desbloqueável)</div>
+    <div class="kit-detail__ability--advanced" data-field="kit-ability-advanced"></div>
+    <span class="field__label">Itens do kit</span>
+    <div class="kit-items">
+      <div class="field__line" data-field="kit-item-1"></div>
+      <div class="field__line" data-field="kit-item-2"></div>
+      <div class="field__line" data-field="kit-item-3"></div>
+    </div>
+  </div>
+
+  <!-- INVENTORY & GEAR -->
+  <div class="section section--full inv-gear">
+    <span class="section__title">Inventário & Equipamento</span>
+    <div>
+      <div class="inv-gear__col-subtitle">Inventário</div>
+      <div class="inv-grid">
+        <div class="inv-slot"><span class="inv-slot__num">1</span><div class="inv-slot__content" data-field="inv-1-item"></div><div class="inv-slot__tag" data-field="inv-1-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">2</span><div class="inv-slot__content" data-field="inv-2-item"></div><div class="inv-slot__tag" data-field="inv-2-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">3</span><div class="inv-slot__content" data-field="inv-3-item"></div><div class="inv-slot__tag" data-field="inv-3-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">4</span><div class="inv-slot__content" data-field="inv-4-item"></div><div class="inv-slot__tag" data-field="inv-4-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">5</span><div class="inv-slot__content" data-field="inv-5-item"></div><div class="inv-slot__tag" data-field="inv-5-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">6</span><div class="inv-slot__content" data-field="inv-6-item"></div><div class="inv-slot__tag" data-field="inv-6-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">7</span><div class="inv-slot__content" data-field="inv-7-item"></div><div class="inv-slot__tag" data-field="inv-7-tag"></div></div>
+        <div class="inv-slot"><span class="inv-slot__num">8</span><div class="inv-slot__content" data-field="inv-8-item"></div><div class="inv-slot__tag" data-field="inv-8-tag"></div></div>
+      </div>
+      <div class="inv-legend">
+        <span>Normal = 1 slot</span>
+        <span>Pesado = 2 slots</span>
+        <span>Armadura = 2 slots</span>
+        <span>Sem espaço → larga, quebra ou complica</span>
+        <span>Sucata: M·E·Q·O</span>
+      </div>
+    </div>
+    <div>
+      <div class="inv-gear__col-subtitle">Equipamento</div>
+      <div class="gear-grid">
+        <div class="gear-slot">
+          <div class="gear-slot__label">Arma principal</div>
+          <div class="gear-slot__line" data-field="gear-arma"></div>
+        </div>
+        <div class="gear-slot">
+          <div class="gear-slot__label">Proteção / armadura</div>
+          <div class="gear-slot__line" data-field="gear-protecao"></div>
+        </div>
+        <div class="gear-slot">
+          <div class="gear-slot__label">Ferramenta essencial</div>
+          <div class="gear-slot__line" data-field="gear-ferramenta"></div>
+        </div>
+        <div class="gear-slot">
+          <div class="gear-slot__label">Item valioso</div>
+          <div class="gear-slot__line" data-field="gear-valioso"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCARS & FACTIONS -->
+  <div class="section section--full scars-factions">
+    <span class="section__title">Marcas & Facções</span>
+    <div class="scars-col">
+      <div class="scars-col__subtitle">Marcas</div>
+      <div class="fields">
+        <div class="field">
+          <span class="field__label">Contato / facção</span>
+          <div class="field__line" data-field="contato"></div>
+        </div>
+        <div class="scar-entry">
+          <div class="field">
+            <span class="field__label">Cicatriz / sequela 1 (efeito mecânico)</span>
+            <div class="field__line" data-field="scar-1"></div>
+          </div>
+          <div class="scar-entry__effect" data-field="scar-1-effect"></div>
+        </div>
+        <div class="scar-entry">
+          <div class="field">
+            <span class="field__label">Cicatriz / sequela 2 (efeito mecânico)</span>
+            <div class="field__line" data-field="scar-2"></div>
+          </div>
+          <div class="scar-entry__effect" data-field="scar-2-effect"></div>
+        </div>
+        <div class="field">
+          <span class="field__label">Contaminação</span>
+          <div class="field__line" data-field="contaminacao"></div>
+        </div>
+      </div>
+    </div>
+    <div class="factions-col">
+      <div class="factions-col__subtitle">Facções (grupo)</div>
+      <div class="fields">
+        <div class="faction-entry">
+          <div class="field">
+            <span class="field__label">Facção</span>
+            <div class="field__line" data-field="faction-1-name"></div>
+          </div>
+          <div class="field">
+            <span class="field__label">Reputação</span>
+            <div class="field__line" data-field="faction-1-rep"></div>
+          </div>
+        </div>
+        <div class="faction-entry">
+          <div class="field">
+            <span class="field__label">Facção</span>
+            <div class="field__line" data-field="faction-2-name"></div>
+          </div>
+          <div class="field">
+            <span class="field__label">Reputação</span>
+            <div class="field__line" data-field="faction-2-rep"></div>
+          </div>
+        </div>
+        <div class="faction-entry">
+          <div class="field">
+            <span class="field__label">Facção</span>
+            <div class="field__line" data-field="faction-3-name"></div>
+          </div>
+          <div class="field">
+            <span class="field__label">Reputação</span>
+            <div class="field__line" data-field="faction-3-rep"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section notes">
+    <span class="section__title">Anotações</span>
+    <div class="notes__box" contenteditable="true" data-field="notes"></div>
+  </div>
+
+  <!-- RULES REFERENCE -->
+  <div class="section rules">
+    <span class="section__title">Referência rápida</span>
+
+    <div class="rules-block">
+      <div class="rules-block__title">Resolução</div>
+      <p style="margin-bottom:1.5mm; font-family:'Space Mono',monospace; font-size:8pt; font-weight:700;">2d6 + atributo</p>
+      <div class="result">
+        <span class="result__num result__num--success">10+</span>
+        <span class="result__desc">sucesso pleno</span>
+      </div>
+      <div class="result">
+        <span class="result__num result__num--partial">7–9</span>
+        <span class="result__desc">sucesso com custo</span>
+      </div>
+      <div class="result">
+        <span class="result__num result__num--fail">6−</span>
+        <span class="result__desc">o GM faz um movimento</span>
+      </div>
+    </div>
+
+    <div class="rules-block">
+      <div class="rules-block__title">Sorte</div>
+      <p style="margin-bottom:1mm; font-size:7pt;">Gaste 1 Sorte para:</p>
+      <ul>
+        <li>rolar novamente</li>
+        <li>reduzir um custo</li>
+        <li>evitar 1 Ferimento</li>
+        <li>declarar detalhe útil</li>
+      </ul>
+    </div>
+
+    <div class="rules-block">
+      <div class="rules-block__title">Custos no 7–9</div>
+      <ul>
+        <li>marcar 1 Ferimento</li>
+        <li>perder 1 recurso</li>
+        <li>posição pior</li>
+        <li>chamar atenção</li>
+        <li>gastar mais tempo</li>
+        <li>efeito incompleto</li>
+        <li>danificar equipamento</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="footer__left">Salvage RPG · Playtest v0.1 · 2026</span>
+    <span class="footer__right">Jogador: _______________</span>
+  </div>
+
+</div>
+
+<div class="toolbar">
+  <div class="toolbar__preset">
+    <button class="toolbar__btn" onclick="togglePresetMenu()">Exemplo ▾</button>
+    <div class="toolbar__preset-menu" id="preset-menu">
+      <button class="toolbar__preset-item" onclick="loadPreset('catador')">Catador</button>
+      <button class="toolbar__preset-item" onclick="loadPreset('batedor')">Batedor</button>
+      <button class="toolbar__preset-item" onclick="loadPreset('sucateiro')">Sucateiro</button>
+      <button class="toolbar__preset-item" onclick="loadPreset('falador')">Falador</button>
+      <button class="toolbar__preset-item" onclick="loadPreset('brutamontes')">Brutamontes</button>
+    </div>
+  </div>
+  <button class="toolbar__btn" onclick="window.print()">Imprimir</button>
+  <button class="toolbar__btn toolbar__btn--danger" onclick="clearSheet()">Limpar</button>
+</div>
+
+<script>
+const STORAGE_PREFIX = 'salvage_sheet_';
+let saveTimeout = null;
+
+/* ── PRESETS: 5 personagens exemplo ── */
+
+const PRESETS = {
+  catador: {
+    nome: 'Zico "Mão-de-Ouro"',
+    aparencia: 'Magro, mãos cheias de cicatrizes de corte, óculos de proteção rachados na testa',
+    detalhe: 'Sempre cheira os objetos antes de examinar — diz que o metal bom tem cheiro doce',
+    raca: 'Humano',
+    'kit-selected': 'Catador',
+    'attr-corpo': '-1', 'attr-instinto': '+1', 'attr-engenho': '+2', 'attr-presenca': '0',
+    necessidade: 'Encontrar peças de rádio para montar um transmissor',
+    medo: 'Ficar preso em lugar fechado sem ferramentas',
+    vinculo: 'Fez uma promessa para Lia: construir algo que funcione de verdade',
+    'kit-ability': 'Sempre encontra algo útil em sucata sob pressão',
+    'kit-ability-advanced': '',
+    'kit-item-1': 'Chave multi-uso improvisada', 'kit-item-2': 'Bolsa de peças eletrônicas', 'kit-item-3': 'Rádio quebrado promissor',
+    'inv-1-item': 'Chave multi-uso improvisada', 'inv-1-tag': 'preciso',
+    'inv-2-item': 'Bolsa de peças eletrônicas', 'inv-2-tag': 'E',
+    'inv-3-item': 'Rádio quebrado', 'inv-3-tag': 'frágil',
+    'inv-4-item': 'Cantil com água (meio)', 'inv-4-tag': '',
+    'inv-5-item': 'Fio de cobre (3m)', 'inv-5-tag': 'E',
+    'inv-6-item': 'Isqueiro a gás', 'inv-6-tag': 'descartável',
+    'inv-7-item': '', 'inv-7-tag': '', 'inv-8-item': '', 'inv-8-tag': '',
+    'gear-arma': '', 'gear-protecao': 'Óculos de proteção rachados',
+    'gear-ferramenta': 'Chave multi-uso improvisada', 'gear-valioso': 'Rádio quebrado (último projeto)',
+    contato: 'Velho Tomás — catador aposentado que conhece os túneis sob a zona industrial',
+    'scar-1': 'Corte profundo na palma esquerda (sessão 2 — armadilha no hospital)',
+    'scar-1-effect': '+1 ao identificar armadilhas mecânicas, -1 em agarrar com firmeza',
+    'scar-2': '', 'scar-2-effect': '',
+    contaminacao: '',
+    'faction-1-name': 'Coletores', 'faction-1-rep': 'Neutro — trocaram peças uma vez',
+    'faction-2-name': 'Sentinelas', 'faction-2-rep': 'Desconfiados — entraram no território sem pedir',
+    'faction-3-name': '', 'faction-3-rep': '',
+    'notes': 'S1: Encontrou o rádio no porão do hospital. Precisa de 1 capacitor (E) para terminar. · S2: Armadilha de arame no corredor leste — cortou a mão. Tomás apareceu e indicou saída pelos túneis. · S3: Trocou sucata M com os Coletores por fio de cobre. Ouviu rumor de um depósito eletrônico na zona norte.',
+    'exposure-0': '1'
+  },
+
+  batedor: {
+    nome: 'Lia Corta-Vento',
+    aparencia: 'Morena, cabelo curto, cicatriz no queixo, sempre com a capa amarrada na cintura',
+    detalhe: 'Risca paredes com giz para marcar caminhos seguros — seu código pessoal',
+    raca: 'Humano',
+    'kit-selected': 'Batedor',
+    'attr-corpo': '0', 'attr-instinto': '+2', 'attr-engenho': '+1', 'attr-presenca': '-1',
+    necessidade: 'Mapear a zona leste antes que a radiação avance',
+    medo: 'Ser seguida sem perceber',
+    vinculo: 'Zico depende das rotas que ela encontra — sem ela, ele não tem peças',
+    'kit-ability': 'Ao entrar primeiro em área nova, faça 1 pergunta extra ao GM',
+    'kit-ability-advanced': '',
+    'kit-item-1': 'Arco curto improvisado', 'kit-item-2': 'Capa de viagem com capuz', 'kit-item-3': 'Kit de exploração (corda, giz, lanterna)',
+    'inv-1-item': 'Arco curto improvisado', 'inv-1-tag': 'curto alcance',
+    'inv-2-item': 'Capa de viagem', 'inv-2-tag': '',
+    'inv-3-item': 'Kit de exploração', 'inv-3-tag': '',
+    'inv-4-item': '4 flechas artesanais', 'inv-4-tag': 'descartável',
+    'inv-5-item': 'Ração seca (2 porções)', 'inv-5-tag': '',
+    'inv-6-item': 'Giz colorido (3 cores)', 'inv-6-tag': '',
+    'inv-7-item': 'Mapa desenhado à mão (zona central)', 'inv-7-tag': 'raro',
+    'inv-8-item': '', 'inv-8-tag': '',
+    'gear-arma': 'Arco curto improvisado', 'gear-protecao': 'Capa de viagem',
+    'gear-ferramenta': 'Kit de exploração', 'gear-valioso': 'Mapa da zona central',
+    contato: 'Dona Celina — líder de um abrigo familiar na zona sul, troca informação por comida',
+    'scar-1': 'Cicatriz no queixo (antes do jogo — briga antiga)',
+    'scar-1-effect': 'Marca de identidade — NPCs a reconhecem mais fácil',
+    'scar-2': 'Tornozelo torcido (sessão 3 — queda do telhado)',
+    'scar-2-effect': '-1 ao correr ou saltar até curar',
+    contaminacao: '',
+    'faction-1-name': 'Coletores', 'faction-1-rep': 'Amigável — guiou até rota segura',
+    'faction-2-name': 'Sentinelas', 'faction-2-rep': 'Desconfiados — entraram no território sem pedir',
+    'faction-3-name': 'Abrigo da Celina', 'faction-3-rep': 'Aliados — trocam informação por comida',
+    'notes': 'S1: Mapeou caminho do hospital ao galpão. 3 rotas, 1 com radiação. · S2: Marcas de giz de outro batedor no metrô. Quem mais está mapeando? · S3: Caiu do telhado fugindo de predador. Tornozelo torcido. Celina acolheu o grupo.',
+    'wounds-0': '1',
+    'exposure-0': '1'
+  },
+
+  sucateiro: {
+    nome: 'Duda Ferro-Velho',
+    aparencia: 'Forte, mãos enormes, avental de couro, sempre com graxa no rosto',
+    detalhe: 'Fala com as máquinas enquanto trabalha — jura que elas cooperam mais assim',
+    raca: 'Humano mutado',
+    'kit-selected': 'Sucateiro',
+    'attr-corpo': '+1', 'attr-instinto': '-1', 'attr-engenho': '+2', 'attr-presenca': '0',
+    necessidade: 'Um gerador portátil — qualquer coisa que gere energia',
+    medo: 'Que a mutação no braço esquerdo piore e ele perca a mão',
+    vinculo: 'Construiu a armadura de Gael — se ela quebrar, é culpa dele',
+    'kit-ability': 'Uma vez por cena, pode improvisar solução temporária com Engenho',
+    'kit-ability-advanced': '',
+    'kit-item-1': 'Marreta reforçada', 'kit-item-2': 'Peitoral de metal soldado', 'kit-item-3': 'Gerador portátil instável',
+    'inv-1-item': 'Marreta reforçada', 'inv-1-tag': 'pesado (2 slots)',
+    'inv-2-item': '—', 'inv-2-tag': '',
+    'inv-3-item': 'Peitoral de metal soldado', 'inv-3-tag': 'protegido (2 slots)',
+    'inv-4-item': '—', 'inv-4-tag': '',
+    'inv-5-item': 'Gerador portátil instável', 'inv-5-tag': 'frágil, E',
+    'inv-6-item': 'Sucata mecânica (pilha)', 'inv-6-tag': 'M',
+    'inv-7-item': 'Fita isolante + cola', 'inv-7-tag': 'Q',
+    'inv-8-item': 'Ração enlatada (1 porção)', 'inv-8-tag': '',
+    'gear-arma': 'Marreta reforçada (pesado, 2 slots)', 'gear-protecao': 'Peitoral de metal soldado (2 slots)',
+    'gear-ferramenta': 'Gerador portátil instável', 'gear-valioso': 'Sucata mecânica acumulada',
+    contato: 'Ferro — mecânico rival que respeita o trabalho de Duda mas compete por peças',
+    'scar-1': 'Queimadura química no antebraço direito (sessão 1 — vazamento no galpão)',
+    'scar-1-effect': '+1 ao identificar substâncias perigosas, pele sensível ao calor',
+    'scar-2': '', 'scar-2-effect': '',
+    contaminacao: 'Braço esquerdo com veias escurecidas (mutação leve — pré-jogo)',
+    'faction-1-name': 'Coletores', 'faction-1-rep': 'Neutro — trocaram peças uma vez',
+    'faction-2-name': 'Sentinelas', 'faction-2-rep': 'Desconfiados — viram a mutação',
+    'faction-3-name': 'Oficina do Ferro', 'faction-3-rep': 'Rivalidade respeitosa',
+    'notes': 'S1: Vazamento químico no galpão. Improvisou vedação com fita mas queimou o braço. Gerador sobreviveu. · S2: Reparou o colete de Gael depois da briga com os bandidos. Gastou última sucata M. · S3: Braço esquerdo piorou — veias mais escuras depois de passar pela zona de radiação. Mutação avançando?',
+    'exposure-0': '1',
+    'exposure-1': '1'
+  },
+
+  falador: {
+    nome: 'Mira Três-Línguas',
+    aparencia: 'Baixa, cabelo longo trançado, sorriso fácil, broche de facção no peito',
+    detalhe: 'Troca de sotaque dependendo de com quem fala — ninguém sabe qual é o verdadeiro',
+    raca: 'Humano',
+    'kit-selected': 'Falador',
+    'attr-corpo': '-1', 'attr-instinto': '0', 'attr-engenho': '+1', 'attr-presenca': '+2',
+    necessidade: 'Informação sobre quem controla o bolsão de tech ao norte',
+    medo: 'Que descubram de onde ela realmente veio',
+    vinculo: 'Deve um favor enorme a Duda — e ele pode cobrar a qualquer momento',
+    'kit-ability': 'Uma vez por cena, quando alguém hesitar, força resposta honesta ou concessão',
+    'kit-ability-advanced': '',
+    'kit-item-1': 'Broche dos Sentinelas', 'kit-item-2': 'Faca escondida no cinto', 'kit-item-3': 'Antibióticos (3 doses)',
+    'inv-1-item': 'Broche dos Sentinelas', 'inv-1-tag': 'raro',
+    'inv-2-item': 'Faca escondida', 'inv-2-tag': 'curto alcance',
+    'inv-3-item': 'Antibióticos (3 doses)', 'inv-3-tag': 'raro',
+    'inv-4-item': 'Caderno de notas e contatos', 'inv-4-tag': '',
+    'inv-5-item': 'Cantil cheio', 'inv-5-tag': '',
+    'inv-6-item': 'Espelho pequeno (sinalização)', 'inv-6-tag': '',
+    'inv-7-item': 'Tabaco para troca', 'inv-7-tag': '',
+    'inv-8-item': '', 'inv-8-tag': '',
+    'gear-arma': 'Faca escondida (discreta)', 'gear-protecao': '',
+    'gear-ferramenta': 'Caderno de contatos e rotas', 'gear-valioso': 'Antibióticos (3 doses)',
+    contato: 'Capitã Rena — líder dos Sentinelas, respeita Mira mas não confia totalmente',
+    'scar-1': 'Marca de faca no braço (sessão 2 — tentativa de assalto)',
+    'scar-1-effect': 'Lembrete constante de que palavras nem sempre bastam',
+    'scar-2': '', 'scar-2-effect': '',
+    contaminacao: '',
+    'faction-1-name': 'Sentinelas', 'faction-1-rep': 'Aliada — vendeu 1 dose de antibiótico por acesso',
+    'faction-2-name': 'Coletores', 'faction-2-rep': 'Amigável — negociou passagem para o grupo',
+    'faction-3-name': 'Bando do Carvão', 'faction-3-rep': 'Hostil — tentaram roubar na sessão 2',
+    'notes': 'S1: Negociou com os Sentinelas: 1 dose de antibiótico por direito de passagem no território. Restam 2 doses. · S2: Bando do Carvão tentou roubar o grupo. Mira levou facada no braço tentando negociar. Gael resolveu na força. · S3: Convenceu Dona Celina a dar abrigo por uma noite em troca de informação sobre rotas dos Sentinelas. Traição?',
+    'inv-3-item': 'Antibióticos (2 doses)', 'inv-3-tag': 'raro'
+  },
+
+  brutamontes: {
+    nome: 'Gael "Muro"',
+    aparencia: 'Enorme, cabeça raspada, braços tatuados com marcas tribais, olhar cansado',
+    detalhe: 'Carrega um boneco de pano no bolso — era do irmão mais novo',
+    raca: 'Humano',
+    'kit-selected': 'Brutamontes',
+    'attr-corpo': '+2', 'attr-instinto': '+1', 'attr-engenho': '-1', 'attr-presenca': '0',
+    necessidade: 'Encontrar remédio para a infecção no ombro',
+    medo: 'Que as pessoas que protege morram por culpa dele',
+    vinculo: 'Protege Mira porque ela é a única que sabe negociar — sem ela, o grupo morre de fome',
+    'kit-ability': 'Ao usar Corpo para abrir caminho ou proteger, em 7–9 pode causar medo em vez de sofrer custo',
+    'kit-ability-advanced': '',
+    'kit-item-1': 'Bastão de ferro reforçado', 'kit-item-2': 'Colete de placas improvisado', 'kit-item-3': 'Mochilão com suprimentos',
+    'inv-1-item': 'Bastão de ferro reforçado', 'inv-1-tag': 'pesado (2 slots)',
+    'inv-2-item': '—', 'inv-2-tag': '',
+    'inv-3-item': 'Colete de placas improvisado', 'inv-3-tag': 'protegido (2 slots)',
+    'inv-4-item': '—', 'inv-4-tag': '',
+    'inv-5-item': 'Mochilão com suprimentos', 'inv-5-tag': 'pesado (2 slots)',
+    'inv-6-item': '—', 'inv-6-tag': '',
+    'inv-7-item': 'Boneco de pano do irmão', 'inv-7-tag': '',
+    'inv-8-item': 'Bandagem limpa (1 uso)', 'inv-8-tag': 'descartável',
+    'gear-arma': 'Bastão de ferro reforçado (pesado)', 'gear-protecao': 'Colete de placas (2 slots)',
+    'gear-ferramenta': '', 'gear-valioso': 'Boneco de pano do irmão',
+    contato: 'Marcos "Sombra" — ex-combatente, aparece com informação sobre o Bando do Carvão',
+    'scar-1': 'Ombro infectado (pré-jogo — ferimento antigo)',
+    'scar-1-effect': '-1 ao escalar ou levantar acima da cabeça',
+    'scar-2': 'Costelas trincadas (sessão 2 — Bando do Carvão)',
+    'scar-2-effect': '-1 esforço prolongado; +1 contra intimidação (não funciona mais nele)',
+    contaminacao: '',
+    'faction-1-name': 'Coletores', 'faction-1-rep': 'Neutro — não incomodou, não ajudou',
+    'faction-2-name': 'Bando do Carvão', 'faction-2-rep': 'Hostil — Gael quebrou o braço do líder',
+    'faction-3-name': 'Abrigo da Celina', 'faction-3-rep': 'Aliados — protegeu as crianças',
+    'notes': 'S1: Segurou porta do hospital por 3 min enquanto o grupo saía. Ombro quase cedeu. · S2: Briga com Bando do Carvão. Quebrou braço do líder, levou nas costelas. Bandagem usada. · S3: Protegeu crianças do abrigo contra predador contaminado. Celina agora confia no grupo.',
+    'wounds-0': '1',
+    'wounds-1': '1',
+    'inv-8-item': '', 'inv-8-tag': ''
+  }
+};
+
+function saveField(key, value) {
+  localStorage.setItem(STORAGE_PREFIX + key, value);
+}
+
+function loadField(key) {
+  return localStorage.getItem(STORAGE_PREFIX + key) || '';
+}
+
+function debouncedSave(key, value) {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => saveField(key, value), 300);
+}
+
+function initKitSelection() {
+  const options = document.querySelectorAll('.kit-option');
+  const saved = loadField('kit-selected');
+
+  options.forEach((opt, i) => {
+    const cb = opt.querySelector('.checkbox');
+    const name = opt.querySelector('.kit-name').textContent;
+
+    if (saved === name) cb.classList.add('checkbox--selected');
+
+    opt.addEventListener('click', () => {
+      options.forEach(o => o.querySelector('.checkbox').classList.remove('checkbox--selected'));
+      cb.classList.add('checkbox--selected');
+      saveField('kit-selected', name);
+    });
+  });
+}
+
+function initPips() {
+  const tracks = document.querySelectorAll('.track');
+
+  tracks.forEach(track => {
+    let type = 'wounds';
+    const label = track.querySelector('.track__label');
+    if (label.classList.contains('track__label--luck')) type = 'luck';
+    if (label.classList.contains('track__label--exposure')) type = 'exposure';
+
+    const pips = track.querySelectorAll('.track__pip');
+    pips.forEach((pip, idx) => {
+      const key = type + '-' + idx;
+      const markedClass = 'track__pip--marked-' + type;
+
+      // Restore
+      if (loadField(key) === '1') pip.classList.add(markedClass);
+
+      // Toggle
+      pip.addEventListener('click', () => {
+        pip.classList.toggle(markedClass);
+        saveField(key, pip.classList.contains(markedClass) ? '1' : '0');
+      });
+    });
+  });
+}
+
+function togglePresetMenu() {
+  const menu = document.getElementById('preset-menu');
+  menu.classList.toggle('open');
+}
+
+// Close preset menu when clicking outside
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('preset-menu');
+  const presetContainer = e.target.closest('.toolbar__preset');
+  if (!presetContainer && menu) menu.classList.remove('open');
+});
+
+function loadPreset(key) {
+  const preset = PRESETS[key];
+  if (!preset) return;
+  if (!confirm('Carregar o personagem "' + preset.nome + '"? A ficha atual será substituída.')) return;
+
+  // Clear existing data
+  const existingKeys = Object.keys(localStorage).filter(k => k.startsWith(STORAGE_PREFIX));
+  existingKeys.forEach(k => localStorage.removeItem(k));
+
+  // Save all preset fields to LocalStorage
+  for (const [field, value] of Object.entries(preset)) {
+    if (value !== '') saveField(field, value);
+  }
+
+  // Close menu and reload
+  document.getElementById('preset-menu').classList.remove('open');
+  location.reload();
+}
+
+function clearSheet() {
+  if (!confirm('Limpar toda a ficha? Essa ação não pode ser desfeita.')) return;
+
+  const keys = Object.keys(localStorage).filter(k => k.startsWith(STORAGE_PREFIX));
+  keys.forEach(k => localStorage.removeItem(k));
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Init editable fields
+  document.querySelectorAll('[data-field]').forEach(el => {
+    if (!el.hasAttribute('contenteditable')) el.contentEditable = true;
+    const key = el.dataset.field;
+    const saved = loadField(key);
+    if (saved) el.textContent = saved;
+    el.addEventListener('input', () => debouncedSave(key, el.textContent));
+  });
+
+  initKitSelection();
+  initPips();
+});
+</script>
+
+</body>
+</html>
