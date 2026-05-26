@@ -1,0 +1,17 @@
+{
+  "lang": "en-gb",
+  "short_name": "filipesf",
+  "name": "Filipe Fernandes",
+  "description": "Design Engineer in Franca, Brazil working across product interfaces, design systems, frontend delivery, and practical AI workflows.",
+  "display": "standalone",
+  "theme_color": "#f5f1e8",
+  "background_color": "#f5f1e8",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/images/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
