@@ -4,8 +4,8 @@
   "name": "Filipe Fernandes",
   "description": "Design Engineer in Franca, Brazil. Since 2007, building product interfaces and design systems that hold up when the brand changes or a new engineer joins.",
   "display": "standalone",
-  "theme_color": "#f5f1e8",
-  "background_color": "#f5f1e8",
+  "theme_color": "#1b1d18",
+  "background_color": "#1b1d18",
   "start_url": "/",
   "icons": [
     {
